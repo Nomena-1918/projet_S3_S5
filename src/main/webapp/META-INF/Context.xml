@@ -1,0 +1,17 @@
+<Context>
+
+    <!--POOL DE CONNEXION-->
+    <Resource
+        name="jdbc/MyPool"
+        auth="Container"
+        type="javax.sql.DataSource"
+        maxTotal="5"
+        maxIdle="1"
+        validationQuery="select 1"
+        username="nomena"
+        password="root"
+        driverClassName="org.postgresql.Driver"
+        url="jdbc:postgresql://localhost:5432/demoemp"
+    />
+
+</Context>
