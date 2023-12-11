@@ -4,17 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Connexion {
-    public static Connection getConnexionPostgreSql() throws Exception {
-        /////// CONFIG ///////////////
+     static String getUrl() {
+        String user = getUsername();
+        String pwd = getPassword();
+
         String database = "demoemp";
-        String user = "nomena";
-        String pwd = "root";
         String host = "localhost";
         String port = "5432";
-        //////////////////////////////
 
+        return String.format("jdbc:postgresql://%s:%s/%s?user=%s&password=%s", host, port, database, user, pwd);
+    }
+
+    static String getUsername() {
+        return "nomena";
+    }
+
+    static String getPassword() {
+        return "root";
+    }
+
+    public static Connection getConnexionPostgreSql() throws Exception {
         Class.forName("org.postgresql.Driver");
-        String url = String.format("jdbc:postgresql://%s:%s/%s?user=%s&password=%s", host, port, database, user, pwd);
+        String url = getUrl();
         Connection conn = DriverManager.getConnection(url);
         conn.setAutoCommit(false);
         return conn;
