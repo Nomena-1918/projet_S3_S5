@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>JSP - Hello World</title>
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css">
 </head>
 <body>
 
@@ -23,7 +23,6 @@
 </div>
 
 <jsp:include page="inc/footer.jsp"/>
-
 
 </body>
 </html>
