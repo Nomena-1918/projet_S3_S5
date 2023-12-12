@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.demo.database.Connexion;
+import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Emp;
 
 import java.io.IOException;
@@ -24,14 +26,13 @@ public class EmpServlet extends HttpServlet {
     // Affichage servlet dans la base de données
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Tous les emp avec pagination
+        int nbr_ligne = Integer.parseInt(request.getParameter("nbr_ligne"));
         int pagination_debut = Integer.parseInt(request.getParameter("debut"));
-        int pagination_fin = Integer.parseInt(request.getParameter("fin"));
 
-        ServletContext ctx = request.getServletContext();
         try {
-            Connection connection = (Connection) ctx.getAttribute("DBConnection");
+            Connection connection = ConnexionPool.getConnection();
 
-            List<Emp> listEmp = Emp.readAllEmp(connection, pagination_debut, pagination_fin);
+            List<Emp> listEmp = Emp.readAllEmp(connection, nbr_ligne, pagination_debut);
 
             request.setAttribute("list-emp", listEmp);
             RequestDispatcher dispatcher = request.getRequestDispatcher("aff-emp.jsp");

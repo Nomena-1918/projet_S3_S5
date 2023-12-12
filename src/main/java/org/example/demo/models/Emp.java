@@ -82,7 +82,6 @@ public class Emp {
 
             System.out.println("\n"+query+"\n");
 
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
                     emp = new Emp();

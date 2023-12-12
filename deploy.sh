@@ -1,4 +1,6 @@
+server_path="/Applications/apache-tomcat-10/webapps"
+
 ./mvnw clean package
-cp target/demo-1.0-SNAPSHOT.war /Applications/apache-tomcat-10/webapps
+cp -f target/demo-1.0-SNAPSHOT.war $server_path
 mess='\n  Deployment done ! 🔥\n'
 echo "$mess"
