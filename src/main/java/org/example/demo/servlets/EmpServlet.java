@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Emp;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import java.util.List;
 public class EmpServlet extends HttpServlet {
 
     // Affichage servlet dans la base de données
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         // Tous les emp avec pagination
         int nbr_ligne = Integer.parseInt(request.getParameter("nbr_ligne"));
         int pagination_debut = Integer.parseInt(request.getParameter("debut"));
