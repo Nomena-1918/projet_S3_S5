@@ -12,10 +12,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-
 @WebServlet(name = "empServlet", value = "/emp-servlet")
 public class EmpServlet extends HttpServlet {
-
     // Affichage servlet dans la base de données
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Tous les emp avec pagination
@@ -34,7 +32,5 @@ public class EmpServlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }
