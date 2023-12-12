@@ -8,7 +8,7 @@ public class Connexion {
         String user = getUsername();
         String pwd = getPassword();
 
-        String database = "demoemp";
+        String database = "voyage_db";
         String host = "localhost";
         String port = "5432";
 
