@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css">
 </head>
 <body>
-
 <jsp:include page="inc/header.jsp"/>
 
 <%@ page import="java.util.List" %>
