@@ -7,8 +7,8 @@
     <title>Holiday activity</title>
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/css/templatemo-xtra-blog.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
@@ -24,9 +24,14 @@
                         <label for="activite" class="col-sm-3 col-form-label text-right tm-color-primary">Bouquet</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="activite" id="activite" required>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
+                                <%
+                                    List<String> options = Arrays.asList("Option 1", "Option 2", "Option 3");
+                                    for (String option : options) {
+                                %>
+                                <option value="<%= option %>"><%= option %></option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
                     </div>
