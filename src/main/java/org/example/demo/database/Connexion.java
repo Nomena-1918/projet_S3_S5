@@ -1,3 +1,4 @@
+
 package org.example.demo.database;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ public class Connexion {
         String user = getUsername();
         String pwd = getPassword();
 
-        String database = "demoemp";
+        String database = "voyage_db";
         String host = "localhost";
         String port = "5432";
 
@@ -16,11 +17,11 @@ public class Connexion {
     }
 
     static String getUsername() {
-        return "nomena";
+        return "postgres";
     }
 
     static String getPassword() {
-        return "root";
+        return "postgres";
     }
 
     public static Connection getConnexionPostgreSql() throws Exception {
@@ -39,3 +40,4 @@ public class Connexion {
         return conn;
     }
 }
+
