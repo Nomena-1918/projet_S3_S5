@@ -23,9 +23,16 @@ public class ActiviteBouquet {
         this.nomBouquet=nomBouquet;
     }
 
+    public ActiviteBouquet(Long idActivite,Long idBouquet){
+        this.idActivite=idActivite;
+        this.idBouquet=idBouquet;
+    }
+
+
     public ActiviteBouquet(){
 
     }
+
 
     public void setId(Long id) {this.id = id;}
 

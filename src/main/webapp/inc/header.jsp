@@ -9,27 +9,27 @@
         </div>
         <nav class="tm-nav" id="tm-nav">
             <ul>
-                <li class="tm-nav-item active"><a href="index.html" class="tm-nav-link">
+                <li class="tm-nav-item active"><a href="index.jsp" class="tm-nav-link">
                     <i class="fas fa-home"></i>
                     Accueil
                 </a></li>
-                <li class="tm-nav-item"><a href="activite.html" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="activite.jsp" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
                     Ajout activite
                 </a></li>
-                <li class="tm-nav-item"><a href="bouquet.html" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="bouquet.jsp" class="tm-nav-link">
                     <i class="fas fa-users"></i>
                     Ajout bouquet voyage
                 </a></li>
-                <li class="tm-nav-item"><a href="association.html" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="association.jsp" class="tm-nav-link">
                     <i class="far fa-comments"></i>
                     Association activite bouquet
                 </a></li>
-                <li class="tm-nav-item"><a href="recherche.html" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="recherche.jsp" class="tm-nav-link">
                     <i class="far fa-comments"></i>
                     Recherche
                 </a></li>
-                <li class="tm-nav-item"><a href="liste.html" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="liste.jsp" class="tm-nav-link">
                     <i class="far fa-comments"></i>
                     Liste
                 </a></li>

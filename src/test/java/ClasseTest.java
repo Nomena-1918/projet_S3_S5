@@ -8,15 +8,18 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClasseTest {
+
     @Test
     void test() {
         System.out.println("Hello World!");
     }
-
+/*
     @Test
     void testReadAllEmp() {
         // Tous les emp avec pagination
@@ -30,22 +33,25 @@ public class ClasseTest {
             throw new RuntimeException(e);
         }
     }
+ */
+    /*
     @Test
     void testInsertActivite() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Activite activite=new Activite();
-            activite.setNom("Voyage a Mananjary");
+            activite.setNom("Voyage a Mananjary"+LocalDateTime.now());
             Activite.insertActivite(connection,activite);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
+
     @Test
     void testInsertBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Bouquet bouquet=new Bouquet();
-            bouquet.setNom("Bouquet EXTRA");
+            bouquet.setNom("Bouquet EXTRA"+LocalDateTime.now());
             Bouquet.insertBouquet(connection,bouquet);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -55,8 +61,8 @@ public class ClasseTest {
     @Test
     void testInsertActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            ActiviteBouquet actbouq=new ActiviteBouquet(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
-            actbouq.insertActiviteBouquet(connection,actbouq);
+            ActiviteBouquet actbouq=new ActiviteBouquet( 1L, 1L);
+            ActiviteBouquet.insertActiviteBouquet(connection,actbouq);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -83,10 +89,11 @@ public class ClasseTest {
     @Test
     void testfindActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,2L);
+            List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,1L);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+     */
 }

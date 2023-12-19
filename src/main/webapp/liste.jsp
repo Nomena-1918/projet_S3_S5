@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xtra Blog</title>
-    <link rel="stylesheet" href="fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <title>Voyage</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/templatemo-xtra-blog.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<%= request.getContextPath() %>/assets/css/templatemo-xtra-blog.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
@@ -29,7 +28,7 @@
                                 <table class="table table-striped tm-table">
                                     <thead>
                                     <tr>
-                                        <th>Les  activites</th>
+                                        <th>Les activites</th>
                                     </tr>
                                     </thead>
                                     <tbody id="listeTableBody">
