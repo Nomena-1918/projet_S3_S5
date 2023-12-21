@@ -21,9 +21,7 @@ public class EmpServlet extends HttpServlet {
         int nbr_ligne = Integer.parseInt(request.getParameter("nbr_ligne"));
         int pagination_debut = Integer.parseInt(request.getParameter("debut"));
 
-        try {
-            Connection connection = ConnexionPool.getConnection();
-
+        try(Connection connection = ConnexionPool.getConnection()) {
             List<Emp> listEmp = Emp.readAllEmp(connection, nbr_ligne, pagination_debut);
 
             request.setAttribute("list-emp", listEmp);
