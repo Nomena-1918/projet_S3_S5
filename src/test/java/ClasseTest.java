@@ -1,4 +1,7 @@
 import org.example.demo.database.Connexion;
+import org.example.demo.models.Activite;
+import org.example.demo.models.ActiviteBouquet;
+import org.example.demo.models.Bouquet;
 import org.example.demo.models.Emp;
 import org.junit.jupiter.api.Test;
 
@@ -27,5 +30,63 @@ public class ClasseTest {
             throw new RuntimeException(e);
         }
     }
+    @Test
+    void testInsertActivite() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            Activite activite=new Activite();
+            activite.setNom("Voyage a Mananjary");
+            Activite.insertActivite(connection,activite);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    @Test
+    void testInsertBouquet() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            Bouquet bouquet=new Bouquet();
+            bouquet.setNom("Bouquet EXTRA");
+            Bouquet.insertBouquet(connection,bouquet);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void testInsertActiviteBouquet() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            ActiviteBouquet actbouq=new ActiviteBouquet(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
+            actbouq.insertActiviteBouquet(connection,actbouq);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testReadAllActivite() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<Activite> listact = Activite.readAll(connection);
+            System.out.println("\n====================\n"+listact+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void testReadAllBouquet() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<Bouquet> listbouq = Bouquet.readAll(connection);
+            System.out.println("\n====================\n"+listbouq+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void testfindActiviteBouquet() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,2L);
+            System.out.println("\n====================\n"+listactbouq+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
