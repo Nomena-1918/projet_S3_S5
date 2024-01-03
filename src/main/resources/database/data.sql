@@ -1,19 +1,21 @@
 -- Insertion de données dans la table activite
 INSERT INTO activite (nom) VALUES
 ('Excursion en montagne'),
-('Croisière côtière'),
+('Croisiere cotiere'),
 ('Visite de monuments historiques'),
 ('Safari en Afrique'),
+--Donnees de test
 ('Randonnée dans la nature sauvage'),
-('Exploration de villes européennes'),
-('Plongée sous-marine');
+('Exploration de villes europeennes'),
+('Plongee sous-marine');
 
 -- Insertion de données dans la table bouquet
 INSERT INTO bouquet (nom) VALUES
 ('Bouquet Aventure'),
-('Bouquet Découverte'),
+('Bouquet Decouverte'),
 ('Bouquet Historique'),
 ('Bouquet Safari'),
+--Donnees de test
 ('Bouquet Nature'),
 ('Bouquet Culture'),
 ('Bouquet Océan');
