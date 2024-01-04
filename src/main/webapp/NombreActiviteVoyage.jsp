@@ -15,9 +15,10 @@
 <%@ page import="org.example.demo.models.ActiviteBouquet" %>
 <%@ page import="org.example.demo.models.Activite" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.demo.utils.Cast" %>
 <%
-    List<ActiviteBouquet> activiteBouquet = (List<ActiviteBouquet>)request.getAttribute("list-activitebouquet");
-    List<Activite> activite = (List<Activite>)request.getAttribute("list-activite");
+    List<ActiviteBouquet> activiteBouquet = Cast.castToList(request.getAttribute("list-activitebouquet"), ActiviteBouquet.class);
+    List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"), Activite.class);
 %>
     <div class="container-fluid">
         <main class="tm-main">

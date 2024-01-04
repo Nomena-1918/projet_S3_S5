@@ -14,9 +14,10 @@
 <jsp:include page="inc/header.jsp"/>
 <%@ page import="org.example.demo.models.Bouquet" %>
 <%@ page import="java.util.List" %>
+<%@ page import="org.example.demo.utils.Cast" %>
 
 <%
-    List<Bouquet> bouquet = (List<Bouquet>)request.getAttribute("list-bouquet");
+    List<Bouquet> bouquet = Cast.castToList(request.getAttribute("list-bouquet"), Bouquet.class);
 %>
 <div class="container-fluid">
     <main class="tm-main">
