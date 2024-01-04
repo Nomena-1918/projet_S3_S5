@@ -1,17 +1,24 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday activity</title>
-    <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <title>Activite</title>
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/assets/fontawesome/css/all.min.css"> <!-- https://fontawesome.com/ -->
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet"> <!-- https://fonts.google.com/ -->
     <link href="<%= request.getContextPath() %>/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%= request.getContextPath() %>/assets/css/templatemo-xtra-blog.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
+<%@ page import="org.example.demo.models.Bouquet" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.demo.utils.Cast" %>
+
+<%
+    List<Bouquet> bouquet = Cast.castToList(request.getAttribute("list-bouquet"), Bouquet.class);
+%>
 <div class="container-fluid">
     <main class="tm-main">
         <div class="row tm-row tm-mb-120">
@@ -23,15 +30,11 @@
                     <div class="form-group row mb-4">
                         <label for="activite" class="col-sm-3 col-form-label text-right tm-color-primary">Bouquet</label>
                         <div class="col-sm-9">
-                            <select class="form-control mr-0 ml-auto" name="activite" id="activite" required>
-                                <%
-                                    List<String> options = Arrays.asList("Option 1", "Option 2", "Option 3");
-                                    for (String option : options) {
-                                %>
-                                <option value="<%= option %>"><%= option %></option>
-                                <%
-                                    }
-                                %>
+                            <select class="form-control mr-0 ml-auto" name="bouquet" id="activite" required>
+                                <% for (Bouquet item : bouquet) {%>
+                                <option value="<%=item.getId()%>"><%=item.getNom()%>
+                                </option>
+                                <% }%>
                             </select>
                         </div>
                     </div>
@@ -45,6 +48,7 @@
         </div>
     </main>
 </div>
-<jsp:include page="inc/footer.jsp"/>
+<script src="js/jquery.min.js"></script>
+<script src="js/templatemo-script.js"></script>
 </body>
 </html>

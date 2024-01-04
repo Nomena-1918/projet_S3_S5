@@ -1,4 +1,3 @@
-
 package org.example.demo.database;
 
 import java.sql.Connection;
@@ -40,4 +39,3 @@ public class Connexion {
         return conn;
     }
 }
-

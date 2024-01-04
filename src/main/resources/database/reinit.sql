@@ -1,6 +1,3 @@
-truncate table bouquet_activite restart identity cascade;
-
-truncate table activite restart identity cascade;
-
-truncate table bouquet restart identity cascade;
-
+truncate activite restart identity cascade;
+truncate bouquet restart identity cascade;
+truncate bouquet_activite restart identity cascade;
