@@ -13,6 +13,7 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
+<% String messageError = (String) request.getAttribute("messageError"); %>
 <div class="container-fluid">
     <main class="tm-main">
         <%if (messageError != null) {%>
