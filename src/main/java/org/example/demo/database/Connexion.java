@@ -16,11 +16,11 @@ public class Connexion {
     }
 
     static String getUsername() {
-        return "postgres";
+        return "nomena";
     }
 
     static String getPassword() {
-        return "postgres";
+        return "root";
     }
 
     public static Connection getConnexionPostgreSql() throws Exception {
