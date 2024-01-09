@@ -13,10 +13,10 @@ public class ConnexionPool {
         ds.setUsername(Connexion.getUsername());
         ds.setPassword(Connexion.getPassword());
         // Min connexions fermées
-        ds.setMinIdle(1);
+        ds.setMinIdle(5);
 
         // Max connexions fermées
-        ds.setMaxIdle(2);
+        ds.setMaxIdle(15);
         ds.setMaxOpenPreparedStatements(50);
     }
 
