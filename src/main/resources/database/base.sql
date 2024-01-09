@@ -4,7 +4,8 @@
 
 create table activite(
     id serial primary key,
-    nom varchar(100) unique not null
+    nom varchar(100) unique not null,
+    prix_unitaire decimal check ( prix_unitaire > 0 ) not null
 );
 
 create table bouquet(
@@ -73,3 +74,32 @@ JOIN bouquet b ON ba.id_bouquet = b.id
 JOIN categorie_lieu cl ON ba.id_categorie_lieu = cl.id
 JOIN type_duree td ON ba.id_duree = td.id;
 
+
+
+
+CREATE VIEW vue_activite_bouquet_nombre_prix AS
+SELECT
+    vabn.id_bouquet,
+    vabn.nom_bouquet,
+    vabn.id_categorie_lieu,
+    vabn.nom_categorie_lieu,
+    vabn.id_type_duree,
+    vabn.nom_type_duree,
+    vabn.intervaljour,
+    vabn.debutjour,
+    vabn.finjour,
+    sum(a.prix_unitaire*vabn.nombre) as prix_total
+FROM vue_activite_bouquet_nombre vabn
+JOIN activite a ON a.id=vabn.id_activite
+group by
+    vabn.id_bouquet,
+    vabn.nom_bouquet,
+    vabn.id_categorie_lieu,
+    vabn.nom_categorie_lieu,
+    vabn.id_type_duree,
+    vabn.nom_type_duree,
+    vabn.intervaljour,
+    vabn.debutjour,
+    vabn.finjour
+;
+Select * from vue_activite_bouquet_nombre_prix where prix_total between 80000 and 500000;

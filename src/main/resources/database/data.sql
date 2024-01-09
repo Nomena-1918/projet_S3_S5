@@ -1,13 +1,13 @@
 -- Insertion de données dans la table activite
-INSERT INTO activite (nom) VALUES
-('Excursion en montagne'),
-('Croisiere cotiere'),
-('Visite de monuments historiques'),
-('Safari en Afrique'),
+INSERT INTO activite (nom,prix_Unitaire) VALUES
+('Excursion en montagne',900),
+('Croisiere cotiere',10000),
+('Visite de monuments historiques',20000),
+('Safari en Afrique',30000),
 --Donnees de test
-('Randonnée dans la nature sauvage'),
-('Exploration de villes europeennes'),
-('Plongee sous-marine');
+('Randonnée dans la nature sauvage',40000),
+('Exploration de villes europeennes',50000),
+('Plongee sous-marine',60000);
 
 -- Insertion de données dans la table bouquet
 INSERT INTO bouquet (nom) VALUES
@@ -20,14 +20,23 @@ INSERT INTO bouquet (nom) VALUES
 ('Bouquet Culture'),
 ('Bouquet Océan');
 
--- Insertion de données dans la table bouquet_activite
-INSERT INTO bouquet_activite (id_activite, id_bouquet) VALUES
-(1, 1),  -- Excursion en montagne avec Bouquet Aventure
-(2, 2),  -- Croisière côtière avec Bouquet Découverte
-(3, 3),  -- Visite de monuments historiques avec Bouquet Historique
-(4, 4),  -- Safari en Afrique avec Bouquet Safari
-(5, 5),  -- Randonnée dans la nature sauvage avec Bouquet Nature
-(6, 6),  -- Exploration de villes européennes avec Bouquet Culture
-(7, 7);  -- Plongée sous-marine avec Bouquet Océan
+INSERT INTO categorie_lieu (nom) VALUES
+('regional'),
+('national'),
+('provincial');
 
-select * from vue_activite_bouquet;
+INSERT INTO type_duree (nom, intervaljour) VALUES
+('court', int4range(2, 4)),
+('moyen', int4range(5, 7)),
+('long', int4range(8, 10));
+
+-- Insertion de données dans la table bouquet_activite
+INSERT INTO bouquet_activite (id_activite, id_bouquet,id_categorie_lieu,id_duree,nombre) VALUES
+(1,1,1,1,4),  -- Excursion en montagne avec Bouquet Aventure
+(2,2,1,2,5),  -- Croisière côtière avec Bouquet Découverte
+(3,3,1,3,2),  -- Visite de monuments historiques avec Bouquet Historique
+(4,4,2,1,1),  -- Safari en Afrique avec Bouquet Safari
+(5,5,2,2,6),  -- Randonnée dans la nature sauvage avec Bouquet Nature
+(6,6,3,3,7),  -- Exploration de villes européennes avec Bouquet Culture
+(7,7,3,1,8);  -- Plongée sous-marine avec Bouquet Océan
+
