@@ -42,6 +42,10 @@
                     <i class="far fa-comments"></i>
                     Nombre Activite Voyage
                 </a></li>
+                <li class="tm-nav-item"><a href="activitebouquetprix-servlet" class="tm-nav-link">
+                    <i class="far fa-comments"></i>
+                    Voyage fourchette de prix
+                </a></li>
 
             </ul>
         </nav>
