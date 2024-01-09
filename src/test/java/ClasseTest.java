@@ -1,7 +1,5 @@
 import org.example.demo.database.Connexion;
-import org.example.demo.models.Activite;
-import org.example.demo.models.ActiviteBouquet;
-import org.example.demo.models.Bouquet;
+import org.example.demo.models.*;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
@@ -66,6 +64,16 @@ public class ClasseTest {
     void testfindActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,2L);
+            System.out.println("\n====================\n"+listactbouq+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    void getVoyageBetweenPrix() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<ActiviteBouquetPrix> listactbouq = ActiviteBouquetPrix.getVoyageBetweenPrix(connection,80000.0,500000.0);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);

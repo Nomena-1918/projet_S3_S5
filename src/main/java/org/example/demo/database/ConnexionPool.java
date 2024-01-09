@@ -16,8 +16,8 @@ public class ConnexionPool {
         ds.setMinIdle(5);
 
         // Max connexions fermées
-        ds.setMaxIdle(15);
-        ds.setMaxOpenPreparedStatements(50);
+        ds.setMaxIdle(10);
+        ds.setMaxOpenPreparedStatements(5);
     }
 
     public static Connection getConnection() throws SQLException {
