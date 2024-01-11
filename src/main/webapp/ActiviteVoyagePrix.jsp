@@ -17,9 +17,21 @@
 <%@ page import="org.example.demo.utils.Cast" %>
 <%
     List<ActiviteBouquetPrix> activiteBouquetprix = Cast.castToList(request.getAttribute("list-activitebouquetprix"), ActiviteBouquetPrix.class);
+    String messageError = (String) request.getAttribute("messageError");
 %>
     <div class="container-fluid">
         <main class="tm-main">
+            <%if (messageError != null) {%>
+            <div class="card col-12">
+                <div class="card-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-octagon me-1"></i>
+                        <%=messageError%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <%}%>
             <div class="row tm-row">
                 <div class="col-12">
                     <h2 class="tm-color-primary tm-post-title tm-mb-60">Voyage entre fourchette</h2>
@@ -77,7 +89,6 @@
         </main>
     </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/templatemo-script.js"></script>
+<jsp:include page="inc/footer.jsp"/>
 </body>
 </html>

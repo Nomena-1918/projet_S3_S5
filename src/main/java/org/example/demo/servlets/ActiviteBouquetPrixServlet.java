@@ -1,6 +1,7 @@
 package org.example.demo.servlets;
 
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class ActiviteBouquetPrixServlet  extends HttpServlet {
         }
     }
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Double prixMin=Double.parseDouble(request.getParameter("prixMin"));
         Double prixMax=Double.parseDouble(request.getParameter("prixMax"));
         try(Connection connection = ConnexionPool.getConnection()){
@@ -32,8 +33,10 @@ public class ActiviteBouquetPrixServlet  extends HttpServlet {
             request.setAttribute("list-activitebouquetprix",listActiviteBouquet);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
             dispatcher.forward(request, response);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        }  catch (Exception e) {
+            request.setAttribute("messageError",e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
+            dispatcher.forward(request, response);
         }
     }
 

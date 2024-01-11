@@ -46,7 +46,18 @@
                     <i class="far fa-comments"></i>
                     Voyage fourchette de prix
                 </a></li>
-
+                <li class="tm-nav-item"><a href="entreeactivite-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Achat billet activité
+                </a></li>
+                <li class="tm-nav-item"><a href="reservationResteBilletActivite-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Reservation voyage
+                </a></li>
+                <li class="tm-nav-item"><a href="listeResteBilletActivite-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Liste reste billet activité
+                </a></li>
             </ul>
         </nav>
         <div class="tm-mb-65">

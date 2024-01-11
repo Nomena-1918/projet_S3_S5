@@ -68,8 +68,7 @@
     </main>
 </div>
 
-<script src="<%= request.getContextPath() %>/assets/js/jquery.min.js"></script>
-<script src="<%= request.getContextPath() %>/assets/js/templatemo-script.js"></script>
+<jsp:include page="inc/footer.jsp"/>
 
 </body>
 </html>

@@ -40,3 +40,20 @@ INSERT INTO bouquet_activite (id_activite, id_bouquet,id_categorie_lieu,id_duree
 (6,6,3,3,7),  -- Exploration de villes européennes avec Bouquet Culture
 (7,7,3,1,8);  -- Plongée sous-marine avec Bouquet Océan
 
+INSERT INTO bouquet_activite (id_activite, id_bouquet,id_categorie_lieu,id_duree,nombre) VALUES
+(2,1,1,1,3);
+
+INSERT INTO entree_activite (id_activite,quantite) values
+(1,20),  -- Excursion en montagne avec Bouquet Aventure
+(2,20),  -- Croisière côtière avec Bouquet Découverte
+(3,20),  -- Visite de monuments historiques avec Bouquet Historique
+(4,20),  -- Safari en Afrique avec Bouquet Safari
+(5,20),  -- Randonnée dans la nature sauvage avec Bouquet Nature
+(6,20),  -- Exploration de villes européennes avec Bouquet Culture
+(7,20);  -- Plongée sous-marine avec Bouquet Océan
+
+INSERT INTO reservation_voyage (id_categorie_lieu, id_duree, id_bouquet, nombre_billet) values
+(1,1,1,1);
+
+SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage
+    and id_activite=?

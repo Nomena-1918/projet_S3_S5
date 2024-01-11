@@ -40,6 +40,24 @@ CREATE TABLE bouquet_activite (
      CONSTRAINT bouquet_activite_id_duree_fkey FOREIGN KEY (id_duree) REFERENCES type_duree(id)
 );
 
+CREATE TABLE entree_activite (
+  id serial PRIMARY KEY,
+  id_activite integer REFERENCES activite(id),
+  quantite integer check ( quantite > 0 ),
+  date_heure_entree timestamp default now()
+);
+
+CREATE TABLE reservation_voyage (
+    id serial PRIMARY KEY,
+    id_categorie_lieu integer,
+    id_duree integer,
+    id_bouquet integer,
+    nombre_billet integer NOT NULL CHECK (nombre_billet > 0),
+    FOREIGN KEY (id_bouquet) REFERENCES bouquet(id),
+    FOREIGN KEY (id_categorie_lieu) REFERENCES categorie_lieu(id),
+    FOREIGN KEY (id_duree) REFERENCES type_duree(id)
+);
+
 
 CREATE VIEW vue_activite_bouquet AS
 SELECT
@@ -74,7 +92,35 @@ JOIN bouquet b ON ba.id_bouquet = b.id
 JOIN categorie_lieu cl ON ba.id_categorie_lieu = cl.id
 JOIN type_duree td ON ba.id_duree = td.id;
 
+CREATE VIEW reste_activite_voyage as
+select
+    vabn.id_categorie_lieu as id_categorie_lieu,
+    vabn.nom_categorie_lieu as nom_categorie_lieu,
+    vabn.id_type_duree as id_type_duree,
+    vabn.nom_type_duree as nom_type_duree,
+    vabn.id_bouquet as id_bouquet,
+    vabn.nom_bouquet as nom_bouquet,
+    vabn.id_activite as id_activite,
+    vabn.nom_activite as nom_activite,
+    vqea.quantite_total-(rv.nombre_billet*vabn.nombre) as nombre_billet_restant
+from vue_activite_bouquet_nombre vabn
+join vue_quantite_entree_activite vqea on vabn.id_activite = vqea.id_activite
+join reservation_voyage rv on vabn.id_type_duree = rv.id_duree
+                            and vabn.id_categorie_lieu = rv.id_categorie_lieu
+                            and vabn.id_bouquet =rv.id_bouquet
 
+;
+
+
+select * from vue_activite_bouquet_nombre;
+
+CREATE VIEW vue_quantite_entree_activite as
+SELECT
+    id_activite,
+    sum(quantite) as quantite_total
+FROM entree_activite ea
+group by id_activite
+order by id_activite;
 
 
 CREATE VIEW vue_activite_bouquet_nombre_prix AS
@@ -102,4 +148,8 @@ group by
     vabn.debutjour,
     vabn.finjour
 ;
+
+
+
+
 Select * from vue_activite_bouquet_nombre_prix where prix_total between 80000 and 500000;
