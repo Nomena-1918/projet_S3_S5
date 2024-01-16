@@ -58,6 +58,23 @@
                     <i class="fas fa-pen"></i>
                     Liste reste billet activité
                 </a></li>
+                <%-- Travail --%>
+                <li class="tm-nav-item"><a href="insertionEmploye-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion employé
+                </a></li>
+                <li class="tm-nav-item"><a href="insertionFonction-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion fonction employé
+                </a></li>
+                <li class="tm-nav-item"><a href="insertionVoyageEmploye-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion voyage employé
+                </a></li>
+                <li class="tm-nav-item"><a href="insertionPrixDeVenteActivite-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion prix de Vente activité
+                </a></li>
             </ul>
         </nav>
         <div class="tm-mb-65">

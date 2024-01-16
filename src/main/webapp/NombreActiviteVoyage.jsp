@@ -12,12 +12,12 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<%@ page import="org.example.demo.models.ActiviteBouquet" %>
+<%@ page import="org.example.demo.models.VoyageActivite" %>
 <%@ page import="org.example.demo.models.Activite" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
 <%
-    List<ActiviteBouquet> activiteBouquet = Cast.castToList(request.getAttribute("list-activitebouquet"), ActiviteBouquet.class);
+    List<VoyageActivite> voyageActivite = Cast.castToList(request.getAttribute("list-activitebouquet"), VoyageActivite.class);
     List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"), Activite.class);
 %>
     <div class="container-fluid">
@@ -48,10 +48,10 @@
                     </form>
                 </div>
             </div>
-            <%if (activiteBouquet != null && !activiteBouquet.isEmpty()) {%>
+            <%if (voyageActivite != null && !voyageActivite.isEmpty()) {%>
             <div class="row tm-row">
                 <div class="col-12">
-                    <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste correspondant à "<%=activiteBouquet.get(0).getNomActivite()%>"</h2>
+                    <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste correspondant à "<%=voyageActivite.get(0).getNomActivite()%>"</h2>
                 </div>
                 <div class="col-lg-7 tm-contact-left">
                     <table class="table table-striped tm-table">
@@ -61,7 +61,7 @@
                             <th>Durée</th>
                             <th>Nombre</th>
                         </tr>
-                        <%for(ActiviteBouquet item: activiteBouquet){%>
+                        <%for(VoyageActivite item: voyageActivite){%>
                         <tr>
                             <td><%=item.getNomBouquet()%></td>
                             <td><%=item.getNomCategorieLieu()%></td>

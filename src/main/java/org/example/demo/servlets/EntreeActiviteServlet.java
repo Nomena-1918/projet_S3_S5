@@ -29,10 +29,12 @@ public class EntreeActiviteServlet  extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Long idActivite=Long.parseLong(request.getParameter("idActivite"));
         Integer quantite=Integer.parseInt(request.getParameter("quantite"));
+        Double prixUnitaire=Double.parseDouble(request.getParameter("prixUnitaire"));
         try(Connection connection = ConnexionPool.getConnection()){
             EntreeActivite entreeActivite = new EntreeActivite();
             entreeActivite.setId(idActivite);
             entreeActivite.setQuantite(quantite);
+            // blablabla
             EntreeActivite.insertEntreeActivite(connection,entreeActivite);
             getInfo(request, response, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("EntreeActivite.jsp");
