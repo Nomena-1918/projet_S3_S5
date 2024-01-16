@@ -52,6 +52,12 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
+                        <label for="prix" class="col-sm-3 col-form-label text-right tm-color-primary">Prix unitaire</label>
+                        <div class="col-sm-9">
+                            <input class="form-control mr-0 ml-auto" name="prixUnitaire" id="prix" type="number" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
                         <label for="quantite" class="col-sm-3 col-form-label text-right tm-color-primary">Quantité</label>
                         <div class="col-sm-9">
                             <input class="form-control mr-0 ml-auto" name="quantite" id="quantite" type="number" required>

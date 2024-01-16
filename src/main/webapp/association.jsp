@@ -43,10 +43,10 @@
             </div>
             <%}%>
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Association activite bouquet</h2>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Association voyage activité</h2>
             </div>
             <div class="col-lg-7 tm-contact-left">
-                <form method="POST" action="activitebouquet-servlet" class="mb-5 ml-auto mr-0 tm-contact-form">
+                <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
                     <div class="form-group row mb-4">
                         <label for="bouquet" class="col-sm-3 col-form-label text-right tm-color-primary">Bouquet</label>
                         <div class="col-sm-9">
