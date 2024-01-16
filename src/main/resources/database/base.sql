@@ -4,8 +4,7 @@
 
 create table activite(
     id serial primary key,
-    nom varchar(100) unique not null,
-    prix_unitaire decimal check ( prix_unitaire > 0 ) not null
+    nom varchar(100) unique not null
 );
 
 create table bouquet(
@@ -26,12 +25,21 @@ CREATE TABLE type_duree (
 );
 
 
+create table voyage(
+                       id serial PRIMARY KEY,
+
+                       id_bouquet integer,
+    id_duree integer,
+    id_categorie_lieu integer,
+)
+
+
 CREATE TABLE bouquet_activite (
      id serial PRIMARY KEY,
-     id_categorie_lieu integer,
-     id_duree integer,
+
+
      id_activite integer,
-     id_bouquet integer,
+
      nombre integer NOT NULL CHECK (nombre > 0),
      CONSTRAINT bouquet_activite_id_activite_id_bouquet_key UNIQUE (id_activite, id_bouquet),
      CONSTRAINT bouquet_activite_id_activite_fkey FOREIGN KEY (id_activite) REFERENCES activite(id),
