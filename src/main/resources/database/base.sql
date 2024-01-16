@@ -146,8 +146,7 @@ group by
     vabn.nom_type_duree,
     vabn.intervaljour,
     vabn.debutjour,
-    vabn.finjour
-;
+    vabn.finjour;
 
 
 
