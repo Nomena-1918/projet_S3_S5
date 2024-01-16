@@ -26,57 +26,63 @@ CREATE TABLE type_duree (
 
 
 create table voyage(
-                       id serial PRIMARY KEY,
-
-                       id_bouquet integer,
+    id serial PRIMARY KEY,
+    id_bouquet integer,
     id_duree integer,
-    id_categorie_lieu integer,
-)
-
-
-CREATE TABLE bouquet_activite (
-     id serial PRIMARY KEY,
-
-
-     id_activite integer,
-
-     nombre integer NOT NULL CHECK (nombre > 0),
-     CONSTRAINT bouquet_activite_id_activite_id_bouquet_key UNIQUE (id_activite, id_bouquet),
-     CONSTRAINT bouquet_activite_id_activite_fkey FOREIGN KEY (id_activite) REFERENCES activite(id),
-     CONSTRAINT bouquet_activite_id_bouquet_fkey FOREIGN KEY (id_bouquet) REFERENCES bouquet(id),
-     CONSTRAINT bouquet_activite_id_categorie_lieu_fkey FOREIGN KEY (id_categorie_lieu) REFERENCES categorie_lieu(id),
-     CONSTRAINT bouquet_activite_id_duree_fkey FOREIGN KEY (id_duree) REFERENCES type_duree(id)
+    id_categorie_lieu integer
 );
+
+
+CREATE TABLE voyage_activite (
+    id serial PRIMARY KEY,
+    id_voyage int references voyage(id),
+    id_activite integer,
+    nombre integer NOT NULL CHECK (nombre > 0),
+    CONSTRAINT bouquet_activite_id_activite_fkey FOREIGN KEY (id_activite) REFERENCES activite(id),
+    CONSTRAINT bouquet_activite_id_bouquet_fkey FOREIGN KEY (id_voyage) REFERENCES bouquet(id)
+);
+
 
 CREATE TABLE entree_activite (
-  id serial PRIMARY KEY,
-  id_activite integer REFERENCES activite(id),
-  quantite integer check ( quantite > 0 ),
-  date_heure_entree timestamp default now()
+    id serial PRIMARY KEY,
+    id_activite integer REFERENCES activite(id),
+    prix_unitaire decimal check ( prix_unitaire>0 ),
+    quantite integer check ( quantite > 0 ),
+    date_heure_entree timestamp default now()
 );
+
 
 CREATE TABLE reservation_voyage (
     id serial PRIMARY KEY,
-    id_categorie_lieu integer,
-    id_duree integer,
-    id_bouquet integer,
-    nombre_billet integer NOT NULL CHECK (nombre_billet > 0),
-    FOREIGN KEY (id_bouquet) REFERENCES bouquet(id),
-    FOREIGN KEY (id_categorie_lieu) REFERENCES categorie_lieu(id),
-    FOREIGN KEY (id_duree) REFERENCES type_duree(id)
+    id_voyage int references voyage(id),
+    nombre_billet integer NOT NULL CHECK (nombre_billet > 0)
 );
 
 
+-- Toutes les activités d'un bouquet
 CREATE VIEW vue_activite_bouquet AS
 SELECT
-    ba.id AS id,
+    va.id AS id,
     a.id AS id_activite,
     a.nom AS nom_activite,
     b.id AS id_bouquet,
     b.nom AS nom_bouquet
-FROM bouquet_activite ba
-JOIN activite a ON ba.id_activite = a.id
-JOIN bouquet b ON ba.id_bouquet = b.id;
+FROM voyage_activite va
+ JOIN activite a ON va.id_activite = a.id
+ JOIN voyage v ON v.id = va.id
+ JOIN bouquet b on v.id_bouquet = b.id
+order by b.id;
+
+select
+    va.id as id,
+    a.id AS id_activite,
+    a.nom AS nom_activite,
+    v.id as id_voyage,
+    v.id_bouquet as id_bouquet
+from voyage_activite va
+join activite a on va.id_activite = a.id
+join voyage v on va.id_voyage = v.id
+join bouquet b on v.id_bouquet = b.id;
 
 
 CREATE VIEW vue_activite_bouquet_nombre AS
@@ -115,9 +121,7 @@ from vue_activite_bouquet_nombre vabn
 join vue_quantite_entree_activite vqea on vabn.id_activite = vqea.id_activite
 join reservation_voyage rv on vabn.id_type_duree = rv.id_duree
                             and vabn.id_categorie_lieu = rv.id_categorie_lieu
-                            and vabn.id_bouquet =rv.id_bouquet
-
-;
+                            and vabn.id_bouquet =rv.id_bouquet;
 
 
 select * from vue_activite_bouquet_nombre;

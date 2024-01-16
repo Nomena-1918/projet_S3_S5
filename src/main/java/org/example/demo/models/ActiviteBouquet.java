@@ -23,6 +23,7 @@ public class ActiviteBouquet {
     private  Long idBouquet;
     private String nomBouquet;
 
+
     private int debutJour;
     private int finJour;
 
