@@ -55,7 +55,7 @@ public class ActiviteBouquetPrix extends VoyageActivite {
             statement.setDouble(1,prixMin);
             statement.setDouble(2,prixMax);
             System.out.println("\n"+query+"\n");
-            
+
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     activiteBouquetPrix = new ActiviteBouquetPrix(resultSet.getDouble("prix_total"));

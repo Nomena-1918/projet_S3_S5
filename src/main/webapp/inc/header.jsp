@@ -32,7 +32,7 @@
                 </a></li>
                 <li class="tm-nav-item"><a href="voyageActivite-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
-                    Association activite bouquet
+                    Association voyage activité
                 </a></li>
                 <li class="tm-nav-item"><a href="recherche-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
