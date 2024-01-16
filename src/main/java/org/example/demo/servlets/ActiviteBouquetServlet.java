@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-@WebServlet(name = "activitebouquetServlet", value = "/activitebouquet-servlet")
+@WebServlet(name = "voyageActiviteServlet", value = "/voyageActivite-servlet")
 public class ActiviteBouquetServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try(Connection connection = ConnexionPool.getConnection()) {
@@ -29,14 +29,14 @@ public class ActiviteBouquetServlet  extends HttpServlet {
         Long idTypeDuree=Long.parseLong(request.getParameter("idTypeDuree"));
         int nombre= Integer.parseInt(request.getParameter("nombre"));
         try(Connection connection = ConnexionPool.getConnection()){
-            ActiviteBouquet activiteBouquet=new ActiviteBouquet();
-            activiteBouquet.setIdActivite(idActivite);
-            activiteBouquet.setIdCategorieLieu(idCategorieLieu);
-            activiteBouquet.setIdTypeDuree(idTypeDuree);
-            activiteBouquet.setIdBouquet(idBouquet);
-            activiteBouquet.setNombre(nombre);
+            VoyageActivite voyageActivite=new VoyageActivite();
+            voyageActivite.setIdActivite(idActivite);
+            voyageActivite.setIdCategorieLieu(idCategorieLieu);
+            voyageActivite.setIdTypeDuree(idTypeDuree);
+            voyageActivite.setIdBouquet(idBouquet);
+            voyageActivite.setNombre(nombre);
 
-            ActiviteBouquet.insertActiviteBouquet(connection,activiteBouquet);
+            VoyageActivite.insertActiviteBouquet(connection,voyageActivite);
 
             getInfo(request, response, connection);
         } catch (Exception e) {

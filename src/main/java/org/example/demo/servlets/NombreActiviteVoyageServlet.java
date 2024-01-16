@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Activite;
-import org.example.demo.models.ActiviteBouquet;
+import org.example.demo.models.VoyageActivite;
 import org.example.demo.models.Bouquet;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class NombreActiviteVoyageServlet  extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long idActivite=Long.parseLong(request.getParameter("idActivite"));
         try(Connection connection = ConnexionPool.getConnection()){
-            List<ActiviteBouquet> listActiviteBouquet=ActiviteBouquet.getByActivite(connection,idActivite);
+            List<VoyageActivite> listActiviteBouquet=VoyageActivite.getByActivite(connection,idActivite);
 
             request.setAttribute("list-activitebouquet",listActiviteBouquet);
             getInfo(request, response, connection);

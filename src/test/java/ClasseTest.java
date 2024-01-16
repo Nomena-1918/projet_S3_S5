@@ -35,8 +35,8 @@ public class ClasseTest {
     @Test
     void testInsertActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            ActiviteBouquet actbouq=new ActiviteBouquet(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
-            ActiviteBouquet.insertActiviteBouquet(connection,actbouq);
+            VoyageActivite actbouq=new VoyageActivite(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
+            VoyageActivite.insertActiviteBouquet(connection,actbouq);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -63,7 +63,7 @@ public class ClasseTest {
     @Test
     void testfindActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,2L);
+            List<VoyageActivite> listactbouq = VoyageActivite.findActiviteBouquet(connection,2L);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);

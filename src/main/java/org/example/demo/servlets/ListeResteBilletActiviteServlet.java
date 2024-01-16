@@ -7,8 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Activite;
-import org.example.demo.models.ActiviteBouquet;
-import org.example.demo.models.Bouquet;
 import org.example.demo.models.ResteActivite;
 
 import java.io.IOException;

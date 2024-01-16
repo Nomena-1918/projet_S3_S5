@@ -12,12 +12,12 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<%@ page import="org.example.demo.models.ActiviteBouquet" %>
+<%@ page import="org.example.demo.models.VoyageActivite" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
 
 <%
-  List<ActiviteBouquet> activiteBouquet = Cast.castToList(request.getAttribute("list-activitebouquet"), ActiviteBouquet.class);
+  List<VoyageActivite> activiteBouquet = Cast.castToList(request.getAttribute("list-voyageActivite"), VoyageActivite.class);
 %>
       <div class="container-fluid">
         <main class="tm-main">
@@ -32,7 +32,7 @@
                   </tr>
                   </thead>
                   <tbody id="listeTableBody">
-                    <%for(ActiviteBouquet item: activiteBouquet){%>
+                    <%for(VoyageActivite item: activiteBouquet){%>
                       <tr>
                         <td><%=item.getNomActivite()%></td>
                       </tr>

@@ -30,7 +30,7 @@
                     <i class="fas fa-users"></i>
                     Ajout bouquet voyage
                 </a></li>
-                <li class="tm-nav-item"><a href="activitebouquet-servlet" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="voyageActivite-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
                     Association activite bouquet
                 </a></li>
