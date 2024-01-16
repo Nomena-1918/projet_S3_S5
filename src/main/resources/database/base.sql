@@ -1,7 +1,6 @@
 -- create database voyage_db;
 
 --create extension if not exists btree_gist;
-
 create table activite(
     id serial primary key,
     nom varchar(100) unique not null
