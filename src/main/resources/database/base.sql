@@ -125,7 +125,7 @@ select
     vqea.id_activite,
     (vqea.quantite_total - coalesce(vqsa.nombre_billet_reserves,0)) as quantite_reste
     from vue_quantite_entree_activite vqea
-    left join vue_quantite_sortie_activite vqsa on vqea.id_activite = vqsa.id_activite
+    left join vue_quantite_sortie_activite vqsa on vqea.id_activite = vqsa.id_activite;
 
 
 
@@ -269,7 +269,7 @@ join vue_salaire_employe_voyage vsev on vsev.id_voyage = vprtav.id_voyage
 order by id_voyage;
 
 
-select * from vue_benefice_total_voyage where benefice_voyage between
+select * from vue_benefice_total_voyage where benefice_voyage between 2000000 and 5000000;
 
 
 create view employe_complet as
