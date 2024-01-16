@@ -56,10 +56,10 @@ public class Fonction {
         }
 //      Test
         List<Fonction> listFonction = new ArrayList<>();
-        Fonction f1=new Fonction(1,"conducteur",123454.0);
-        Fonction f2=new Fonction(2,"gardien",10000000.0);
-        Fonction f3=new Fonction(3,"cuisinier",200000.0);
-        Fonction f4=new Fonction(4,"guide",3000000.0);
+        Fonction f1=new Fonction(1L,"conducteur",123454.0);
+        Fonction f2=new Fonction(2L,"gardien",10000000.0);
+        Fonction f3=new Fonction(3L,"cuisinier",200000.0);
+        Fonction f4=new Fonction(4L,"guide",3000000.0);
 
         listFonction.add(f1);
         listFonction.add(f2);
