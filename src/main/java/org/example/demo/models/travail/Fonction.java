@@ -1,8 +1,6 @@
 package org.example.demo.models.travail;
 
-
 import org.example.demo.database.Connexion;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
