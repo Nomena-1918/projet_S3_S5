@@ -1,6 +1,7 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,12 +39,15 @@ public class ResteActivite {
         this.resteBillet = resteBillet;
     }
 
-    public static List<ResteActivite> selectWhere(Connection connection, Long idCategorie, Long idType, Long idBouquet, Long idActivite) throws Exception {
+    public static List<ResteActivite> selectWhere(Connection connection, Voyage voyage, Long idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
+        Long idCategorie=voyage.getCategorieLieu().getId();
+        Long idType=voyage.getTypeDuree().getId();
+        Long idBouquet=voyage.getBouquet().getId();
         String query = """
 SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage 
 where id_categorie_lieu=? and id_type_duree=? and id_bouquet=?

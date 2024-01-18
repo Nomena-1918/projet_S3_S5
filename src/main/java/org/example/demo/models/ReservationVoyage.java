@@ -1,6 +1,7 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,37 +11,12 @@ import java.util.*;
 
 public class ReservationVoyage {
     private Long id;
-    private Long idCategorieLieu;
-    private Long idTypeDuree;
     private int nombre_billet;
-    private  Long idBouquet;
+    private Voyage voyage;
 
-    public ReservationVoyage() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getIdCategorieLieu() {
-        return idCategorieLieu;
-    }
-
-    public void setIdCategorieLieu(Long idCategorieLieu) {
-        this.idCategorieLieu = idCategorieLieu;
-    }
-
-    public Long getIdTypeDuree() {
-        return idTypeDuree;
-    }
-
-    public void setIdTypeDuree(Long idTypeDuree) {
-        this.idTypeDuree = idTypeDuree;
+    public ReservationVoyage( Voyage voyage,int nombre_billet) {
+        this.nombre_billet = nombre_billet;
+        this.voyage = voyage;
     }
 
     public int getNombre_billet() {
@@ -51,19 +27,20 @@ public class ReservationVoyage {
         this.nombre_billet = nombre_billet;
     }
 
-    public Long getIdBouquet() {
-        return idBouquet;
+    public Voyage getVoyage() {
+        return voyage;
     }
 
-    public void setIdBouquet(Long idBouquet) {
-        this.idBouquet = idBouquet;
+    public void setVoyage(Voyage voyage) {
+        this.voyage = voyage;
     }
 
-    public ReservationVoyage( Long idCategorieLieu, Long idTypeDuree, int nombre_billet, Long idBouquet) {
-        this.idCategorieLieu = idCategorieLieu;
-        this.idTypeDuree = idTypeDuree;
-        this.nombre_billet = nombre_billet;
-        this.idBouquet = idBouquet;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public static void insertReservationVoyage(Connection connection, ReservationVoyage reservationVoyage) throws Exception {
@@ -72,14 +49,12 @@ public class ReservationVoyage {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        ReservationVoyage.checkNombreActivite(connection, reservationVoyage.getIdCategorieLieu(), reservationVoyage.getIdTypeDuree(), reservationVoyage.getIdBouquet(), reservationVoyage.getNombre_billet());
-        String query = "INSERT INTO reservation_voyage(id_categorie_lieu,id_duree,id_bouquet,nombre_billet) VALUES (?,?,?,?)";
+        ReservationVoyage.checkNombreActivite(connection, reservationVoyage.getVoyage(), reservationVoyage.getNombre_billet());
+        String query = "INSERT INTO reservation_voyage(id_voyage,nombre_billet) VALUES (?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, reservationVoyage.getIdCategorieLieu());
-            statement.setLong(2, reservationVoyage.getIdTypeDuree());
-            statement.setLong(3, reservationVoyage.getIdBouquet());
-            statement.setLong(4, reservationVoyage.getNombre_billet());
+            statement.setLong(1,reservationVoyage.getId());
+            statement.setLong(2, reservationVoyage.getNombre_billet());
 
             System.out.println("\n" + query + "\n");
 
@@ -95,8 +70,8 @@ public class ReservationVoyage {
             connection.close();
     }
 
-    public static void checkNombreActivite(Connection connection, Long idCategorie, Long idType, Long idBouquet, int nombreBillet) throws Exception {
-        List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,idCategorie,idType,idBouquet,null);
+    public static void checkNombreActivite(Connection connection,Voyage voyage, int nombreBillet) throws Exception {
+        List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,voyage,null);
         List<ResteActivite> resteActivitesInsufisant=new ArrayList<>();
 
         for (ResteActivite item: resteActivites) {
@@ -113,7 +88,7 @@ public class ReservationVoyage {
 
     @Override
     public String toString() {
-        return String.format("ReservationVoyage{id=%s,idactivite=%s,nomactivite='%s',idbouquet=%s, nombouquet='%s'}",getId(),getIdBouquet());
+        return String.format("ReservationVoyage{id=%s}",getId());
     }
 
 }
