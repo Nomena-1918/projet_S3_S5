@@ -29,10 +29,7 @@ public class TypeDureeServlet  extends HttpServlet {
         int debutJour=Integer.parseInt(request.getParameter("debutJour"));
         int finJour=Integer.parseInt(request.getParameter("finJour"));
         try(Connection connection = ConnexionPool.getConnection()){
-            TypeDuree typeDuree = new TypeDuree();
-            typeDuree.setNom(nomTypeDuree);
-            typeDuree.setDebutJour(debutJour);
-            typeDuree.setFinJour(finJour);
+            TypeDuree typeDuree = new TypeDuree(nomTypeDuree,debutJour,finJour);
             TypeDuree.insertTypeDuree(connection,typeDuree);
             RequestDispatcher dispatcher = request.getRequestDispatcher("typeDuree.jsp");
 

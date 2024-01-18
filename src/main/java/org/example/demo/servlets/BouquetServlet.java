@@ -27,8 +27,7 @@ public class BouquetServlet  extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nomBouquet=request.getParameter("nom");
         try(Connection connection = ConnexionPool.getConnection()){
-            Bouquet bouquet = new Bouquet();
-            bouquet.setNom(nomBouquet);
+            Bouquet bouquet = new Bouquet(nomBouquet);
             Bouquet.insertBouquet(connection,bouquet);
             RequestDispatcher dispatcher = request.getRequestDispatcher("bouquet.jsp");
 

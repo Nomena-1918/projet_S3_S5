@@ -30,6 +30,18 @@ public class Voyage {
         this.categorieLieu = categorieLieu;
     }
 
+    public Voyage() {
+
+    }
+
+    public Voyage(Long id) {
+        this.id = id;
+    }
+
+    public Voyage(Bouquet bouquet) {
+        this.bouquet = bouquet;
+    }
+
     public Long getId() {
         return id;
     }
@@ -61,7 +73,33 @@ public class Voyage {
     public void setCategorieLieu(CategorieLieu categorieLieu) {
         this.categorieLieu = categorieLieu;
     }
-    
+
+    public static void insertVoyage(Connection connection, Voyage voyage) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        String query = "INSERT INTO voyage(id_bouquet,id_categorie_lieu,id_duree) VALUES (?,?,?)";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, voyage.getBouquet().getId());
+            statement.setLong(2, voyage.getCategorieLieu().getId());
+            statement.setLong(3, voyage.getTypeDuree().getId());
+
+            System.out.println("\n" + query + "\n");
+
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
+
+        if (new_connex)
+            connection.close();
+    }
 
     public static List<Voyage> readAll(Connection connection) throws Exception {
         boolean new_connex = false;
@@ -69,35 +107,36 @@ public class Voyage {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-//      Test
-        List<Voyage> listActivite = new ArrayList<>();
-        List<ActiviteBouquetPrix> listActiviteBouquet=ActiviteBouquetPrix.getVoyageBetweenPrix(connection,0.0,10000000.0);
-        for (ActiviteBouquetPrix item: listActiviteBouquet) {
-            Voyage voyage=new Voyage(1L,new Bouquet(item.getIdBouquet(),item.getNomBouquet()),
-                                    new TypeDuree(item.getIdTypeDuree(),item.getNomTypeDuree()),
-                                    new CategorieLieu(item.getIdCategorieLieu(),item.getNomCategorieLieu()));
-            listActivite.add(voyage);
+        List<Voyage> listVoyage = new ArrayList<>();
+        String query = "select * from vue_voyage_complet";
+        Voyage voyage;
+          try (PreparedStatement statement = connection.prepareStatement(query)) {
+            System.out.println("\n"+query+"\n");
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    voyage = new Voyage();
+                    voyage.setId(resultSet.getLong("id"));
+                    voyage.setBouquet(new Bouquet(  resultSet.getLong("id_bouquet"),
+                                                    resultSet.getString("nom_bouquet")));
+                    voyage.setCategorieLieu(new CategorieLieu(  resultSet.getLong("id_categorie_lieu"),
+                                                                resultSet.getString("nom_categorie_lieu")));
+                    voyage.setTypeDuree(new TypeDuree(  resultSet.getLong("id_duree"),
+                                                        resultSet.getString("nom")));
+                    listVoyage.add(voyage);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-//        String query = "SELECT * FROM voyage";
-//        Voyage voyage;
-//
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            System.out.println("\n"+query+"\n");
-//
-//            try (ResultSet resultSet = statement.executeQuery()) {
-//                while (resultSet.next()) {
-//                    voyage = new Voyage();
-//                    voyage.setId(resultSet.getLong("id"));
-//                    listActivite.add(voyage);
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
 
         if (new_connex)
             connection.close();
 
-        return listActivite;
+        return listVoyage;
     }
 }

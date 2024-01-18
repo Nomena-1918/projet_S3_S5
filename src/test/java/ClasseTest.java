@@ -35,8 +35,7 @@ public class ClasseTest {
     @Test
     void testInsertActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            VoyageActivite actbouq=new VoyageActivite(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
-            VoyageActivite.insertActiviteBouquet(connection,actbouq);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

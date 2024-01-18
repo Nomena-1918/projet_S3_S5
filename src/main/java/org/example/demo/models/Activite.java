@@ -10,28 +10,25 @@ import java.util.List;
 public class Activite {
     private Long id;
     private String nom;
-    private Double prixUnitaire;
     public Activite(Long id,String nom){
         this.id=id;
         this.nom=nom;
+    }
+
+    public Activite(Long id) {
+        this.id = id;
+    }
+
+    public Activite(String nom) {
+        this.nom = nom;
     }
 
     public Activite(){
 
     }
 
-    public Double getPrixUnitaire() {
-        return prixUnitaire;
-    }
-
-    public void setPrixUnitaire(Double prixUnitaire) {
-        this.prixUnitaire = prixUnitaire;
-    }
-
     public void setId(Long id) {this.id = id;}
-
     public void setNom(String nom) {this.nom = nom;}
-
     public Long getId() {return id;}
     public String getNom() {return nom;}
 
@@ -41,11 +38,10 @@ public class Activite {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO activite(nom,prix_unitaire) VALUES (?,?)";
+        String query = "INSERT INTO activite(nom) VALUES (?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, activite.getNom());
-            statement.setDouble(2, activite.getPrixUnitaire());
 
             System.out.println("\n" + query + "\n");
 

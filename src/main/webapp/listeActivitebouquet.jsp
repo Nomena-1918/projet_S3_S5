@@ -17,7 +17,7 @@
 <%@ page import="org.example.demo.utils.Cast" %>
 
 <%
-  List<VoyageActivite> activiteBouquet = Cast.castToList(request.getAttribute("list-voyageActivite"), VoyageActivite.class);
+  List<VoyageActivite> voyageActivite = Cast.castToList(request.getAttribute("list-voyageActivite"), VoyageActivite.class);
 %>
       <div class="container-fluid">
         <main class="tm-main">
@@ -32,14 +32,15 @@
                   </tr>
                   </thead>
                   <tbody id="listeTableBody">
-                    <%for(VoyageActivite item: activiteBouquet){%>
+                    <%for(VoyageActivite item: voyageActivite){%>
                       <tr>
-                        <td><%=item.getNomActivite()%></td>
+                        <td><%=item.getActivite().getNom()%></td>
                       </tr>
                     <%}%>
                   </tbody>
                 </table>
               </div>
+              <a href="recherche-servlet">Redirection vers la page de recherche</a>
             </div>
           </div>
         </main>

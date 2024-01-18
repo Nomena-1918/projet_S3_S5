@@ -15,7 +15,7 @@
     <main class="tm-main">
         <div class="row tm-row tm-mb-120">
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Les activites</h2>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Les activités</h2>
             </div>
             <p>Nom du bouquet : <span>premium</span></p>
 

@@ -17,7 +17,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
 <%
-    List<VoyageActivite> voyageActivite = Cast.castToList(request.getAttribute("list-activitebouquet"), VoyageActivite.class);
+    List<VoyageActivite> voyageActivite = Cast.castToList(request.getAttribute("list-voyageActivite"), VoyageActivite.class);
     List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"), Activite.class);
 %>
     <div class="container-fluid">
@@ -51,7 +51,7 @@
             <%if (voyageActivite != null && !voyageActivite.isEmpty()) {%>
             <div class="row tm-row">
                 <div class="col-12">
-                    <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste correspondant à "<%=voyageActivite.get(0).getNomActivite()%>"</h2>
+                    <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste correspondant à "<%=voyageActivite.get(0).getActivite().getNom()%>"</h2>
                 </div>
                 <div class="col-lg-7 tm-contact-left">
                     <table class="table table-striped tm-table">
@@ -63,9 +63,9 @@
                         </tr>
                         <%for(VoyageActivite item: voyageActivite){%>
                         <tr>
-                            <td><%=item.getNomBouquet()%></td>
-                            <td><%=item.getNomCategorieLieu()%></td>
-                            <td><%=item.getNomTypeDuree()%></td>
+                            <td><%=item.getVoyage().getBouquet().getNom()%></td>
+                            <td><%=item.getVoyage().getCategorieLieu().getNom()%></td>
+                            <td><%=item.getVoyage().getTypeDuree().getNom()%></td>
                             <td><%=item.getNombre()%></td>
                         </tr>
                         <%}%>

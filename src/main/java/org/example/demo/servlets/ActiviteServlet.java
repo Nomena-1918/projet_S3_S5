@@ -27,8 +27,7 @@ public class ActiviteServlet  extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nomActivite=request.getParameter("nom");
         try(Connection connection = ConnexionPool.getConnection()){
-            Activite activite = new Activite();
-            activite.setNom(nomActivite);
+            Activite activite = new Activite(nomActivite);
             Activite.insertActivite(connection,activite);
             RequestDispatcher dispatcher = request.getRequestDispatcher("activite.jsp");
 
