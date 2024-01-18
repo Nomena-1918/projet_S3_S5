@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.*;
+import org.example.demo.models.travail.Voyage;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -24,19 +25,15 @@ public class VoyageActiviteServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long idActivite=Long.parseLong(request.getParameter("idActivite"));
-        Long idBouquet=Long.parseLong(request.getParameter("idBouquet"));
-        Long idCategorieLieu=Long.parseLong(request.getParameter("idCategorieLieu"));
-        Long idTypeDuree=Long.parseLong(request.getParameter("idTypeDuree"));
+        Long idVoyage=Long.parseLong(request.getParameter("idVoyage"));
         int nombre= Integer.parseInt(request.getParameter("nombre"));
         try(Connection connection = ConnexionPool.getConnection()){
-            VoyageActivite voyageActivite=new VoyageActivite();
-            voyageActivite.setIdActivite(idActivite);
-            voyageActivite.setIdCategorieLieu(idCategorieLieu);
-            voyageActivite.setIdTypeDuree(idTypeDuree);
-            voyageActivite.setIdBouquet(idBouquet);
-            voyageActivite.setNombre(nombre);
-
-            VoyageActivite.insertActiviteBouquet(connection,voyageActivite);
+            VoyageActivite voyageActivite=new VoyageActivite(
+                    new Activite(idActivite),
+                    new Voyage(idVoyage),
+                    nombre
+            );
+            VoyageActivite.insertVoyageActivite(connection,voyageActivite);
 
             getInfo(request, response, connection);
         } catch (Exception e) {
@@ -53,14 +50,8 @@ public class VoyageActiviteServlet extends HttpServlet {
         List<Activite> listActivite = Activite.readAll(connection);
         request.setAttribute("list-activite", listActivite);
 
-        List<Bouquet> listBouquet = Bouquet.readAll(connection);
-        request.setAttribute("list-bouquet", listBouquet);
-
-        List<CategorieLieu> listCategorieLieu = CategorieLieu.readAll(connection);
-        request.setAttribute("list-categorieLieu",listCategorieLieu);
-
-        List<TypeDuree> listTypeDuree = TypeDuree.readAll(connection);
-        request.setAttribute("list-typeDuree",listTypeDuree);
+        List<Voyage> listVoyage = Voyage.readAll(connection);
+        request.setAttribute("list-voyage", listVoyage);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("association.jsp");
         dispatcher.forward(request, response);

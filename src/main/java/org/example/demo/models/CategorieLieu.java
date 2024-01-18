@@ -34,6 +34,10 @@ public class CategorieLieu {
         this.nom = nom;
     }
 
+    public CategorieLieu(Long id) {
+        this.id = id;
+    }
+
     public CategorieLieu() {
     }
 

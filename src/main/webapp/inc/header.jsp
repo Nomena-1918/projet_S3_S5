@@ -27,8 +27,12 @@
                     Ajout catégorie lieu
                 </a></li>
                 <li class="tm-nav-item"><a href="bouquet-servlet" class="tm-nav-link">
-                    <i class="fas fa-users"></i>
+                    <i class="fas fa-pen"></i>
                     Ajout bouquet voyage
+                </a></li>
+                <li class="tm-nav-item"><a href="voyage-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Ajout voyage
                 </a></li>
                 <li class="tm-nav-item"><a href="voyageActivite-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>

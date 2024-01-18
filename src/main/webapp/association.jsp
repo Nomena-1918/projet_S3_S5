@@ -15,17 +15,13 @@
 <jsp:include page="inc/header.jsp"/>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.models.Activite" %>
-<%@ page import="org.example.demo.models.Bouquet" %>
-<%@ page import="org.example.demo.models.CategorieLieu" %>
-<%@ page import="org.example.demo.models.TypeDuree" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
+<%@ page import="org.example.demo.models.travail.Voyage" %>
 
 <%
     List<Activite> activite = castToList(request.getAttribute("list-activite"), Activite.class);
-    List<Bouquet> bouquet = castToList(request.getAttribute("list-bouquet"), Bouquet.class);
-    List<CategorieLieu> categorieLieu = castToList(request.getAttribute("list-categorieLieu"), CategorieLieu.class);
-    List<TypeDuree> typeDuree = castToList(request.getAttribute("list-typeDuree"), TypeDuree.class);
+    List<Voyage> voyage = castToList(request.getAttribute("list-voyage"), Voyage.class);
     String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -48,33 +44,12 @@
             <div class="col-lg-7 tm-contact-left">
                 <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
                     <div class="form-group row mb-4">
-                        <label for="bouquet" class="col-sm-3 col-form-label text-right tm-color-primary">Bouquet</label>
+                        <label for="idVoyage" class="col-sm-3 col-form-label text-right tm-color-primary">Voyage</label>
                         <div class="col-sm-9">
-                            <select class="form-control mr-0 ml-auto" name="idBouquet" id="bouquet" required>
-                                <% for (Bouquet value : bouquet) {%>
-                                <option value="<%=value.getId()%>"><%=value.getNom()%>
-                                </option>
-                                <% }%>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                        <label for="categorieLieu" class="col-sm-3 col-form-label text-right tm-color-primary">Catégorie Lieu</label>
-                        <div class="col-sm-9">
-                            <select class="form-control mr-0 ml-auto" name="idCategorieLieu" id="CategorieLieu" required>
-                                <% for (CategorieLieu item : categorieLieu) {%>
-                                <option value="<%=item.getId()%>"><%=item.getNom()%>
-                                </option>
-                                <% }%>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                        <label for="typeDuree" class="col-sm-3 col-form-label text-right tm-color-primary">Type Durée</label>
-                        <div class="col-sm-9">
-                            <select class="form-control mr-0 ml-auto" name="idTypeDuree" id="typeDuree" required>
-                                <% for (TypeDuree item : typeDuree) {%>
-                                <option value="<%=item.getId()%>"><%=item.getNom()%>
+                            <select class="form-control mr-0 ml-auto" name="idVoyage" id="idVoyage" required>
+                                <% for (Voyage value : voyage) {%>
+                                <option
+                                        value="<%=value.getId()%>"><%=value.getBouquet().getNom()%> <%=value.getTypeDuree().getNom()%> <%=value.getCategorieLieu().getNom()%>
                                 </option>
                                 <% }%>
                             </select>

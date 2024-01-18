@@ -1,6 +1,7 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,15 +13,6 @@ import java.util.List;
 public class ActiviteBouquetPrix extends VoyageActivite {
     private Double prix;
 
-    public ActiviteBouquetPrix(Long id, Long idActivite, String nomActivite, Long idBouquet, String nomBouquet, Double prix) {
-        super(id, idActivite, nomActivite, idBouquet, nomBouquet);
-        this.prix = prix;
-    }
-
-    public ActiviteBouquetPrix(Long id, Long idActivite, String nomActivite, Long idCategorieLieu, String nomCategorieLieu, Long idTypeDuree, String nomTypeDuree, int nombre, Long idBouquet, String nomBouquet, Double prix) {
-        super(id, idActivite, nomActivite, idCategorieLieu, nomCategorieLieu, idTypeDuree, nomTypeDuree, nombre, idBouquet, nomBouquet);
-        this.prix = prix;
-    }
 
     public ActiviteBouquetPrix(Double prix) {
         this.prix = prix;
@@ -59,15 +51,19 @@ public class ActiviteBouquetPrix extends VoyageActivite {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     activiteBouquetPrix = new ActiviteBouquetPrix(resultSet.getDouble("prix_total"));
-                    activiteBouquetPrix.setIdBouquet(resultSet.getLong("id_bouquet"));
-                    activiteBouquetPrix.setNomBouquet(resultSet.getString("nom_bouquet"));
-                    activiteBouquetPrix.setIdCategorieLieu(resultSet.getLong("id_categorie_lieu"));
-                    activiteBouquetPrix.setNomCategorieLieu(resultSet.getString("nom_categorie_lieu"));
-                    activiteBouquetPrix.setIdTypeDuree(resultSet.getLong("id_type_duree"));
-                    activiteBouquetPrix.setNomTypeDuree(resultSet.getString("nom_type_duree"));
-                    activiteBouquetPrix.setDebutJour(resultSet.getInt("debutjour"));
-                    activiteBouquetPrix.setFinJour(resultSet.getInt("finjour"));
-
+                    activiteBouquetPrix.setVoyage(new Voyage(
+                            new Bouquet(    resultSet.getLong("id_bouquet"),
+                                    resultSet.getString("nom_bouquet")
+                            ),
+                            new TypeDuree(  resultSet.getLong("id_type_duree"),
+                                    resultSet.getString("nom_type_duree"),
+                                    resultSet.getInt("debutjour"),
+                                    resultSet.getInt("finjour")
+                            ),
+                            new CategorieLieu(  resultSet.getLong("id_categorie_lieu"),
+                                    resultSet.getString("nom_categorie_lieu")
+                            )
+                    ));
                     listba.add(activiteBouquetPrix);
                 }
             } catch (SQLException e) {

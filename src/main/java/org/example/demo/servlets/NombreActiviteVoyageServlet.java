@@ -30,8 +30,7 @@ public class NombreActiviteVoyageServlet  extends HttpServlet {
         Long idActivite=Long.parseLong(request.getParameter("idActivite"));
         try(Connection connection = ConnexionPool.getConnection()){
             List<VoyageActivite> listActiviteBouquet=VoyageActivite.getByActivite(connection,idActivite);
-
-            request.setAttribute("list-activitebouquet",listActiviteBouquet);
+            request.setAttribute("list-voyageActivite",listActiviteBouquet);
             getInfo(request, response, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("NombreActiviteVoyage.jsp");
             dispatcher.forward(request, response);

@@ -15,6 +15,10 @@ public class Activite {
         this.nom=nom;
     }
 
+    public Activite(Long id) {
+        this.id = id;
+    }
+
     public Activite(String nom) {
         this.nom = nom;
     }
@@ -34,7 +38,7 @@ public class Activite {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO activite(nom) VALUES (?,?)";
+        String query = "INSERT INTO activite(nom) VALUES (?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, activite.getNom());

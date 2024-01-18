@@ -75,9 +75,9 @@
 
                         <%for(ActiviteBouquetPrix item: activiteBouquetprix){%>
                         <tr>
-                            <td><%=item.getNomBouquet()%></td>
-                            <td><%=item.getNomCategorieLieu()%></td>
-                            <td><%=item.getNomTypeDuree()%></td>
+                            <td><%=item.getVoyage().getBouquet().getNom()%></td>
+                            <td><%=item.getVoyage().getCategorieLieu().getNom()%></td>
+                            <td><%=item.getVoyage().getTypeDuree().getNom()%></td>
                             <td><%=item.getPrix()%></td>
                         </tr>
                         <%}%>

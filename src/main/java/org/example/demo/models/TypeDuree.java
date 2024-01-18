@@ -35,6 +35,11 @@ public class TypeDuree {
         this.id = id;
         this.nom = nom;
     }
+    public TypeDuree(String nom, int debutJour, int finJour) {
+        this.nom = nom;
+        this.debutJour = debutJour;
+        this.finJour = finJour;
+    }
 
     public int getDebutJour() {
         return debutJour;
@@ -53,6 +58,17 @@ public class TypeDuree {
     }
 
     public TypeDuree() {
+    }
+
+    public TypeDuree(Long id) {
+        this.id = id;
+    }
+
+    public TypeDuree(Long id, String nom, int debutJour, int finJour) {
+        this.id = id;
+        this.nom = nom;
+        this.debutJour = debutJour;
+        this.finJour = finJour;
     }
 
     public static void insertTypeDuree(Connection connection, TypeDuree typeDuree) throws Exception {

@@ -112,4 +112,4 @@ INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
 (5, 2, 20),
 (6, 3, 10),
 (7, 4, 30);
-
+select * from vue_activite_bouquet_nombre where id_activite=1

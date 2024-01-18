@@ -10,7 +10,7 @@ public class Connexion {
 
         String database = "voyage_db";
         String host = "localhost";
-        String port = "5433";
+        String port = "5432";
 
         return String.format("jdbc:postgresql://%s:%s/%s?user=%s&password=%s", host, port, database, user, pwd);
     }

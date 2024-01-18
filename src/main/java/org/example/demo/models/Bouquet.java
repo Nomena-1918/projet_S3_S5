@@ -20,6 +20,14 @@ public class Bouquet {
 
     }
 
+    public Bouquet(Long id) {
+        this.id = id;
+    }
+
+    public Bouquet(String nom) {
+        this.nom = nom;
+    }
+
     public void setId(Long id) {this.id = id;}
 
     public void setNom(String nom) {this.nom = nom;}

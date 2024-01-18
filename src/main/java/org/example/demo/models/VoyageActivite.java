@@ -1,6 +1,7 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,93 +11,12 @@ import java.util.*;
 
 public class VoyageActivite {
     private Long id;
-    private Long idActivite;
-    private String nomActivite;
-
-    private Long idCategorieLieu;
-    private String nomCategorieLieu;
-
-    private Long idTypeDuree;
-    private String nomTypeDuree;
-
+    private Activite activite;
+    private Voyage voyage;
     private int nombre;
-    private  Long idBouquet;
-    private String nomBouquet;
-
-    private int debutJour;
-    private int finJour;
-
-    public VoyageActivite(Long id,Long idActivite,String nomActivite,Long idBouquet,String nomBouquet){
-        this.id=id;
-        this.idActivite=idActivite;
-        this.nomActivite=nomActivite;
-        this.idBouquet=idBouquet;
-        this.nomBouquet=nomBouquet;
-    }
-
-    public VoyageActivite(Long id, Long idActivite, String nomActivite, Long idCategorieLieu, String nomCategorieLieu, Long idTypeDuree, String nomTypeDuree, int nombre, Long idBouquet, String nomBouquet) {
-        this.id = id;
-        this.idActivite = idActivite;
-        this.nomActivite = nomActivite;
-        this.idCategorieLieu = idCategorieLieu;
-        this.nomCategorieLieu = nomCategorieLieu;
-        this.idTypeDuree = idTypeDuree;
-        this.nomTypeDuree = nomTypeDuree;
-        this.nombre = nombre;
-        this.idBouquet = idBouquet;
-        this.nomBouquet = nomBouquet;
-    }
 
     public VoyageActivite(){
 
-    }
-
-    public int getDebutJour() {
-        return debutJour;
-    }
-
-    public void setDebutJour(int debutJour) {
-        this.debutJour = debutJour;
-    }
-
-    public int getFinJour() {
-        return finJour;
-    }
-
-    public void setFinJour(int finJour) {
-        this.finJour = finJour;
-    }
-
-    public Long getIdCategorieLieu() {
-        return idCategorieLieu;
-    }
-
-    public void setIdCategorieLieu(Long idCategorieLieu) {
-        this.idCategorieLieu = idCategorieLieu;
-    }
-
-    public String getNomCategorieLieu() {
-        return nomCategorieLieu;
-    }
-
-    public void setNomCategorieLieu(String nomCategorieLieu) {
-        this.nomCategorieLieu = nomCategorieLieu;
-    }
-
-    public Long getIdTypeDuree() {
-        return idTypeDuree;
-    }
-
-    public void setIdTypeDuree(Long idTypeDuree) {
-        this.idTypeDuree = idTypeDuree;
-    }
-
-    public String getNomTypeDuree() {
-        return nomTypeDuree;
-    }
-
-    public void setNomTypeDuree(String nomTypeDuree) {
-        this.nomTypeDuree = nomTypeDuree;
     }
 
     public int getNombre() {
@@ -108,39 +28,42 @@ public class VoyageActivite {
     }
 
     public void setId(Long id) {this.id = id;}
-
-    public void setIdActivite(Long idActivite) {this.idActivite = idActivite;}
-
-    public void setNomActivite(String nomActivite) {this.nomActivite = nomActivite;}
-
-    public void setIdBouquet(Long idBouquet) {this.idBouquet = idBouquet;}
-
-    public void setNomBouquet(String nomBouquet) {this.nomBouquet = nomBouquet;}
-
     public Long getId() {return id;}
 
-    public Long getIdActivite() {return idActivite;}
+    public Activite getActivite() {
+        return activite;
+    }
 
-    public String getNomActivite() {return nomActivite;}
+    public void setActivite(Activite activite) {
+        this.activite = activite;
+    }
 
-    public Long getIdBouquet() {return idBouquet;}
+    public Voyage getVoyage() {
+        return voyage;
+    }
 
-    public String getNomBouquet() {return nomBouquet;}
+    public void setVoyage(Voyage voyage) {
+        this.voyage = voyage;
+    }
 
-    public static void insertActiviteBouquet(Connection connection, VoyageActivite voyageActivite) throws Exception {
+    public VoyageActivite(Activite activite, Voyage voyage, int nombre) {
+        this.activite = activite;
+        this.voyage = voyage;
+        this.nombre = nombre;
+    }
+
+    public static void insertVoyageActivite(Connection connection, VoyageActivite voyageActivite) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO bouquet_activite(id_activite,id_bouquet,id_categorie_lieu,id_duree,nombre) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO voyage_activite(id_voyage,id_activite,nombre) VALUES (?,?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, voyageActivite.getIdActivite());
-            statement.setLong(2, voyageActivite.getIdBouquet());
-            statement.setLong(3, voyageActivite.getIdCategorieLieu());
-            statement.setLong(4, voyageActivite.getIdTypeDuree());
-            statement.setLong(5, voyageActivite.getNombre());
+            statement.setLong(1, voyageActivite.getActivite().getId());
+            statement.setLong(2, voyageActivite.getVoyage().getId());
+            statement.setLong(3, voyageActivite.getNombre());
 
             System.out.println("\n" + query + "\n");
 
@@ -176,10 +99,12 @@ public class VoyageActivite {
                 while (resultSet.next()) {
                     voyageActivite = new VoyageActivite();
                     voyageActivite.setId(resultSet.getLong("id"));
-                    voyageActivite.setIdActivite(resultSet.getLong("id_activite"));
-                    voyageActivite.setNomActivite(resultSet.getString("nom_activite"));
-                    voyageActivite.setIdBouquet(resultSet.getLong("id_bouquet"));
-                    voyageActivite.setNomBouquet(resultSet.getString("nom_bouquet"));
+                    voyageActivite.setActivite(new Activite(resultSet.getLong("id_activite"),
+                                                            resultSet.getString("nom_activite")));
+                    voyageActivite.setVoyage(new Voyage(
+                            new Bouquet(resultSet.getLong("id_bouquet"),
+                                        resultSet.getString("nom_bouquet")))
+                    );
                     listba.add(voyageActivite);
                 }
             } catch (SQLException e) {
@@ -199,14 +124,13 @@ public class VoyageActivite {
 
     public static List<VoyageActivite> getByActivite(Connection connection, Long idActivite) throws Exception {
         boolean new_connex = false;
-        List<VoyageActivite> listba=new ArrayList<>();
+        List<VoyageActivite> listVA=new ArrayList<>();
 
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
         String query = "select * from vue_activite_bouquet_nombre where id_activite=?";
-
 
         VoyageActivite voyageActivite;
         try (PreparedStatement statement = connection.prepareStatement(query)) {
@@ -217,18 +141,25 @@ public class VoyageActivite {
                 while (resultSet.next()) {
                     voyageActivite = new VoyageActivite();
                     voyageActivite.setId(resultSet.getLong("id"));
-                    voyageActivite.setIdActivite(resultSet.getLong("id_activite"));
-                    voyageActivite.setNomActivite(resultSet.getString("nom_activite"));
-                    voyageActivite.setIdBouquet(resultSet.getLong("id_bouquet"));
-                    voyageActivite.setNomBouquet(resultSet.getString("nom_bouquet"));
-                    voyageActivite.setIdCategorieLieu(resultSet.getLong("id_categorie_lieu"));
+                    voyageActivite.setActivite(
+                            new Activite(   resultSet.getLong("id_activite"),
+                                            resultSet.getString("nom_activite"))
+                    );
+                    voyageActivite.setVoyage(new Voyage(
+                            new Bouquet(    resultSet.getLong("id_bouquet"),
+                                            resultSet.getString("nom_bouquet")
+                            ),
+                            new TypeDuree(  resultSet.getLong("id_type_duree"),
+                                            resultSet.getString("nom_type_duree"),
+                                            resultSet.getInt("debutjour"),
+                                            resultSet.getInt("finjour")
+                            ),
+                            new CategorieLieu(  resultSet.getLong("id_categorie_lieu"),
+                                                resultSet.getString("nom_categorie_lieu")
+                            )
+                    ));
                     voyageActivite.setNombre(resultSet.getInt("nombre"));
-                    voyageActivite.setNomCategorieLieu(resultSet.getString("nom_categorie_lieu"));
-                    voyageActivite.setIdTypeDuree(resultSet.getLong("id_type_duree"));
-                    voyageActivite.setNomTypeDuree(resultSet.getString("nom_type_duree"));
-                    voyageActivite.setDebutJour(resultSet.getInt("debutjour"));
-                    voyageActivite.setFinJour(resultSet.getInt("finjour"));
-                    listba.add(voyageActivite);
+                    listVA.add(voyageActivite);
                 }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
@@ -242,12 +173,12 @@ public class VoyageActivite {
         if (new_connex)
             connection.close();
 
-        return listba;
+        return listVA;
     }
 
     @Override
     public String toString() {
-        return String.format("VoyageActivite{id=%s,idactivite=%s,nomactivite='%s',idbouquet=%s, nombouquet='%s'}",getId(), getIdActivite(),getNomActivite(),getIdBouquet(),getNomBouquet());
+        return String.format("VoyageActivite{id=%s}",getId());
     }
 
 }
