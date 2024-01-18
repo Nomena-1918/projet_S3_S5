@@ -21,3 +21,4 @@
   - Intérêt
   
 Fitsarana 3 sisa : points++ le dernier
+5 + 5 + 15
