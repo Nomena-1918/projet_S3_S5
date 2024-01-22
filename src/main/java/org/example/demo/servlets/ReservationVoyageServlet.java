@@ -40,7 +40,8 @@ public class ReservationVoyageServlet  extends HttpServlet {
         }
     }
 
-    private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
+    private void getInfo(HttpServletRequest request, HttpServletResponse
+            response, Connection connection) throws Exception {
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);
 

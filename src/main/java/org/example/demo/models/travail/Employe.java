@@ -29,6 +29,10 @@ public class Employe {
         this.fonction = fonction;
     }
 
+    public Employe() {
+
+    }
+
     public Long getId() {
         return id;
     }

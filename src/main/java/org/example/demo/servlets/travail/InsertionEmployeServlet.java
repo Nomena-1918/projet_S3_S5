@@ -32,7 +32,7 @@ public class InsertionEmployeServlet  extends HttpServlet {
         String nom=request.getParameter("nom");
         Long idFonction=Long.parseLong(request.getParameter("idFonction"));
         try(Connection connection = ConnexionPool.getConnection()){
-            // blablabla
+            Employe employe=new Employe();
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class InsertionEmployeServlet  extends HttpServlet {
             } catch (Exception ex){
                 ex.printStackTrace();
             }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("InsertionEmploye.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
             dispatcher.forward(request, response);
         }
     }

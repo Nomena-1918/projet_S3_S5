@@ -71,7 +71,7 @@ public class ReservationVoyage {
     }
 
     public static void checkNombreActivite(Connection connection,Voyage voyage, int nombreBillet) throws Exception {
-        List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,voyage,null);
+        List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,null);
         List<ResteActivite> resteActivitesInsufisant=new ArrayList<>();
 
         for (ResteActivite item: resteActivites) {

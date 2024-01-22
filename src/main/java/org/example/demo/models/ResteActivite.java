@@ -39,35 +39,20 @@ public class ResteActivite {
         this.resteBillet = resteBillet;
     }
 
-    public static List<ResteActivite> selectWhere(Connection connection, Voyage voyage, Long idActivite) throws Exception {
+    public static List<ResteActivite> selectWhere(Connection connection, Long idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        Long idCategorie=voyage.getCategorieLieu().getId();
-        Long idType=voyage.getTypeDuree().getId();
-        Long idBouquet=voyage.getBouquet().getId();
-        String query = """
-SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage 
-where id_categorie_lieu=? and id_type_duree=? and id_bouquet=?
-""";
+        String query = "SELECT id_activite,quantite_reste FROM vue_reste_activite_voyage and id_activite=?";
 
-        if(idActivite!=null){
-            query+=" and id_activite=?";
-        }
         List<ResteActivite> listResteActivite = new ArrayList<>();
         ResteActivite resteActivite;
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1,idCategorie);
-            statement.setLong(2,idType);
-            statement.setLong(3,idBouquet);
-            if(idActivite!=null){
-                statement.setLong(4,idActivite);
-            }
+            statement.setLong(4,idActivite);
             System.out.println("\n"+query+"\n");
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(

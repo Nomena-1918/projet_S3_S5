@@ -275,4 +275,3 @@ create view employe_complet as
     select e.id, e.nom, e.id_fonction, fe.nom as nom_fonction, fe.salaire_horaire
         from employe e
 join fonction_employe fe on e.id_fonction = fe.id
-
