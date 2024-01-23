@@ -75,7 +75,10 @@ INSERT INTO entree_activite (id_activite,prix_unitaire,quantite) values
 
 INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
 (1,5);
-
+INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
+(2,1);
+INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
+(3,2);
 
 -- Données pour la table fonction_employe
 INSERT INTO fonction_employe (nom, salaire_horaire) VALUES
@@ -83,13 +86,29 @@ INSERT INTO fonction_employe (nom, salaire_horaire) VALUES
 ('Cuisinier', 4500.00),
 ('Chauffeur', 4000.00);
 
+insert into sexe(nom) values
+('Masculin'),
+('Féminin');
+
 -- Données pour la table employe
-INSERT INTO employe (nom, id_fonction) VALUES
-('Jean Dupont', 1),
-('Marie Martin', 2),
-('Pierre Dubois', 3),
-('Sophie Tremblay', 1),
-('Michel Lavoie', 2);
+INSERT INTO employe (id_sexe, nom, prenom, dtn) VALUES
+(1, 'Jean', 'Dupont', '2004-01-23'),
+(2, 'Marie', 'Martin', '2004-01-23'),
+(1, 'Pierre','Dubois', '2004-01-23'),
+(2, 'Sophie', 'Tremblay', '2004-01-23'),
+(1, 'Michel', 'Lavoie', '2004-01-23');
+
+insert into embauche_employe(id_emp, id_fonction, date_embauche) values
+(1, 1, '2024-01-23 00:01'),
+(2, 2, '2023-01-23 00:02'),
+(3, 3, '2022-01-23 00:03'),
+(4, 1, '2021-01-23 00:04'),
+(5, 2, '2019-01-23 00:05');
+
+insert into grade_fonction(nom, coeff_taux_horaire, plage_anciennete) values
+('Simple', 1, int4range(0, 2)),
+('Senior', 2, int4range(2, 5)),
+('Expert', 3, int4range(5, 80));
 
 -- Données pour la table prix_vente_activite
 INSERT INTO prix_vente_activite (id_activite, prix_vente) VALUES
@@ -113,3 +132,7 @@ INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
 (6, 3, 10),
 (7, 4, 30);
 select * from vue_activite_bouquet_nombre where id_activite=1
+
+
+set timezone  = 'Indian/Antananarivo';
+
