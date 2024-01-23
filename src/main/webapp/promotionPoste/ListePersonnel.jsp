@@ -39,7 +39,6 @@
         <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste personnel
         </h2>
       </div>
-    <%if (personnel != null) {%>
     <div class="row tm-row">
       <div class="col-12">
         <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste de reste de billets d'activité</h2>
@@ -85,7 +84,6 @@
         </table>
       </div>
     </div>
-    <%}%>
   </main>
 </div>
 
