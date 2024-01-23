@@ -14,13 +14,14 @@ import org.example.demo.models.travail.Fonction;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet(name = "insertionEmployeServlet", value = "/insertionEmploye-servlet")
 public class InsertionEmployeServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try(Connection connection = ConnexionPool.getConnection()) {
-            getInfo(request, response, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
@@ -30,28 +31,23 @@ public class InsertionEmployeServlet  extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nom=request.getParameter("nom");
-        Long idFonction=Long.parseLong(request.getParameter("idFonction"));
+        String prenom=request.getParameter("prenom");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dtn = LocalDate.parse(request.getParameter("date"), formatter);
+
+        String sexe=request.getParameter("sexe");
+
         try(Connection connection = ConnexionPool.getConnection()){
-            Employe employe=new Employe(nom,new Fonction(idFonction));
-            Employe.insertEmploye(connection,employe);
-            getInfo(request, response, connection);
+            Employe employe=new Employe(nom,prenom,dtn,sexe);
+//          Employe.insertEmploye(connection,employe
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             request.setAttribute("messageError",e.getMessage());
-            try(Connection connection = ConnexionPool.getConnection()){
-                getInfo(request, response, connection);
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
             dispatcher.forward(request, response);
-            throw new RuntimeException(e);
         }
     }
 
-    private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
-        List<Fonction> listFonction = Fonction.readAll(connection);
-        request.setAttribute("list-fonction", listFonction);
-    }
 }

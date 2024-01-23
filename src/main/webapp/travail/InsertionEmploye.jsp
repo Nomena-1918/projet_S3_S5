@@ -42,23 +42,31 @@
       <div class="col-lg-7 tm-contact-left">
         <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
           <div class="form-group row mb-4">
-            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom employé</label>
+            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom </label>
             <div class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="nom" id="name" type="text" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="fonction" class="col-sm-3 col-form-label text-right tm-color-primary">Fonction</label>
+            <label for="prenom" class="col-sm-3 col-form-label text-right tm-color-primary">Prénom </label>
             <div class="col-sm-9">
-              <select class="form-control mr-0 ml-auto" name="idFonction" id="fonction" required>
-                <% for (Fonction item : fonction) {%>
-                <option
-                        value="<%=item.getId()%>"><%=item.getNom()%>
-                </option>
-                <% }%>
+              <input class="form-control mr-0 ml-auto" name="prenom" id="prenom" type="text" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="date" class="col-sm-3 col-form-label text-right tm-color-primary">Date de naissance </label>
+            <div class="col-sm-9">
+              <input class="form-control mr-0 ml-auto" name="date" id="date" type="date" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="sexe" class="col-sm-3 col-form-label text-right tm-color-primary">Sexe</label>
+            <div class="col-sm-9">
+              <select class="form-control mr-0 ml-auto" name="sexe" id="sexe"  required>
+                <option value="homme">Homme</option>
+                <option value="femme">Femme</option>
               </select>
             </div>
-
           </div>
           <div class="form-group row text-right">
             <div class="col-12">

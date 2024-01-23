@@ -1,11 +1,25 @@
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
+import org.example.demo.models.travail.Fonction;
 import org.junit.jupiter.api.Test;
+import veda.godao.DAO;
+import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
 import java.util.List;
 
 public class ClasseTest {
+    private static final DAO dao;
+    static {
+        dao=new DAO(
+                "test_veda",
+                "localhost",
+                "5432",
+                "nomena",
+                "root",
+                false,
+                Constantes.PSQL_ID);
+    }
     @Test
     void test() {
         System.out.println("Hello World!");
@@ -72,7 +86,7 @@ public class ClasseTest {
     @Test
     void getVoyageBetweenPrix() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<ActiviteBouquetPrix> listactbouq = ActiviteBouquetPrix.getVoyageBetweenPrix(connection,80000.0,500000.0);
+            List<Fonction> listactbouq = Fonction.readAll(connection);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
