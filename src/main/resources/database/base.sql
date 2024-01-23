@@ -111,10 +111,12 @@ order by id_activite;
 
 
 -- Somme des sorties totales des billets activités
-create view vue_quantite_sortie_activite as
-select vabn.id_activite, coalesce(vabn.nombre*rv.nombre_billet, 0) as nombre_billet_reserves
-    from vue_activite_bouquet_nombre vabn
-    join reservation_voyage rv on vabn.id_voyage = rv.id_voyage order by id_activite;
+create or replace view vue_quantite_sortie_activite as
+select vabn.id_activite, sum(coalesce(vabn.nombre*rv.nombre_billet, 0)) as nombre_billet_reserves
+from vue_activite_bouquet_nombre vabn
+    join reservation_voyage rv on vabn.id_voyage = rv.id_voyage
+group by vabn.id_activite
+order by id_activite;
 
 
 

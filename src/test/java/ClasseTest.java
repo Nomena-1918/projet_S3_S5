@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.util.List;
-
 public class ClasseTest {
     @Test
-    void test() {
+    public void test() {
         System.out.println("Hello World!");
     }
     @Test
@@ -71,9 +70,9 @@ public class ClasseTest {
 
     @Test
     void getVoyageBetweenPrix() {
-        try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<ActiviteBouquetPrix> listactbouq = ActiviteBouquetPrix.getVoyageBetweenPrix(connection,80000.0,500000.0);
-            System.out.println("\n====================\n"+listactbouq+"\n====================\n");
+        try (Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<ActiviteBouquetPrix> listactbouq = ActiviteBouquetPrix.getVoyageBetweenPrix(connection, 80000.0, 500000.0);
+            System.out.println("\n====================\n" + listactbouq + "\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

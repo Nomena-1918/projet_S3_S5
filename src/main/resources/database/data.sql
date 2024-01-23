@@ -75,7 +75,10 @@ INSERT INTO entree_activite (id_activite,prix_unitaire,quantite) values
 
 INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
 (1,5);
-
+INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
+(2,1);
+INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
+(3,2);
 
 -- Données pour la table fonction_employe
 INSERT INTO fonction_employe (nom, salaire_horaire) VALUES
