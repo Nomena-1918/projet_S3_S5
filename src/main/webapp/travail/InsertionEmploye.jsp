@@ -16,10 +16,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.travail.Fonction" %>
+<%@ page import="org.example.demo.models.promotionPoste.Sexe" %>
 
 <%
-  List<Fonction> fonction = castToList(request.getAttribute("list-fonction"), Fonction.class);
+  List<Sexe> sexes = castToList(request.getAttribute("list-sexe"), Sexe.class);
   String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -62,9 +62,12 @@
           <div class="form-group row mb-4">
             <label for="sexe" class="col-sm-3 col-form-label text-right tm-color-primary">Sexe</label>
             <div class="col-sm-9">
-              <select class="form-control mr-0 ml-auto" name="sexe" id="sexe"  required>
-                <option value="homme">Homme</option>
-                <option value="femme">Femme</option>
+              <select class="form-control mr-0 ml-auto" name="idsexe" id="sexe"  required>
+                <% for (Sexe item : sexes) {%>
+                <option
+                        value="<%=item.getId()%>"><%=item.getNom()%>%>
+                </option>
+                <% }%>
               </select>
             </div>
           </div>

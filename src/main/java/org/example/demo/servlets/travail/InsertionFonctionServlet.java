@@ -39,4 +39,5 @@ public class InsertionFonctionServlet  extends HttpServlet {
             dispatcher.forward(request, response);
         }
     }
+
 }

@@ -4,7 +4,13 @@ import org.example.demo.database.Connexion;
 import org.example.demo.models.Bouquet;
 import org.example.demo.models.CategorieLieu;
 import org.example.demo.models.TypeDuree;
+import org.example.demo.models.promotionPoste.Sexe;
+import veda.godao.DAO;
+import veda.godao.annotations.Column;
+import veda.godao.annotations.ForeignKey;
+import veda.godao.annotations.PrimaryKey;
 import veda.godao.annotations.Table;
+import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,28 +18,48 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
+@Table("employe")
 public class Employe {
+    private static final DAO dao;
+    static {
+        dao=new DAO(
+                Connexion.database,
+                Connexion.host,
+                Connexion.port,
+                Connexion.username,
+                Connexion.password,
+                Connexion.use_ssl,
+                Connexion.SGBD);
+    }
+
+    @PrimaryKey
+    @Column("id")
     private Long id;
+    @Column("nom")
     private String nom;
+    @Column("prenom")
     private String prenom;
+    @Column("dtn")
     private LocalDate dtn;
-    private String sexe;
+    @ForeignKey(recursive = true)
+    @Column("id_sexe")
+    private Sexe sexe;
 
     public Employe() {
 
     }
 
-    public Employe(Long id) {
-        this.id = id;
-    }
-
-    public Employe(String nom, String prenom, LocalDate dtn, String sexe) {
+    public Employe(String nom, String prenom, LocalDate dtn, Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;
         this.dtn = dtn;
         this.sexe = sexe;
+    }
+
+    public Employe(Long id) {
+        this.id = id;
     }
 
     public String getPrenom() {
@@ -52,14 +78,6 @@ public class Employe {
         this.dtn = dtn;
     }
 
-    public String getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(String sexe) {
-        this.sexe = sexe;
-    }
-
     public Long getId() {
         return id;
     }
@@ -76,66 +94,34 @@ public class Employe {
         this.id = id;
     }
 
+    public static void insertEmploye(Connection connection, Employe employe) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        try{
+            dao.insertWithoutPrimaryKey(connection,employe);
+            connection.commit();
+        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
 
-//    public static void insertEmploye(Connection connection, Employe employe) throws Exception {
-//        boolean new_connex = false;
-//        if (connection == null) {
-//            connection = Connexion.getConnexionPostgreSql();
-//            new_connex = true;
-//        }
-//        String query = "INSERT INTO employe(nom) VALUES (?)";
-//
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            statement.setString(1, employe.getNom());
-//
-//            System.out.println("\n" + query + "\n");
-//
-//            statement.executeUpdate();
-//            connection.commit();
-//        }
-//        catch (Exception e) {
-//            connection.rollback();
-//            throw e;
-//        }
-//
-//        if (new_connex)
-//            connection.close();
-//    }
+        if (new_connex)
+            connection.close();
+    }
+    public static List<Employe> readAll(Connection connection) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        Employe[] employes=dao.select(connection,Employe.class);
 
-//    public static List<Employe> readAll(Connection connection) throws Exception {
-//        boolean new_connex = false;
-//        if(connection == null) {
-//            connection = Connexion.getConnexionPostgreSql();
-//            new_connex = true;
-//        }
-//        List<Employe> listEmploye = new ArrayList<>();
-//        Fonction fonction;
-//        Employe employe;
-//        String query = "SELECT * FROM employe_complet";
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            System.out.println("\n"+query+"\n");
-//
-//            try (ResultSet resultSet = statement.executeQuery()) {
-//                while (resultSet.next()) {
-//                    fonction = new Fonction(
-//                            resultSet.getLong("id_fonction"),
-//                            resultSet.getString("nom_fonction"),
-//                            resultSet.getDouble("salaire_horaire")
-//                    );
-//                    employe = new Employe(
-//                            resultSet.getLong("id"),
-//                            resultSet.getString("nom")
-//                    );
-//                    listEmploye.add(employe);
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//
-//        if (new_connex)
-//            connection.close();
-//
-//        return listEmploye;
-//    }
+        if (new_connex)
+            connection.close();
+        return Arrays.asList(employes);
+    }
 }

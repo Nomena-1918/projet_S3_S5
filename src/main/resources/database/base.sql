@@ -289,7 +289,7 @@ create view vue_voyage_complet_benefice_total as
 select vvc.id, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc.nom, vvc.id_categorie_lieu, vvc.nom_categorie_lieu as nom_categorie_lieu,
        vbtv.benefice_voyage as benefice_voyage
 from vue_voyage_complet as vvc
-join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage
+join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage;
 
 
 

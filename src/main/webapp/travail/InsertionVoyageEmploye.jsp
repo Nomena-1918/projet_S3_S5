@@ -61,7 +61,7 @@
               <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
                 <% for (Employe item : employe) {%>
                 <option
-                        value="<%=item.getId()%>"><%=item.getNom()%> <%=item.getFonction().getNom()%>
+                        value="<%=item.getId()%>"><%=item.getNom()%>%>
                 </option>
                 <% }%>
               </select>

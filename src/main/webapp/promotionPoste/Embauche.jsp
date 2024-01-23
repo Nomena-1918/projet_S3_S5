@@ -47,11 +47,11 @@
                         <label for="idEmploye" class="col-sm-3 col-form-label text-right tm-color-primary">Employé</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
-<%--                                <% for (Employe item : employe) {%>--%>
+                                <% for (Employe item : employe) {%>
                                 <option >
-<%--                                        value="<%=item.getId()%>"><%=item.getNom()%>%>--%>
+                                        value="<%=item.getId()%>"><%=item.getNom()%>%>
                                 </option>
-<%--                                <% }%>--%>
+                                <% }%>
                             </select>
                         </div>
                     </div>
