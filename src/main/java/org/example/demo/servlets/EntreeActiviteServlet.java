@@ -31,10 +31,7 @@ public class EntreeActiviteServlet  extends HttpServlet {
         Integer quantite=Integer.parseInt(request.getParameter("quantite"));
         Double prixUnitaire=Double.parseDouble(request.getParameter("prixUnitaire"));
         try(Connection connection = ConnexionPool.getConnection()){
-            EntreeActivite entreeActivite = new EntreeActivite();
-            entreeActivite.setId(idActivite);
-            entreeActivite.setQuantite(quantite);
-            // blablabla
+            EntreeActivite entreeActivite = new EntreeActivite(idActivite,prixUnitaire,quantite);
             EntreeActivite.insertEntreeActivite(connection,entreeActivite);
             getInfo(request, response, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("EntreeActivite.jsp");

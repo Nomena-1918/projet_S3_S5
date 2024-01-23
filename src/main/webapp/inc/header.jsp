@@ -79,6 +79,10 @@
                     <i class="fas fa-pen"></i>
                     Insertion prix de Vente activité
                 </a></li>
+                <li class="tm-nav-item"><a href="benefice-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Benefice
+                </a></li>
             </ul>
         </nav>
         <div class="tm-mb-65">

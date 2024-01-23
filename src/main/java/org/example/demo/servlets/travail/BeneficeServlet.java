@@ -7,18 +7,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.Bouquet;
-import org.example.demo.models.travail.Fonction;
+import org.example.demo.models.ActiviteBouquetPrix;
+import org.example.demo.models.CategorieLieu;
+import org.example.demo.models.travail.Benefice;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
-@WebServlet(name = "insertionFonctionServlet", value = "/insertionFonction-servlet")
-public class InsertionFonctionServlet  extends HttpServlet {
+@WebServlet(name = "beneficeServlet", value = "/benefice-servlet")
+public class BeneficeServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionFonction.jsp");
+        try{
+            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/Benefice.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -26,16 +27,16 @@ public class InsertionFonctionServlet  extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        String nomFonction=request.getParameter("nomFonction");
-        Double salaireHoraire=Double.parseDouble(request.getParameter("salaireHoraire"));
+        Double prixMin=Double.parseDouble(request.getParameter("prixMin"));
+        Double prixMax=Double.parseDouble(request.getParameter("prixMax"));
         try(Connection connection = ConnexionPool.getConnection()){
-            Fonction fonction= new Fonction(nomFonction,salaireHoraire);
-            Fonction.insertFonction(connection,fonction);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionFonction.jsp");
+            List<Benefice> benefices=Benefice.getBeneficeBetweenPrix(connection,prixMin,prixMax);
+            request.setAttribute("list-benefices",benefices);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/Benefice.jsp");
             dispatcher.forward(request, response);
-        } catch (Exception e) {
+        }  catch (Exception e) {
             request.setAttribute("messageError",e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionFonction.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("travail/Benefice.jsp");
             dispatcher.forward(request, response);
         }
     }

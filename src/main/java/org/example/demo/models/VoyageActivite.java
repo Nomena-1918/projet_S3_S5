@@ -176,6 +176,42 @@ public class VoyageActivite {
         return listVA;
     }
 
+    public static List<VoyageActivite> getByVoyage(Connection connection,Long idVoyage) throws Exception {
+        boolean new_connex = false;
+        if(connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        List<VoyageActivite> listVoyageActivite = new ArrayList<>();
+        String query = "select * from voyage_activite where id_voyage=?";
+        VoyageActivite voyageActivite;
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            System.out.println("\n"+query+"\n");
+            statement.setLong(1,idVoyage);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    voyageActivite = new VoyageActivite();
+                    voyageActivite.setId(resultSet.getLong("id"));
+                    voyageActivite.setActivite(new Activite( resultSet.getLong("id_activite")));
+                    voyageActivite.setVoyage(new Voyage(  resultSet.getLong("id_voyage")));
+                    voyageActivite.setNombre(resultSet.getInt("nombre"));
+                    listVoyageActivite.add(voyageActivite);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
+
+        if (new_connex)
+            connection.close();
+
+        return listVoyageActivite;
+    }
+
     @Override
     public String toString() {
         return String.format("VoyageActivite{id=%s}",getId());

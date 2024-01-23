@@ -1,6 +1,7 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,37 +39,31 @@ public class ResteActivite {
         this.resteBillet = resteBillet;
     }
 
-    public static List<ResteActivite> selectWhere(Connection connection, Long idCategorie, Long idType, Long idBouquet, Long idActivite) throws Exception {
+    public static List<ResteActivite> selectWhere(Connection connection, Long idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = """
-SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage 
-where id_categorie_lieu=? and id_type_duree=? and id_bouquet=?
-""";
 
+        String query = "SELECT id_activite,quantite_reste FROM vue_reste_activite_voyage ";
         if(idActivite!=null){
-            query+=" and id_activite=?";
+            query+=" where id_activite=?";
         }
+
         List<ResteActivite> listResteActivite = new ArrayList<>();
         ResteActivite resteActivite;
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1,idCategorie);
-            statement.setLong(2,idType);
-            statement.setLong(3,idBouquet);
             if(idActivite!=null){
-                statement.setLong(4,idActivite);
+                statement.setLong(1,idActivite);
             }
             System.out.println("\n"+query+"\n");
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"), resultSet.getString("nom_activite"))
-                            ,resultSet.getInt("nombre_billet_restant")
+                            new Activite(resultSet.getLong("id_activite"))
+                            ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);
                 }
@@ -83,19 +78,18 @@ where id_categorie_lieu=? and id_type_duree=? and id_bouquet=?
         return listResteActivite;
     }
 
-    public static List<ResteActivite> findAll(Connection connection,Long idActivite) throws Exception {
+    public static List<ResteActivite> findAll(Connection connection, Long idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = """
-SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage 
-""";
 
+        String query = "SELECT id_activite,quantite_reste,nom_activite FROM vue_reste_activite_complet_voyage ";
         if(idActivite!=null){
             query+=" where id_activite=?";
         }
+
         List<ResteActivite> listResteActivite = new ArrayList<>();
         ResteActivite resteActivite;
 
@@ -104,12 +98,11 @@ SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage
                 statement.setLong(1,idActivite);
             }
             System.out.println("\n"+query+"\n");
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"), resultSet.getString("nom_activite"))
-                            ,resultSet.getInt("nombre_billet_restant")
+                            new Activite(resultSet.getLong("id_activite"),resultSet.getString("nom_activite"))
+                            ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);
                 }

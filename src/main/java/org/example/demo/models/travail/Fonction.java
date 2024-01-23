@@ -1,7 +1,12 @@
 package org.example.demo.models.travail;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.Activite;
+
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +20,16 @@ public class Fonction {
         this.salaireHoraire = salaireHoraire;
     }
 
+    public Fonction(Long id) {
+        this.id = id;
+    }
+
     public Fonction(Long id, String nom, Double salaireHoraire) {
         this.id = id;
         this.nom = nom;
         this.salaireHoraire = salaireHoraire;
     }
+
 
     public Long getId() {
         return id;
@@ -44,7 +54,32 @@ public class Fonction {
     public void setSalaireHoraire(Double salaireHoraire) {
         this.salaireHoraire = salaireHoraire;
     }
+    public static void insertFonction(Connection connection, Fonction fonction) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        String query = "INSERT INTO fonction_employe(nom,salaire_horaire) VALUES (?,?)";
 
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, fonction.getNom());
+            statement.setDouble(2, fonction.getSalaireHoraire());
+
+            System.out.println("\n" + query + "\n");
+
+            statement.executeUpdate();
+            connection.commit();
+        }
+        catch (Exception e) {
+            connection.rollback();
+            throw e;
+        }
+
+        if (new_connex)
+            connection.close();
+
+    }
 
     public static List<Fonction> readAll(Connection connection) throws Exception {
         boolean new_connex = false;
@@ -52,34 +87,25 @@ public class Fonction {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-//      Test
         List<Fonction> listFonction = new ArrayList<>();
-        Fonction f1=new Fonction(1L,"conducteur",123454.0);
-        Fonction f2=new Fonction(2L,"gardien",10000000.0);
-        Fonction f3=new Fonction(3L,"cuisinier",200000.0);
-        Fonction f4=new Fonction(4L,"guide",3000000.0);
+        Fonction fonction;
+        String query = "SELECT * FROM fonction_employe";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            System.out.println("\n"+query+"\n");
 
-        listFonction.add(f1);
-        listFonction.add(f2);
-        listFonction.add(f3);
-        listFonction.add(f4);
-
-//        String query = "SELECT * FROM voyage";
-//        Voyage voyage;
-//
-//        try (PreparedStatement statement = connection.prepareStatement(query)) {
-//            System.out.println("\n"+query+"\n");
-//
-//            try (ResultSet resultSet = statement.executeQuery()) {
-//                while (resultSet.next()) {
-//                    voyage = new Voyage();
-//                    voyage.setId(resultSet.getLong("id"));
-//                    listActivite.add(voyage);
-//                }
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    fonction = new Fonction(
+                            resultSet.getLong("id"),
+                            resultSet.getString("nom"),
+                            resultSet.getDouble("salaire_horaire")
+                    );
+                    listFonction.add(fonction);
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
         if (new_connex)
             connection.close();

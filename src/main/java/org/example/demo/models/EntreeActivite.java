@@ -9,10 +9,26 @@ import java.util.List;
 
 public class EntreeActivite {
     private Long id;
+
+    private Double prixUnitaire;
     private Integer quantite;
 
     public EntreeActivite(){
 
+    }
+
+    public EntreeActivite(Long id, Double prixUnitaire, Integer quantite) {
+        this.id = id;
+        this.prixUnitaire = prixUnitaire;
+        this.quantite = quantite;
+    }
+
+    public Double getPrixUnitaire() {
+        return prixUnitaire;
+    }
+
+    public void setPrixUnitaire(Double prixUnitaire) {
+        this.prixUnitaire = prixUnitaire;
     }
 
     public Integer getQuantite() {
@@ -34,11 +50,12 @@ public class EntreeActivite {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO entree_activite(id_activite,quantite) VALUES (?,?)";
+        String query = "INSERT INTO entree_activite(id_activite,prix_unitaire,quantite) VALUES (?,?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, entreeActivite.getId());
-            statement.setInt(2, entreeActivite.getQuantite());
+            statement.setDouble(2, entreeActivite.getPrixUnitaire());
+            statement.setInt(3, entreeActivite.getQuantite());
 
             System.out.println("\n" + query + "\n");
 
