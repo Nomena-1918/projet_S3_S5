@@ -200,18 +200,22 @@ Select * from vue_activite_bouquet_nombre_prix where prix_total between 80000 an
 
 
 
-create table fonction_employe(
+create table sexe(
     id serial primary key,
-    nom varchar(100) not null,
-    salaire_horaire decimal not null check ( salaire_horaire>0 )
+    nom varchar(100) not null
 );
 
 
 create table employe(
     id serial primary key,
     nom varchar(100) not null,
-    id_fonction int references fonction_employe(id)
+    prenom varchar(100) not null,
+    id_sexe int not null references sexe(id),
+    dtn date not null check ( dtn < now() )
 );
+
+
+
 
 create table prix_vente_activite(
     id serial primary key,
@@ -257,7 +261,8 @@ create view vue_salaire_employe_voyage as
 select ve.id_voyage,  sum(fe.salaire_horaire*heures_travail) as salaire_total
 from voyage_employe ve
 join employe e on ve.id_emp = e.id
-join fonction_employe fe on e.id_fonction = fe.id
+join embauche_employe ee on e.id = ee.id_emp and ee.date_embauche = (select max(date_embauche) from embauche_employe where embauche_employe.id_emp = e.id)
+join fonction_employe fe on ee.id_fonction = fe.id
 group by ve.id_voyage
 order by id_voyage;
 
@@ -273,10 +278,6 @@ order by id_voyage;
 select * from vue_benefice_total_voyage where benefice_voyage between 2000000 and 5000000;
 
 
-create view employe_complet as
-    select e.id, e.nom, e.id_fonction, fe.nom as nom_fonction, fe.salaire_horaire
-        from employe e
-join fonction_employe fe on e.id_fonction = fe.id
 
 
 create view vue_reste_activite_complet_voyage as
@@ -289,3 +290,57 @@ select vvc.id, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc
        vbtv.benefice_voyage as benefice_voyage
 from vue_voyage_complet as vvc
 join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage
+
+
+
+create table fonction_employe(
+    id serial primary key,
+    nom varchar(100) not null,
+    salaire_horaire decimal not null check ( salaire_horaire>0 )
+);
+
+
+
+
+create table grade_fonction(
+    id serial primary key,
+    nom varchar(100) unique not null,
+    coeff_taux_horaire decimal not null check ( coeff_taux_horaire > 0 ),
+    plage_anciennete int4range,
+    EXCLUDE USING gist (plage_anciennete WITH &&)
+);
+
+create table embauche_employe(
+    id serial primary key,
+    id_emp int not null references employe(id),
+    id_fonction int not null references fonction_employe(id),
+    date_embauche date not null check ( date_embauche <= now() )
+);
+
+create view employe_complet as
+WITH derniere_date AS (
+    SELECT id_emp, MAX(date_embauche) AS derniere_date_embauche
+    FROM embauche_employe
+    GROUP BY id_emp
+)
+SELECT e.id, e.nom, ee.id_fonction, fe.nom as nom_fonction, fe.salaire_horaire, dd.derniere_date_embauche
+FROM employe e
+         JOIN embauche_employe ee ON e.id = ee.id_emp
+         JOIN fonction_employe fe ON ee.id_fonction = fe.id
+         JOIN derniere_date dd ON e.id = dd.id_emp AND ee.date_embauche = dd.derniere_date_embauche
+ORDER BY dd.derniere_date_embauche DESC;
+
+
+SELECT EXTRACT(YEAR FROM AGE('2024-01-23 15:27:34'::timestamp, '2004-01-22 15:27:34'::timestamp));
+
+
+create view vue_liste_personnel as
+select
+    ec.id, ec.nom, ec.id_fonction, ec.nom_fonction, ec.salaire_horaire, ec.derniere_date_embauche,
+    EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))  as annees_service,
+    gf.id as id_grade, gf.nom as nom_grade, gf.plage_anciennete, gf.coeff_taux_horaire, ec.salaire_horaire as salaire_de_base,
+    (gf.coeff_taux_horaire * ec.salaire_horaire) as salaire_horaire_actuel
+from employe_complet ec
+join grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int
+
+
