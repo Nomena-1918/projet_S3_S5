@@ -49,11 +49,12 @@ public class ReservationVoyage {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
+
         ReservationVoyage.checkNombreActivite(connection, reservationVoyage.getVoyage(), reservationVoyage.getNombre_billet());
         String query = "INSERT INTO reservation_voyage(id_voyage,nombre_billet) VALUES (?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1,reservationVoyage.getId());
+            statement.setLong(1,reservationVoyage.getVoyage().getId());
             statement.setLong(2, reservationVoyage.getNombre_billet());
 
             System.out.println("\n" + query + "\n");
@@ -71,12 +72,16 @@ public class ReservationVoyage {
     }
 
     public static void checkNombreActivite(Connection connection,Voyage voyage, int nombreBillet) throws Exception {
-        List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,null);
+        List<VoyageActivite> listVoyageActivite=VoyageActivite.getByVoyage(connection,voyage.getId());
         List<ResteActivite> resteActivitesInsufisant=new ArrayList<>();
 
-        for (ResteActivite item: resteActivites) {
-            if(item.getResteBillet() < nombreBillet){
-                resteActivitesInsufisant.add(item);
+        for (VoyageActivite voyageActivite: listVoyageActivite){
+            List<ResteActivite> resteActivites=ResteActivite.selectWhere(connection,voyageActivite.getActivite().getId());
+
+            for (ResteActivite restact: resteActivites) {
+                if(restact.getResteBillet() < nombreBillet * voyageActivite.getNombre()){
+                    resteActivitesInsufisant.add(restact);
+                }
             }
         }
 

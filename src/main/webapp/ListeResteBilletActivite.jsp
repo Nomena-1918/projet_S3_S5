@@ -15,14 +15,27 @@
 <%@ page import="org.example.demo.models.Activite" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
+<%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="org.example.demo.models.ResteActivite" %>
 <%
     List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"), Activite.class);
     List<ResteActivite> resteActivites=Cast.castToList(request.getAttribute("list-resteActivite"), ResteActivite.class);
+    String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
     <main class="tm-main">
         <div class="row tm-row">
+            <%if (messageError != null) {%>
+            <div class="card col-12">
+                <div class="card-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="bi bi-exclamation-octagon me-1"></i>
+                        <%=messageError%>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+            <%}%>
             <div class="col-12">
                 <h2 class="tm-color-primary tm-post-title tm-mb-60">Nombre activite par voyage
                 </h2>

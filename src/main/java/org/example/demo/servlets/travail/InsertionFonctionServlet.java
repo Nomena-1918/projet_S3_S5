@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Bouquet;
+import org.example.demo.models.travail.Fonction;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -28,7 +29,8 @@ public class InsertionFonctionServlet  extends HttpServlet {
         String nomFonction=request.getParameter("nomFonction");
         Double salaireHoraire=Double.parseDouble(request.getParameter("salaireHoraire"));
         try(Connection connection = ConnexionPool.getConnection()){
-            // blablabla
+            Fonction fonction= new Fonction(nomFonction,salaireHoraire);
+            Fonction.insertFonction(connection,fonction);
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionFonction.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {

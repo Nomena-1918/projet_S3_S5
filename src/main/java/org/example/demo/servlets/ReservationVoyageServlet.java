@@ -35,13 +35,12 @@ public class ReservationVoyageServlet  extends HttpServlet {
                 request.setAttribute("messageError",e.getMessage());
                 getInfo(request, response, connection);
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                throw new RuntimeException(e);
             }
         }
     }
 
-    private void getInfo(HttpServletRequest request, HttpServletResponse
-            response, Connection connection) throws Exception {
+    private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);
 

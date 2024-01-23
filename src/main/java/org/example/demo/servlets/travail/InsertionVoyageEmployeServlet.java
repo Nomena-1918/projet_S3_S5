@@ -9,6 +9,7 @@ import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.*;
 import org.example.demo.models.travail.Employe;
 import org.example.demo.models.travail.Voyage;
+import org.example.demo.models.travail.VoyageEmploye;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,7 +30,11 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
         Long idEmploye=Long.parseLong(request.getParameter("idEmploye"));
         int heureTravail=Integer.parseInt(request.getParameter("heure"));
         try(Connection connection = ConnexionPool.getConnection()){
-            // blablabla
+            Voyage voyage=new Voyage(idVoyage);
+            Employe employe=new Employe(idEmploye);
+
+            VoyageEmploye voyageEmploye=new VoyageEmploye(voyage,employe,heureTravail);
+            VoyageEmploye.insertVoyageEmploye(connection,voyageEmploye);
             getInfo(request, response, connection);
         } catch (Exception e) {
             try(Connection connection = ConnexionPool.getConnection()){

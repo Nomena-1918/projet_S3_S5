@@ -18,12 +18,16 @@ public class ListeResteBilletActiviteServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try(Connection connection = ConnexionPool.getConnection()) {
             List<ResteActivite> resteActivites=ResteActivite.findAll(connection,null);
+
             request.setAttribute("list-resteActivite", resteActivites);
             getInfo(request, response, connection);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ListeResteBilletActivite.jsp");
-            dispatcher.forward(request, response);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+/*            try(Connection connection = ConnexionPool.getConnection()){
+                request.setAttribute("messageError",e.getMessage());
+                getInfo(request, response, connection);
+            } catch (Exception ex) {*/
+                throw new RuntimeException(e);
+          /*  }*/
         }
     }
 
@@ -33,15 +37,21 @@ public class ListeResteBilletActiviteServlet  extends HttpServlet {
             List<ResteActivite> resteActivites=ResteActivite.findAll(connection,idActivite);
             request.setAttribute("list-resteActivite", resteActivites);
             getInfo(request, response, connection);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ListeResteBilletActivite.jsp");
-            dispatcher.forward(request, response);
         } catch (Exception e) {
+/*            try(Connection connection = ConnexionPool.getConnection()){
+                request.setAttribute("messageError",e.getMessage());
+                getInfo(request, response, connection);
+            } catch (Exception ex) {*/
             throw new RuntimeException(e);
+            /*  }*/
         }
     }
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
         List<Activite> listActivite = Activite.readAll(connection);
         request.setAttribute("list-activite", listActivite);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ListeResteBilletActivite.jsp");
+        dispatcher.forward(request, response);
     }
 }

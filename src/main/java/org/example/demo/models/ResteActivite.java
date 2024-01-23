@@ -45,19 +45,25 @@ public class ResteActivite {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "SELECT id_activite,quantite_reste FROM vue_reste_activite_voyage and id_activite=?";
+
+        String query = "SELECT id_activite,quantite_reste FROM vue_reste_activite_voyage ";
+        if(idActivite!=null){
+            query+=" where id_activite=?";
+        }
 
         List<ResteActivite> listResteActivite = new ArrayList<>();
         ResteActivite resteActivite;
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(4,idActivite);
+            if(idActivite!=null){
+                statement.setLong(1,idActivite);
+            }
             System.out.println("\n"+query+"\n");
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"), resultSet.getString("nom_activite"))
-                            ,resultSet.getInt("nombre_billet_restant")
+                            new Activite(resultSet.getLong("id_activite"))
+                            ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);
                 }
@@ -72,19 +78,18 @@ public class ResteActivite {
         return listResteActivite;
     }
 
-    public static List<ResteActivite> findAll(Connection connection,Long idActivite) throws Exception {
+    public static List<ResteActivite> findAll(Connection connection, Long idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = """
-SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage 
-""";
 
+        String query = "SELECT id_activite,quantite_reste,nom_activite FROM vue_reste_activite_complet_voyage ";
         if(idActivite!=null){
             query+=" where id_activite=?";
         }
+
         List<ResteActivite> listResteActivite = new ArrayList<>();
         ResteActivite resteActivite;
 
@@ -93,12 +98,11 @@ SELECT id_activite,nom_activite,nombre_billet_restant FROM reste_activite_voyage
                 statement.setLong(1,idActivite);
             }
             System.out.println("\n"+query+"\n");
-
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"), resultSet.getString("nom_activite"))
-                            ,resultSet.getInt("nombre_billet_restant")
+                            new Activite(resultSet.getLong("id_activite"),resultSet.getString("nom_activite"))
+                            ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);
                 }

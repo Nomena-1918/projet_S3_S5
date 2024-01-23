@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.Activite;
+import org.example.demo.models.travail.ActivitePrixVente;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -30,7 +31,8 @@ public class InsertionPrixDeVenteActiviteServlet extends HttpServlet {
         Double prixVente=Double.parseDouble(request.getParameter("prixVente"));
 
         try(Connection connection = ConnexionPool.getConnection()){
-            // blablabla
+            ActivitePrixVente activitePrixVente =new ActivitePrixVente(new Activite(idActivite),prixVente);
+            ActivitePrixVente.insertActivitePrixVente(connection,activitePrixVente);
             getInfo(request, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionPrixDeVenteActivite.jsp");
             dispatcher.forward(request, response);
