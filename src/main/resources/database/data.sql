@@ -17,9 +17,9 @@ INSERT INTO bouquet (nom) VALUES
 ('Bouquet Océan');
 
 INSERT INTO categorie_lieu (nom) VALUES
-('regional'),
-('national'),
-('provincial');
+('Régional'),
+('National'),
+('Provincial');
 
 INSERT INTO type_duree (nom, intervaljour) VALUES
 ('Court', int4range(2, 4)),
@@ -131,8 +131,3 @@ INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
 (5, 2, 20),
 (6, 3, 10),
 (7, 4, 30);
-select * from vue_activite_bouquet_nombre where id_activite=1
-
-
-set timezone  = 'Indian/Antananarivo';
-

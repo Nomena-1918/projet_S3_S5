@@ -1,6 +1,6 @@
 -- create database voyage_db;
-
---create extension if not exists btree_gist;
+set timezone = 'Indian/Antananarivo';
+create extension if not exists btree_gist;
 create table activite(
     id serial primary key,
     nom varchar(100) unique not null
@@ -254,6 +254,30 @@ join vue_prix_revient_activite vpra on vabn.id_activite = vpra.id_activite
 group by vabn.id_voyage
 order by vabn.id_voyage;
 
+create table fonction_employe(
+    id serial primary key,
+    nom varchar(100) not null,
+    salaire_horaire decimal not null check ( salaire_horaire>0 )
+);
+
+
+
+
+create table grade_fonction(
+    id serial primary key,
+    nom varchar(100) unique not null,
+    coeff_taux_horaire decimal not null check ( coeff_taux_horaire > 0 ),
+    plage_anciennete int4range,
+    EXCLUDE USING gist (plage_anciennete WITH &&)
+);
+
+create table embauche_employe(
+    id serial primary key,
+    id_emp int not null references employe(id),
+    id_fonction int not null references fonction_employe(id),
+    date_embauche date not null check ( date_embauche <= now() )
+);
+
 
 
 -- Vue salaire total employé par voyage
@@ -293,29 +317,6 @@ join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage;
 
 
 
-create table fonction_employe(
-    id serial primary key,
-    nom varchar(100) not null,
-    salaire_horaire decimal not null check ( salaire_horaire>0 )
-);
-
-
-
-
-create table grade_fonction(
-    id serial primary key,
-    nom varchar(100) unique not null,
-    coeff_taux_horaire decimal not null check ( coeff_taux_horaire > 0 ),
-    plage_anciennete int4range,
-    EXCLUDE USING gist (plage_anciennete WITH &&)
-);
-
-create table embauche_employe(
-    id serial primary key,
-    id_emp int not null references employe(id),
-    id_fonction int not null references fonction_employe(id),
-    date_embauche date not null check ( date_embauche <= now() )
-);
 
 create view employe_complet as
 WITH derniere_date AS (
