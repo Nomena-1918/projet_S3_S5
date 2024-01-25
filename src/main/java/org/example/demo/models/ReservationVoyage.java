@@ -85,7 +85,7 @@ public class ReservationVoyage {
             }
         }
 
-        if(resteActivitesInsufisant.size()>0){
+        if(!resteActivitesInsufisant.isEmpty()){
             throw new Exception("Activite insuffisant :"+resteActivitesInsufisant);
         }
 

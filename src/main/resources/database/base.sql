@@ -51,10 +51,28 @@ CREATE TABLE entree_activite (
 );
 
 
+
+create table sexe(
+    id serial primary key,
+    nom varchar(100) not null
+);
+
+
+
+
+create table client(
+   id serial primary key,
+   nom varchar(100) not null,
+   id_sexe int references sexe(id)
+);
+
+
+
 CREATE TABLE reservation_voyage (
     id serial PRIMARY KEY,
     id_voyage int references voyage(id),
-    nombre_billet integer NOT NULL CHECK (nombre_billet > 0)
+    nombre_billet integer NOT NULL CHECK (nombre_billet > 0),
+    id_client int not null references client(id)
 );
 
 
@@ -199,13 +217,6 @@ order by id_voyage;
 Select * from vue_activite_bouquet_nombre_prix where prix_total between 80000 and 500000;
 
 
-
-create table sexe(
-    id serial primary key,
-    nom varchar(100) not null
-);
-
-
 create table employe(
     id serial primary key,
     nom varchar(100) not null,
@@ -302,7 +313,6 @@ order by id_voyage;
 select * from vue_benefice_total_voyage where benefice_voyage between 2000000 and 5000000;
 
 
-
 create view vue_reste_activite_complet_voyage as
     select a.id as id_activite, a.nom as nom_activite, vrav.quantite_reste as quantite_reste
 from vue_reste_activite_voyage as vrav
@@ -343,11 +353,26 @@ from employe_complet ec
 join grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int
 
 
+-- Stats vente d'activités par genre
+create view vue_resume_reservation_client_genre as
+select row_number() over () as id,
+       rv.id as id_reservation, rv.id_client, c.nom as nom_client,
+       s.id as id_sexe, s.nom as nom_sexe,
+       rv.id_voyage, vabn.id_activite,
+       vabn.nom_activite, vabn.nombre as nombre_activite,
+       vpva.prix_vente, (vabn.nombre*vpva.prix_vente) as prix_vente_total
+    from reservation_voyage rv
+join client c on rv.id_client = c.id
+join vue_activite_bouquet_nombre vabn on rv.id_voyage = vabn.id_voyage
+join vue_prix_vente_activite vpva on vpva.id_activite = vabn.id_activite
+join sexe s on c.id_sexe = s.id;
+
+select * from vue_resume_reservation_client_genre where id_sexe = 1;
+select * from vue_resume_reservation_client_genre where id_sexe = 2;
 
 
-create table client(
-    id serial primary key,
-    nom varchar(100) not null,
-    id_sexe int references
-)
-
+create view vue_stats_genre as
+select id_sexe, id_activite, nom_activite, sum(nombre_activite) as nombre, sum(prix_vente_total) as prix_total
+    from vue_resume_reservation_client_genre vrscg
+group by id_sexe, id_activite, nom_activite
+order by id_sexe;

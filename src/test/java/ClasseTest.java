@@ -1,6 +1,7 @@
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
 import org.example.demo.models.benefice.BeneficeVoyage;
+import org.example.demo.models.promotionPoste.Sexe;
 import org.example.demo.models.travail.Fonction;
 import org.example.demo.models.travail.Voyage;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,12 @@ public class ClasseTest {
     void testVoyage() throws Exception {
         Voyage[] voyageList = dao.select(null, Voyage.class);
         System.out.println(Arrays.toString(voyageList));
+    }
+
+    @Test
+    void testClient() throws Exception {
+        Client.insertClient(Connexion.getConnexionPostgreSql(), new Client("Clienttest", new Sexe(1)));
+        System.out.println("ok");
     }
 
     @Test

@@ -73,22 +73,30 @@ INSERT INTO entree_activite (id_activite,prix_unitaire,quantite) values
 (6,70000,20),
 (7,80000,20);
 
-INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
-(1,5);
-INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
-(2,1);
-INSERT INTO reservation_voyage (id_voyage, nombre_billet) values
-(3,2);
+insert into sexe(nom) values
+('Masculin'),
+('Féminin');
 
+
+insert into client(nom, id_sexe) values
+('Client 1', 1),
+('Client 2', 2);
+
+
+INSERT INTO reservation_voyage (id_voyage, nombre_billet, id_client) values
+(1,5, 1);
+INSERT INTO reservation_voyage (id_voyage, nombre_billet, id_client) values
+(2,1, 2);
+INSERT INTO reservation_voyage (id_voyage, nombre_billet, id_client) values
+(3,2, 1);
+INSERT INTO reservation_voyage (id_voyage, nombre_billet, id_client) values
+(3,1, 2);
 -- Données pour la table fonction_employe
 INSERT INTO fonction_employe (nom, salaire_horaire) VALUES
 ('Guide', 5000.00),
 ('Cuisinier', 4500.00),
 ('Chauffeur', 4000.00);
 
-insert into sexe(nom) values
-('Masculin'),
-('Féminin');
 
 -- Données pour la table employe
 INSERT INTO employe (id_sexe, nom, prenom, dtn) VALUES
@@ -131,3 +139,5 @@ INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
 (5, 2, 20),
 (6, 3, 10),
 (7, 4, 30);
+
+
