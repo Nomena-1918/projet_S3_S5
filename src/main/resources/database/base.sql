@@ -239,20 +239,20 @@ join activite a on pva.id_activite = a.id;
 
 
 -- Vue Bénéfice activite
-create view vue_prix_revient_activite as
-select vpua.id_activite, (vpva.prix_vente - vpua.prix_unitaire) as prix_revient_activite
+create view vue_benefice_activite as
+select vpua.id_activite, (vpva.prix_vente - vpua.prix_unitaire) as benefice_activite
     from vue_prix_unitaire_activite vpua
 join vue_prix_vente_activite vpva on vpva.id_activite = vpua.id_activite;
 
 
-
 -- Vue Bénéfice total des activités par voyage
-create view vue_prix_revient_total_activite_voyage as
-select vabn.id_voyage, sum(vabn.nombre * vpra.prix_revient_activite) as prix_revient_activite_voyage
+create view vue_benefice_total_activite_voyage as
+select vabn.id_voyage, sum(vabn.nombre * vba.benefice_activite) as benefice_activite_voyage
 FROM vue_activite_bouquet_nombre vabn
-join vue_prix_revient_activite vpra on vabn.id_activite = vpra.id_activite
+join vue_benefice_activite vba on vabn.id_activite = vba.id_activite
 group by vabn.id_voyage
 order by vabn.id_voyage;
+
 
 create table fonction_employe(
     id serial primary key,
@@ -293,14 +293,13 @@ order by id_voyage;
 
 -- Vue Bénéfice total par voyage
 create view vue_benefice_total_voyage as
-select vprtav.id_voyage, (vprtav.prix_revient_activite_voyage - vsev.salaire_total) as benefice_voyage
-    from vue_prix_revient_total_activite_voyage vprtav
-join vue_salaire_employe_voyage vsev on vsev.id_voyage = vprtav.id_voyage
+select vbtav.id_voyage, vbtav.benefice_activite_voyage, vsev.salaire_total, (vbtav.benefice_activite_voyage - vsev.salaire_total) as benefice_voyage
+    from vue_benefice_total_activite_voyage vbtav
+join vue_salaire_employe_voyage vsev on vsev.id_voyage = vbtav.id_voyage
 order by id_voyage;
 
 
 select * from vue_benefice_total_voyage where benefice_voyage between 2000000 and 5000000;
-
 
 
 
@@ -309,13 +308,13 @@ create view vue_reste_activite_complet_voyage as
 from vue_reste_activite_voyage as vrav
 join activite a on a.id = vrav.id_activite;
 
+-------------
 create view vue_voyage_complet_benefice_total as
-select vvc.id, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc.nom, vvc.id_categorie_lieu, vvc.nom_categorie_lieu as nom_categorie_lieu,
+select vvc.id as id_voyage, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc.nom, vvc.id_categorie_lieu, vvc.nom_categorie_lieu as nom_categorie_lieu,
        vbtv.benefice_voyage as benefice_voyage
 from vue_voyage_complet as vvc
 join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage;
-
-
+-------------
 
 
 create view employe_complet as
