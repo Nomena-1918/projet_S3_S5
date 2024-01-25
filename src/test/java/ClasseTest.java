@@ -1,5 +1,6 @@
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
+import org.example.demo.models.promotionPoste.Sexe;
 import org.example.demo.models.travail.Fonction;
 import org.junit.jupiter.api.Test;
 import veda.godao.DAO;
@@ -88,6 +89,15 @@ public class ClasseTest {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             List<Fonction> listactbouq = Fonction.readAll(connection);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
+    void selectListeSexe() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<Activite> activites = Activite.readAll(connection);
+            System.out.println("\n====================\n"+activites+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

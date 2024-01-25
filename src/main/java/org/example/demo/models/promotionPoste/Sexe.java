@@ -35,6 +35,9 @@ public class Sexe {
         this.nom = nom;
     }
 
+    public Sexe() {
+    }
+
     public Sexe(Integer id) {
         this.id = id;
     }

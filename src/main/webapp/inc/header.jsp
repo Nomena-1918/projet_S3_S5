@@ -95,6 +95,10 @@
                     <i class="fas fa-pen"></i>
                     Liste personnel
                 </a></li>
+                <li class="tm-nav-item"><a href="stat-genre-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Statistiques
+                </a></li>
             </ul>
         </nav>
         <div class="tm-mb-65">

@@ -344,3 +344,4 @@ from employe_complet ec
 join grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int
 
 
+
