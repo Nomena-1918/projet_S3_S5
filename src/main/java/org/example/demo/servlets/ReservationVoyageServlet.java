@@ -25,12 +25,15 @@ public class ReservationVoyageServlet  extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long idVoyage=Long.parseLong(request.getParameter("idVoyage"));
+        Integer idClient=Integer.parseInt(request.getParameter("idClient"));
         int nombreBillet= Integer.parseInt(request.getParameter("nombrePersonne"));
+
         try(Connection connection = ConnexionPool.getConnection()){
-            ReservationVoyage reservationVoyage=new ReservationVoyage(new Voyage(idVoyage),nombreBillet);
+            ReservationVoyage reservationVoyage=new ReservationVoyage(nombreBillet,new Voyage(idVoyage),new Client(idClient));
             ReservationVoyage.insertReservationVoyage(connection,reservationVoyage);
             getInfo(request, response, connection);
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             try(Connection connection = ConnexionPool.getConnection()){
                 request.setAttribute("messageError",e.getMessage());
                 getInfo(request, response, connection);
@@ -43,6 +46,9 @@ public class ReservationVoyageServlet  extends HttpServlet {
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);
+
+        var listClient = Client.readAll(connection);
+        request.setAttribute("list-client", listClient);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("ReservationVoyage.jsp");
         dispatcher.forward(request, response);

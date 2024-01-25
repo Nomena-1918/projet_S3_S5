@@ -17,9 +17,13 @@
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
 <%@ page import="org.example.demo.models.travail.Voyage" %>
+<%@ page import="org.example.demo.models.Client" %>
+
 
 <%
     List<Voyage> voyage = castToList(request.getAttribute("list-voyage"), Voyage.class);
+    List<Client> client = castToList(request.getAttribute("list-client"), Client.class);
+
     String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -53,6 +57,20 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group row mb-4">
+                        <label for="idVoyage" class="col-sm-3 col-form-label text-right tm-color-primary">Voyage</label>
+                        <div class="col-sm-9">
+                            <select class="form-control mr-0 ml-auto" name="idClient" id="idClient" required>
+                                <% for (Client value : client) {%>
+                                <option
+                                        value="<%=value.getId()%>"><%=value.getNom()%> <%=value.getSexe().getNom()%>
+                                </option>
+                                <% }%>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group row mb-4">
                         <label for="nombre" class="col-sm-3 col-form-label text-right tm-color-primary">Nombre de personne</label>
                         <diV class="col-sm-9">

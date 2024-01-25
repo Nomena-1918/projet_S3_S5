@@ -38,6 +38,12 @@ public class ClasseTest {
     }
 
     @Test
+    void testSelectClient() throws Exception {
+        var list = Client.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
     void testBenefice() throws Exception {
         List<BeneficeVoyage> beneficeVoyageList = BeneficeVoyage.readAll(Connexion.getConnexionPostgreSql());
         System.out.println(beneficeVoyageList);

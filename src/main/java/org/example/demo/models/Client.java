@@ -33,6 +33,10 @@ public class Client {
     public Client() {
     }
 
+    public Client(Integer id) {
+        this.id = id;
+    }
+
     public static void insertClient(Connection connection, Client client) throws Exception {
         boolean new_connex = false;
         if (connection == null) {

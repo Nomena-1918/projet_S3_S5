@@ -30,6 +30,8 @@ public class Sexe {
     @Column("nom")
     private String nom;
 
+    public Sexe() {
+    }
     public Sexe(Integer id, String nom) {
         this.id = id;
         this.nom = nom;

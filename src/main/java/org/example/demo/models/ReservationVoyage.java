@@ -13,10 +13,21 @@ public class ReservationVoyage {
     private Long id;
     private int nombre_billet;
     private Voyage voyage;
+    private Client client;
 
-    public ReservationVoyage( Voyage voyage,int nombre_billet) {
+
+    public ReservationVoyage(int nombre_billet, Voyage voyage, Client client) {
         this.nombre_billet = nombre_billet;
         this.voyage = voyage;
+        this.client = client;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public int getNombre_billet() {
@@ -51,11 +62,13 @@ public class ReservationVoyage {
         }
 
         ReservationVoyage.checkNombreActivite(connection, reservationVoyage.getVoyage(), reservationVoyage.getNombre_billet());
-        String query = "INSERT INTO reservation_voyage(id_voyage,nombre_billet) VALUES (?,?)";
+        String query = "INSERT INTO reservation_voyage(id_voyage,nombre_billet,id_client) VALUES (?,?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1,reservationVoyage.getVoyage().getId());
             statement.setLong(2, reservationVoyage.getNombre_billet());
+            statement.setInt(3, reservationVoyage.getClient().getId());
+
 
             System.out.println("\n" + query + "\n");
 
