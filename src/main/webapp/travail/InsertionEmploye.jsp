@@ -16,10 +16,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.travail.Fonction" %>
+<%@ page import="org.example.demo.models.promotionPoste.Sexe" %>
 
 <%
-  List<Fonction> fonction = castToList(request.getAttribute("list-fonction"), Fonction.class);
+  List<Sexe> sexes = castToList(request.getAttribute("list-sexe"), Sexe.class);
   String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -42,23 +42,34 @@
       <div class="col-lg-7 tm-contact-left">
         <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
           <div class="form-group row mb-4">
-            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom employé</label>
+            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom </label>
             <div class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="nom" id="name" type="text" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="fonction" class="col-sm-3 col-form-label text-right tm-color-primary">Fonction</label>
+            <label for="prenom" class="col-sm-3 col-form-label text-right tm-color-primary">Prénom </label>
             <div class="col-sm-9">
-              <select class="form-control mr-0 ml-auto" name="idFonction" id="fonction" required>
-                <% for (Fonction item : fonction) {%>
+              <input class="form-control mr-0 ml-auto" name="prenom" id="prenom" type="text" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="date" class="col-sm-3 col-form-label text-right tm-color-primary">Date de naissance </label>
+            <div class="col-sm-9">
+              <input class="form-control mr-0 ml-auto" name="date" id="date" type="date" required>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="sexe" class="col-sm-3 col-form-label text-right tm-color-primary">Sexe</label>
+            <div class="col-sm-9">
+              <select class="form-control mr-0 ml-auto" name="idsexe" id="sexe"  required>
+                <% for (Sexe item : sexes) {%>
                 <option
-                        value="<%=item.getId()%>"><%=item.getNom()%>
+                        value="<%=item.getId()%>"><%=item.getNom()%>%>
                 </option>
                 <% }%>
               </select>
             </div>
-
           </div>
           <div class="form-group row text-right">
             <div class="col-12">

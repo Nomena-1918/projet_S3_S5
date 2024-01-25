@@ -47,8 +47,8 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
     }
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
-        List<Employe> listEmploye = Employe.readAll(connection);
-        request.setAttribute("list-employe", listEmploye);
+//        List<Employe> listEmploye = Employe.readAll(connection);
+//        request.setAttribute("list-employe", listEmploye);
 
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);

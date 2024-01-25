@@ -4,40 +4,78 @@ import org.example.demo.database.Connexion;
 import org.example.demo.models.Bouquet;
 import org.example.demo.models.CategorieLieu;
 import org.example.demo.models.TypeDuree;
+import org.example.demo.models.promotionPoste.Sexe;
+import veda.godao.DAO;
+import veda.godao.annotations.Column;
+import veda.godao.annotations.ForeignKey;
+import veda.godao.annotations.PrimaryKey;
+import veda.godao.annotations.Table;
+import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-
+@Table("employe")
 public class Employe {
-    private Long id;
-    private String nom;
-    private Fonction fonction;
+    private static final DAO dao;
+    static {
+        dao=new DAO(
+                Connexion.database,
+                Connexion.host,
+                Connexion.port,
+                Connexion.username,
+                Connexion.password,
+                Connexion.use_ssl,
+                Connexion.SGBD);
+    }
 
-    public Employe(Fonction fonction) {
-        this.fonction = fonction;
+    @PrimaryKey
+    @Column("id")
+    private Long id;
+    @Column("nom")
+    private String nom;
+    @Column("prenom")
+    private String prenom;
+    @Column("dtn")
+    private LocalDate dtn;
+    @ForeignKey(recursive = true)
+    @Column("id_sexe")
+    private Sexe sexe;
+
+    public Employe() {
+
+    }
+
+    public Employe(String nom, String prenom, LocalDate dtn, Sexe sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.dtn = dtn;
+        this.sexe = sexe;
     }
 
     public Employe(Long id) {
         this.id = id;
     }
 
-    public Employe(Long id, String nom, Fonction fonction) {
-        this.id = id;
-        this.nom = nom;
-        this.fonction = fonction;
+    public String getPrenom() {
+        return prenom;
     }
 
-    public Employe(String nom, Fonction fonction) {
-        this.nom = nom;
-        this.fonction = fonction;
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
-    public Employe() {
+    public LocalDate getDtn() {
+        return dtn;
+    }
 
+    public void setDtn(LocalDate dtn) {
+        this.dtn = dtn;
     }
 
     public Long getId() {
@@ -56,30 +94,14 @@ public class Employe {
         this.id = id;
     }
 
-    public Fonction getFonction() {
-        return fonction;
-    }
-
-    public void setFonction(Fonction fonction) {
-        this.fonction = fonction;
-    }
-
-
     public static void insertEmploye(Connection connection, Employe employe) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO employe(nom,id_fonction) VALUES (?,?)";
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, employe.getNom());
-            statement.setDouble(2, employe.getFonction().getId());
-
-            System.out.println("\n" + query + "\n");
-
-            statement.executeUpdate();
+        try{
+            dao.insertWithoutPrimaryKey(connection,employe);
             connection.commit();
         }
         catch (Exception e) {
@@ -89,43 +111,17 @@ public class Employe {
 
         if (new_connex)
             connection.close();
-
     }
     public static List<Employe> readAll(Connection connection) throws Exception {
         boolean new_connex = false;
-        if(connection == null) {
+        if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        List<Employe> listEmploye = new ArrayList<>();
-        Fonction fonction;
-        Employe employe;
-        String query = "SELECT * FROM employe_complet";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            System.out.println("\n"+query+"\n");
-
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    fonction = new Fonction(
-                            resultSet.getLong("id_fonction"),
-                            resultSet.getString("nom_fonction"),
-                            resultSet.getDouble("salaire_horaire")
-                    );
-                    employe = new Employe(
-                            resultSet.getLong("id"),
-                            resultSet.getString("nom"),
-                            fonction
-                    );
-                    listEmploye.add(employe);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        Employe[] employes=dao.select(connection,Employe.class);
 
         if (new_connex)
             connection.close();
-
-        return listEmploye;
+        return Arrays.asList(employes);
     }
 }

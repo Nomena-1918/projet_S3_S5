@@ -83,6 +83,18 @@
                     <i class="fas fa-pen"></i>
                     Benefice
                 </a></li>
+                <li class="tm-nav-item"><a href="embauche-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Embauche
+                </a></li>
+                <li class="tm-nav-item"><a href="insertionGradePoste-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion grade poste
+                </a></li>
+                <li class="tm-nav-item"><a href="listePersonnel-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Liste personnel
+                </a></li>
             </ul>
         </nav>
         <div class="tm-mb-65">

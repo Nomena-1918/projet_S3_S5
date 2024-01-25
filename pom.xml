@@ -22,14 +22,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>veda.godao</groupId>
-            <artifactId>veda</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>2.0.0</version>
@@ -70,40 +62,22 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <artifactId>junit</artifactId>
-            <groupId>junit</groupId>
-            <version>4.13.2</version>
-            <scope>test</scope>
+            <groupId>veda.godao</groupId>
+            <artifactId>veda</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>3.0.0-M1</version>
-                <executions>
-                    <execution>
-                        <id>install-local-jar</id>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <configuration>
-                            <file>/lib/Veda.jar</file>
-                            <groupId>veda.godao</groupId>
-                            <artifactId>veda</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
