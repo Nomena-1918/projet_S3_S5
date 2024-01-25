@@ -310,12 +310,11 @@ join activite a on a.id = vrav.id_activite;
 
 -------------
 create view vue_voyage_complet_benefice_total as
-select vvc.id as id_voyage, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc.nom, vvc.id_categorie_lieu, vvc.nom_categorie_lieu as nom_categorie_lieu,
+select row_number() over () as id, vvc.id as id_voyage, vvc.id_bouquet, vvc.nom_bouquet as nom_bouquet, vvc.id_duree, vvc.nom, vvc.id_categorie_lieu, vvc.nom_categorie_lieu as nom_categorie_lieu,
        vbtv.benefice_voyage as benefice_voyage
 from vue_voyage_complet as vvc
 join vue_benefice_total_voyage as vbtv on vvc.id=vbtv.id_voyage;
 -------------
-
 
 create view employe_complet as
 WITH derniere_date AS (
@@ -343,4 +342,12 @@ select
 from employe_complet ec
 join grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int
 
+
+
+
+create table client(
+    id serial primary key,
+    nom varchar(100) not null,
+    id_sexe int references
+)
 

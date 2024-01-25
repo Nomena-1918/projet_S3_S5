@@ -1,18 +1,21 @@
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
+import org.example.demo.models.benefice.BeneficeVoyage;
 import org.example.demo.models.travail.Fonction;
+import org.example.demo.models.travail.Voyage;
 import org.junit.jupiter.api.Test;
 import veda.godao.DAO;
 import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClasseTest {
     private static final DAO dao;
     static {
         dao=new DAO(
-                "test_veda",
+                "voyage_db",
                 "localhost",
                 "5432",
                 "nomena",
@@ -20,6 +23,19 @@ public class ClasseTest {
                 false,
                 Constantes.PSQL_ID);
     }
+
+    @Test
+    void testVoyage() throws Exception {
+        Voyage[] voyageList = dao.select(null, Voyage.class);
+        System.out.println(Arrays.toString(voyageList));
+    }
+
+    @Test
+    void testBenefice() throws Exception {
+        List<BeneficeVoyage> beneficeVoyageList = BeneficeVoyage.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(beneficeVoyageList);
+    }
+
     @Test
     void test() {
         System.out.println("Hello World!");

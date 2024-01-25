@@ -1,6 +1,9 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import veda.godao.annotations.Column;
+import veda.godao.annotations.PrimaryKey;
+import veda.godao.annotations.Table;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,8 +12,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table("categorie_lieu")
 public class CategorieLieu {
+    @PrimaryKey
+    @Column("id")
     Long id;
+    @Column("nom")
     String nom;
 
     public Long getId() {

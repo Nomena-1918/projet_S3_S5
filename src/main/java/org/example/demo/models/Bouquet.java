@@ -1,14 +1,21 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import veda.godao.annotations.Column;
+import veda.godao.annotations.PrimaryKey;
+import veda.godao.annotations.Table;
 
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table("bouquet")
 public class Bouquet {
+    @PrimaryKey
+    @Column("id")
     private Long id;
+    @Column("nom")
     private String nom;
 
     public Bouquet(Long id,String nom){

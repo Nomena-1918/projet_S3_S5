@@ -2,6 +2,10 @@ package org.example.demo.models.travail;
 
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
+import veda.godao.annotations.Column;
+import veda.godao.annotations.ForeignKey;
+import veda.godao.annotations.PrimaryKey;
+import veda.godao.annotations.Table;
 
 import javax.swing.plaf.BorderUIResource;
 import java.sql.Connection;
@@ -11,10 +15,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table("voyage")
 public class Voyage {
+    @PrimaryKey
+    @Column("id")
     private Long id;
+
+    @ForeignKey(recursive = true)
+    @Column("id_bouquet")
     private Bouquet bouquet;
+
+    @ForeignKey(recursive = true)
+    @Column("id_duree")
     private TypeDuree typeDuree;
+
+    @ForeignKey(recursive = true)
+    @Column("id_categorie_lieu")
     private CategorieLieu categorieLieu;
 
     public Voyage(Long id, Bouquet bouquet, TypeDuree typeDuree, CategorieLieu categorieLieu) {
