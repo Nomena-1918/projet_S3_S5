@@ -30,8 +30,6 @@ public class Sexe {
     @Column("nom")
     private String nom;
 
-    public Sexe() {
-    }
     public Sexe(Integer id, String nom) {
         this.id = id;
         this.nom = nom;
@@ -72,5 +70,20 @@ public class Sexe {
             connection.close();
         return Arrays.asList(sexes);
     }
+
+    public static void insertSexe(Connection connection, Sexe sexe) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+        dao.insertWithoutPrimaryKey(connection, sexe);
+        if (new_connex) {
+            connection.commit();
+            connection.close();
+        }
+    }
+
+
 
 }

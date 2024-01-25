@@ -3,6 +3,7 @@ import org.example.demo.database.Connexion;
 import org.example.demo.models.promotionPoste.Sexe;
 import veda.godao.DAO;
 import veda.godao.annotations.*;
+import veda.godao.utils.DAOConnexion;
 
 import java.sql.Connection;
 import java.util.Arrays;
@@ -44,8 +45,10 @@ public class Client {
             new_connex = true;
         }
         dao.insertWithoutPrimaryKey(connection,client);
-        if (new_connex)
+        if (new_connex) {
+            connection.commit();
             connection.close();
+        }
     }
     public static List<Client> readAll(Connection connection) throws Exception {
         boolean new_connex = false;

@@ -13,7 +13,7 @@ import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
-@Table("statistique_sexe")
+@Table("vue_stats_genre")
 public class StatistiqueSexe {
     private static final DAO dao;
     static {
@@ -87,19 +87,23 @@ public class StatistiqueSexe {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-//        StatistiqueSexe[] statistiquesSexe=dao.select(connection,StatistiqueSexe.class);
-// test
-        StatistiqueSexe[] statistiquesSexe=new StatistiqueSexe[5];
-        statistiquesSexe[0]=new StatistiqueSexe(sexe,activite,12,1000000.0);
-        statistiquesSexe[1]=new StatistiqueSexe(sexe,activite,3,2000000.0);
-        statistiquesSexe[2]=new StatistiqueSexe(sexe,activite,4,4000000.0);
-        statistiquesSexe[3]=new StatistiqueSexe(sexe,activite,5,6000000.0);
-        statistiquesSexe[4]=new StatistiqueSexe(sexe,activite,8,3000000.0);
+        StatistiqueSexe[] statistiquesSexe;
 
-// test
+        // Par défaut :
+        if (activite==null)
+            statistiquesSexe=dao.select(connection,StatistiqueSexe.class);
+
+        // Recherche par activité
+        else {
+            StatistiqueSexe where = new StatistiqueSexe();
+            where.setSexe(sexe);
+            where.setActivite(activite);
+            statistiquesSexe=dao.select(connection,StatistiqueSexe.class,where);
+        }
 
         if (new_connex)
             connection.close();
+
         return Arrays.asList(statistiquesSexe);
     }
 }
