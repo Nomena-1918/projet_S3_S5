@@ -38,6 +38,10 @@ public class Client {
         this.id = id;
     }
 
+    public Client(Sexe sexe){
+        this.sexe=sexe;
+    }
+
     public static void insertClient(Connection connection, Client client) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
