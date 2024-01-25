@@ -37,6 +37,10 @@ public class Client {
     @Column("id_sexe")
     private Sexe sexe;
 
+    public Client(Sexe sexe) {
+        this.sexe = sexe;
+    }
+
     public static void insertClient(Connection connection, Client client) throws Exception {
         boolean new_connex = false;
         if (connection == null) {

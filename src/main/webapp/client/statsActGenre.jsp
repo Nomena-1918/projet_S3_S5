@@ -106,6 +106,33 @@
         </div>
         <%}%>
 
+        <div class="row">
+            <div class="card col-lg-12 d-flex h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Statistique par Chart</h5>
+                    <div id="chart"></div>
+                    <div id="pieChart"></div>
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", () => {
+                            new ApexCharts(document.querySelector("#pieChart"), {
+                                series:[<%=40 %>,<%=60 %>],
+                                chart: {
+                                    height: 350,
+                                    type: 'pie',
+                                    toolbar: {
+                                        show: false
+                                    }
+                                },
+                                labels: ['<%="Homme" %>','<%="Femme" %>']
+                            }).render();
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+        <script src="<%= request.getContextPath() %>/assets/css/apexcharts.min.js"></script>
+
     </main>
 </div>
 

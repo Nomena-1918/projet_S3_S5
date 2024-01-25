@@ -95,6 +95,10 @@
                     <i class="fas fa-pen"></i>
                     Liste personnel
                 </a></li>
+                <li class="tm-nav-item"><a href="client-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Insertion client
+                </a></li>
                 <li class="tm-nav-item"><a href="stat-genre-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
                     Statistiques
