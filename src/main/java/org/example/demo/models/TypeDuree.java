@@ -19,6 +19,7 @@ public class TypeDuree {
     Long id;
     @Column("nom")
     String nom;
+
     int debutJour;
     int finJour;
 

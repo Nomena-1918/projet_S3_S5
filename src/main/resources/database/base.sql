@@ -343,14 +343,19 @@ ORDER BY dd.derniere_date_embauche DESC;
 SELECT EXTRACT(YEAR FROM AGE('2024-01-23 15:27:34'::timestamp, '2004-01-22 15:27:34'::timestamp));
 
 
+create view vue_grade_fonction as
+    select gf.*, lower(gf.plage_anciennete) as debut_ancien, upper(gf.plage_anciennete) as fin_ancien
+        from grade_fonction gf;
+
+
 create view vue_liste_personnel as
 select
-    ec.id, ec.nom, ec.id_fonction, ec.nom_fonction, ec.salaire_horaire, ec.derniere_date_embauche,
+    row_number() over () as id_row, ec.id, ec.nom, ec.id_fonction, ec.nom_fonction, ec.salaire_horaire, ec.derniere_date_embauche,
     EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))  as annees_service,
     gf.id as id_grade, gf.nom as nom_grade, gf.plage_anciennete, gf.coeff_taux_horaire, ec.salaire_horaire as salaire_de_base,
     (gf.coeff_taux_horaire * ec.salaire_horaire) as salaire_horaire_actuel
 from employe_complet ec
-join grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int
+join vue_grade_fonction gf on gf.plage_anciennete @> EXTRACT(YEAR FROM AGE(now(), ec.derniere_date_embauche))::int;
 
 
 -- Stats vente d'activités par genre

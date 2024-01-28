@@ -35,7 +35,7 @@
         <%}%>
         <div class="row tm-row">
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Voyage entre fourchette</h2>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Voyage avec bénéfice dans une fourchette de prix</h2>
             </div>
             <div class="col-lg-7 tm-contact-left">
                 <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
@@ -68,13 +68,17 @@
             <div class="col-lg-7 tm-contact-left">
                 <table class="table table-striped tm-table">
                     <tr>
-                        <th>Voyage</th>
+                        <th>Bouquet</th>
+                        <th>Durée</th>
+                        <th>Catégorie lieu</th>
                         <th>Benefices</th>
                     </tr>
 
                     <%for(Benefice item: benefices){%>
                     <tr>
-                        <td><%=item.getVoyage().getBouquet().getNom()%> <%=item.getVoyage().getTypeDuree().getNom()%> <%=item.getVoyage().getCategorieLieu().getNom()%></td>
+                        <td><%=item.getVoyage().getBouquet().getNom()%></td>
+                        <td><%=item.getVoyage().getTypeDuree().getNom()%></td>
+                        <td><%=item.getVoyage().getCategorieLieu().getNom()%></td>
                         <td><%=item.getBenefice()%></td>
                     </tr>
                     <%}%>

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.*;
+import org.example.demo.models.client.Client;
 import org.example.demo.models.travail.Voyage;
 
 import java.io.IOException;

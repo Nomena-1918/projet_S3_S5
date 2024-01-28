@@ -51,6 +51,14 @@ public class Employe {
 
     }
 
+    public Sexe getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(Sexe sexe) {
+        this.sexe = sexe;
+    }
+
     public Employe(String nom, String prenom, LocalDate dtn, Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;

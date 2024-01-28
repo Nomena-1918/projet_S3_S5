@@ -70,7 +70,7 @@
                             <th>Bouquet</th>
                             <th>Catégorie lieu</th>
                             <th>Durée</th>
-                            <th>Nombre</th>
+                            <th>Coût total</th>
                         </tr>
 
                         <%for(ActiviteBouquetPrix item: activiteBouquetprix){%>

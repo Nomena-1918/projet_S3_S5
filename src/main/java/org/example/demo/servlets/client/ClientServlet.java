@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.*;
+import org.example.demo.models.client.Client;
 import org.example.demo.models.client.StatistiqueSexe;
 import org.example.demo.models.promotionPoste.Embauche;
 import org.example.demo.models.promotionPoste.Sexe;
@@ -33,11 +34,12 @@ public class ClientServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Integer idSexe=Integer.parseInt(request.getParameter("idsexe"));
+        String nom = request.getParameter("nom");
         try(Connection connection = ConnexionPool.getConnection()){
             Sexe sexe=new Sexe(idSexe);
-            Client client=new Client(sexe);
+            Client client=new Client(nom, sexe);
             Client.insertClient(connection,client);
-
+            connection.commit();
             getInfo(request, response, connection);
         } catch (Exception e) {
             try(Connection connection = ConnexionPool.getConnection()){

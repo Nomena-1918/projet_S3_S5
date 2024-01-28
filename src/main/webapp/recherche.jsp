@@ -23,7 +23,7 @@
     <main class="tm-main">
         <div class="row tm-row tm-mb-120">
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Recherhe activite pour bouquet</h2>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Recherche activites d'un bouquet</h2>
             </div>
             <div class="col-lg-7 tm-contact-left">
                 <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">

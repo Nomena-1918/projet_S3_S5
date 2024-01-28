@@ -17,7 +17,7 @@
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
 <%@ page import="org.example.demo.models.travail.Voyage" %>
-<%@ page import="org.example.demo.models.Client" %>
+<%@ page import="org.example.demo.models.client.Client" %>
 
 
 <%

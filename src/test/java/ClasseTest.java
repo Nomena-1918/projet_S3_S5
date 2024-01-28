@@ -1,7 +1,11 @@
 import org.example.demo.database.Connexion;
 import org.example.demo.models.*;
 import org.example.demo.models.benefice.BeneficeVoyage;
+import org.example.demo.models.client.Client;
+import org.example.demo.models.promotionPoste.GradeFonction;
 import org.example.demo.models.promotionPoste.Sexe;
+import org.example.demo.models.promotionPoste.SituationProPersonne;
+import org.example.demo.models.travail.Employe;
 import org.example.demo.models.travail.Fonction;
 import org.example.demo.models.travail.Voyage;
 import org.junit.jupiter.api.Test;
@@ -33,13 +37,38 @@ public class ClasseTest {
 
     @Test
     void testClient() throws Exception {
-        Client.insertClient(Connexion.getConnexionPostgreSql(), new Client("Clienttest", new Sexe(1)));
+        Client.insertClient(null, new Client("Clienttest", new Sexe(1)));
         System.out.println("ok");
     }
 
     @Test
     void testSelectClient() throws Exception {
         var list = Client.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
+    void testSelectGrade() throws Exception {
+        var list = GradeFonction.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
+    void testSelectFonction() throws Exception {
+        var list = dao.select(Connexion.getConnexionPostgreSql(), Fonction.class);
+        System.out.println(Arrays.toString(list));
+    }
+
+    @Test
+    void testSelectEmp() throws Exception {
+        var list = Employe.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+
+    @Test
+    void testSelectSituationPro() throws Exception {
+        var list = SituationProPersonne.readAll(Connexion.getConnexionPostgreSql());
         System.out.println(list);
     }
 

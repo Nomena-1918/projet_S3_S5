@@ -36,13 +36,9 @@
       </div>
       <%}%>
       <div class="col-12">
-        <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste personnel
-        </h2>
+        <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste personnel</h2>
       </div>
     <div class="row tm-row">
-      <div class="col-12">
-        <h2 class="tm-color-primary tm-post-title tm-mb-60">Liste de reste de billets d'activité</h2>
-      </div>
       <div class="col-lg-7 tm-contact-left">
         <table class="table table-striped tm-table">
           <tr>

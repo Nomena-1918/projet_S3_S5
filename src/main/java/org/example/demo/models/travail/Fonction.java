@@ -9,15 +9,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import veda.godao.annotations.*;
 
+@Table("fonction_employe")
 public class Fonction {
+
+    @PrimaryKey
+    @Column("id")
     private Long id;
+    @Column("nom")
     private String nom;
+    @Column("salaire_horaire")
     private Double salaireHoraire;
 
     public Fonction(String nom, Double salaireHoraire) {
         this.nom = nom;
         this.salaireHoraire = salaireHoraire;
+    }
+
+    public Fonction() {
     }
 
     public Fonction(Long id) {

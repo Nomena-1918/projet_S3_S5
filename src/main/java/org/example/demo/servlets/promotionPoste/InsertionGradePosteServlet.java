@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo.database.ConnexionPool;
 import org.example.demo.models.TypeDuree;
+import org.example.demo.models.promotionPoste.GradeFonction;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -26,11 +27,12 @@ public class InsertionGradePosteServlet  extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nom =request.getParameter("nom");
-        int coeff = Integer.parseInt(request.getParameter("coeff"));
+        double coeff = Double.parseDouble(request.getParameter("coeff"));
         int debutJour=Integer.parseInt(request.getParameter("debutJour"));
         int finJour=Integer.parseInt(request.getParameter("finJour"));
         try(Connection connection = ConnexionPool.getConnection()){
-
+            GradeFonction gf = new GradeFonction(nom, coeff, debutJour, finJour);
+            GradeFonction.insertGradeFonction(connection, gf);
             RequestDispatcher dispatcher = request.getRequestDispatcher("promotionPoste/InsertionGradePoste.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {

@@ -24,11 +24,11 @@
           <div class="row tm-row tm-mb-120">
             <div class="row tm-row">
               <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title">Liste des activite</h2>
+                <h2 class="tm-color-primary tm-post-title">Liste des activités</h2>
                 <table class="table table-striped tm-table">
                   <thead>
                   <tr>
-                    <th>Les  activites</th>
+                    <th>Les activites</th>
                   </tr>
                   </thead>
                   <tbody id="listeTableBody">

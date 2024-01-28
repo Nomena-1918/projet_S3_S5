@@ -1,12 +1,11 @@
 package org.example.demo.models;
 
 import org.example.demo.database.Connexion;
+import org.example.demo.models.client.Client;
 import org.example.demo.models.travail.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 public class ReservationVoyage {
@@ -69,7 +68,6 @@ public class ReservationVoyage {
             statement.setLong(2, reservationVoyage.getNombre_billet());
             statement.setInt(3, reservationVoyage.getClient().getId());
 
-
             System.out.println("\n" + query + "\n");
 
             statement.executeUpdate();
@@ -99,7 +97,7 @@ public class ReservationVoyage {
         }
 
         if(!resteActivitesInsufisant.isEmpty()){
-            throw new Exception("Activite insuffisant :"+resteActivitesInsufisant);
+            throw new Exception("Activite insuffisant : "+resteActivitesInsufisant);
         }
 
     }

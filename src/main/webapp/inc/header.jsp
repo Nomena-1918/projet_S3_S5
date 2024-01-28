@@ -40,7 +40,7 @@
                 </a></li>
                 <li class="tm-nav-item"><a href="recherche-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
-                    Recherche
+                    Recherche activité pour bouquet
                 </a></li>
                 <li class="tm-nav-item"><a href="nombreactivitevoyage-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>

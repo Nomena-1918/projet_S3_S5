@@ -41,7 +41,7 @@
       </div>
       <%}%>
       <div class="col-12">
-        <h2 class="tm-color-primary tm-post-title tm-mb-60">Association voyage activité</h2>
+        <h2 class="tm-color-primary tm-post-title tm-mb-60">Ajout voyage</h2>
       </div>
       <div class="col-lg-7 tm-contact-left">
         <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
