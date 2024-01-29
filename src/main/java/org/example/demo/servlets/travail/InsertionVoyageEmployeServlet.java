@@ -27,7 +27,7 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long idVoyage=Long.parseLong(request.getParameter("idVoyage"));
-        Long idEmploye=Long.parseLong(request.getParameter("idEmploye"));
+        Integer idEmploye=Integer.parseInt(request.getParameter("idEmploye"));
         int heureTravail=Integer.parseInt(request.getParameter("heure"));
         try(Connection connection = ConnexionPool.getConnection()){
             Voyage voyage=new Voyage(idVoyage);

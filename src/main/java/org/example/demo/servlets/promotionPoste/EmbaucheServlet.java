@@ -31,7 +31,7 @@ public class EmbaucheServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Long idFonction=Long.parseLong(request.getParameter("idFonction"));
-        Long idEmploye=Long.parseLong(request.getParameter("idEmploye"));
+        Integer idEmploye=Integer.parseInt(request.getParameter("idEmploye"));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse(request.getParameter("date"), formatter);

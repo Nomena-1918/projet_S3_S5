@@ -48,17 +48,10 @@
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
                                 <% for (Employe item : employe) {%>
-                                <option >
-                                        value="<%=item.getId()%>"><%=item.getNom()%>%>
+                                <option value="<%=item.getId()%>"><%=item.getNom()%>
                                 </option>
                                 <% }%>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group row mb-4">
-                        <label for="date" class="col-sm-3 col-form-label text-right tm-color-primary">Date </label>
-                        <div class="col-sm-9">
-                            <input class="form-control mr-0 ml-auto" name="date" id="date" type="date" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
@@ -72,6 +65,12 @@
                                 </option>
                                 <% }%>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label for="date" class="col-sm-3 col-form-label text-right tm-color-primary">Date </label>
+                        <div class="col-sm-9">
+                            <input class="form-control mr-0 ml-auto" name="date" id="date" type="date" required>
                         </div>
                     </div>
                     <div class="form-group row text-right">

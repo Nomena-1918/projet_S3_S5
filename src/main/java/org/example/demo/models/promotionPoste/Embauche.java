@@ -4,9 +4,7 @@ import org.example.demo.database.Connexion;
 import org.example.demo.models.travail.Employe;
 import org.example.demo.models.travail.Fonction;
 import veda.godao.DAO;
-import veda.godao.annotations.Column;
-import veda.godao.annotations.ForeignKey;
-import veda.godao.annotations.Table;
+import veda.godao.annotations.*;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -24,6 +22,9 @@ public class Embauche {
                 Connexion.use_ssl,
                 Connexion.SGBD);
     }
+    @PrimaryKey
+    @Column("id")
+    private Integer id;
     @ForeignKey(recursive = true)
     @Column("id_emp")
     private Employe employe;
@@ -37,6 +38,14 @@ public class Embauche {
         this.employe = employe;
         this.fonction = fonction;
         this.date = date;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Employe getEmploye() {

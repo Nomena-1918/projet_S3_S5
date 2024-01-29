@@ -44,6 +44,8 @@ public class SituationProPersonne {
     public SituationProPersonne() {
     }
 
+
+
     public SituationProPersonne(Employe employe, Fonction fonction, GradeFonction gradeFonction) {
         this.employe = employe;
         this.fonction = fonction;

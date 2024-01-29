@@ -36,7 +36,7 @@ public class Employe {
 
     @PrimaryKey
     @Column("id")
-    private Long id;
+    private Integer id;
     @Column("nom")
     private String nom;
     @Column("prenom")
@@ -66,7 +66,7 @@ public class Employe {
         this.sexe = sexe;
     }
 
-    public Employe(Long id) {
+    public Employe(Integer id) {
         this.id = id;
     }
 
@@ -86,9 +86,6 @@ public class Employe {
         this.dtn = dtn;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getNom() {
         return nom;
@@ -98,7 +95,11 @@ public class Employe {
         this.nom = nom;
     }
 
-    public void setId(Long id) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -131,5 +132,19 @@ public class Employe {
         if (new_connex)
             connection.close();
         return Arrays.asList(employes);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                
+                    Emp : {
+                        id : %s,
+                        nom : %s,
+                        prenom : %s,
+                        dtn : %s,
+                        sexe : %s
+                    }
+                """, this.getId(), this.getNom(), this.prenom, this.getDtn(), this.sexe.getNom());
     }
 }
