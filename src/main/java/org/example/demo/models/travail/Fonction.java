@@ -16,7 +16,7 @@ public class Fonction {
 
     @PrimaryKey
     @Column("id")
-    private Long id;
+    private Integer id;
     @Column("nom")
     private String nom;
     @Column("salaire_horaire")
@@ -30,22 +30,21 @@ public class Fonction {
     public Fonction() {
     }
 
-    public Fonction(Long id) {
+    public Fonction(Integer id) {
         this.id = id;
     }
 
-    public Fonction(Long id, String nom, Double salaireHoraire) {
+    public Fonction(Integer id, String nom, Double salaireHoraire) {
         this.id = id;
         this.nom = nom;
         this.salaireHoraire = salaireHoraire;
     }
 
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -106,7 +105,7 @@ public class Fonction {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     fonction = new Fonction(
-                            resultSet.getLong("id"),
+                            resultSet.getInt("id"),
                             resultSet.getString("nom"),
                             resultSet.getDouble("salaire_horaire")
                     );

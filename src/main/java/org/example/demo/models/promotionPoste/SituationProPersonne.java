@@ -8,8 +8,11 @@ import veda.godao.annotations.*;
 import veda.godao.DAO;
 
 import java.sql.Connection;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 @Table("vue_liste_personnel")
 public class SituationProPersonne {
@@ -41,6 +44,9 @@ public class SituationProPersonne {
     @Column("id_grade")
     private GradeFonction gradeFonction;
 
+    @Column("derniere_date_embauche")
+    private LocalDate dateEmbauche;
+
     public SituationProPersonne() {
     }
 
@@ -52,6 +58,18 @@ public class SituationProPersonne {
         this.gradeFonction = gradeFonction;
     }
 
+    public LocalDate getDateEmbauche() {
+        return dateEmbauche;
+    }
+
+    public String getDateEmbaucheStr() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return dateEmbauche.format(formatter);
+    }
+
+    public void setDateEmbauche(LocalDate dateEmbauche) {
+        this.dateEmbauche = dateEmbauche;
+    }
 
     public Integer getId_row() {
         return id_row;
@@ -95,6 +113,10 @@ public class SituationProPersonne {
         if (new_connex)
             connection.close();
         return Arrays.asList(clients);
+    }
+
+    public Double getSalaireActuel() {
+        return this.gradeFonction.getTauxHoraireCoeff() * this.fonction.getSalaireHoraire();
     }
 
 }

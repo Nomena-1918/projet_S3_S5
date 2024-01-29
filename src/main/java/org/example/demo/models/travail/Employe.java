@@ -134,6 +134,21 @@ public class Employe {
         return Arrays.asList(employes);
     }
 
+    public static Employe findById(Connection connection, Integer idEmploye) throws Exception {
+        boolean new_connex = false;
+        if (connection == null) {
+            connection = Connexion.getConnexionPostgreSql();
+            new_connex = true;
+        }
+
+        Employe emp = dao.select(connection, Employe.class, new Employe(idEmploye))[0];
+
+        if (new_connex)
+            connection.close();
+
+        return emp;
+    }
+
     @Override
     public String toString() {
         return String.format("""

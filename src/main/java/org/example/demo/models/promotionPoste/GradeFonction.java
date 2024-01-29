@@ -21,9 +21,9 @@ public class GradeFonction {
     @Column("coeff_taux_horaire")
     private Double tauxHoraireCoeff;
     @Column("debut_ancien")
-    private int debutAncien;
+    private Integer debutAncien;
     @Column("fin_ancien")
-    private int finAncien;
+    private Integer finAncien;
 
     public GradeFonction() {
     }
@@ -99,19 +99,19 @@ public class GradeFonction {
         this.tauxHoraireCoeff = tauxHoraireCoeff;
     }
 
-    public int getDebutAncien() {
+    public Integer getDebutAncien() {
         return debutAncien;
     }
 
-    public void setDebutAncien(int debutAncien) {
+    public void setDebutAncien(Integer debutAncien) {
         this.debutAncien = debutAncien;
     }
 
-    public int getFinAncien() {
+    public Integer getFinAncien() {
         return finAncien;
     }
 
-    public void setFinAncien(int finAncien) {
+    public void setFinAncien(Integer finAncien) {
         this.finAncien = finAncien;
     }
 }
