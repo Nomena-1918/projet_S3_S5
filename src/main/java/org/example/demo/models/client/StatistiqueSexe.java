@@ -30,7 +30,6 @@ public class StatistiqueSexe {
     @ForeignKey(recursive = true)
     @Column("id_sexe")
     private Sexe sexe;
-
     @ForeignKey(recursive = true)
     @Column("id_activite")
     private Activite activite;
@@ -90,14 +89,19 @@ public class StatistiqueSexe {
         StatistiqueSexe[] statistiquesSexe;
 
         // Par défaut :
-        if (activite==null)
-            statistiquesSexe=dao.select(connection,StatistiqueSexe.class);
+        if (activite == null && sexe == null)
+            return Arrays.asList(dao.select(connection,StatistiqueSexe.class));
 
         // Recherche par activité
         else {
             StatistiqueSexe where = new StatistiqueSexe();
-            where.setSexe(sexe);
-            where.setActivite(activite);
+            if (sexe != null) {
+                where.setSexe(sexe);
+            }
+
+            if (activite != null) {
+                where.setActivite(activite);
+            }
             statistiquesSexe=dao.select(connection,StatistiqueSexe.class,where);
         }
 

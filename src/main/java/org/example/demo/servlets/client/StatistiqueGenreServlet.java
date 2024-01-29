@@ -40,6 +40,25 @@ public class StatistiqueGenreServlet extends HttpServlet {
             List<StatistiqueSexe> statistiqueSexeHomme=StatistiqueSexe.readAll(connection,sexes.get(0),activite);
             List<StatistiqueSexe> statistiqueSexeFemme=StatistiqueSexe.readAll(connection,sexes.get(1),activite);
 
+            // Pourcentage Homme - Femme
+            int nbrTotalHomme = 0;
+            for (StatistiqueSexe s : statistiqueSexeHomme) {
+                nbrTotalHomme+=s.getNombre();
+            }
+
+            int nbrTotalFemme = 0;
+            for (StatistiqueSexe s : statistiqueSexeFemme) {
+                nbrTotalFemme+=s.getNombre();
+            }
+
+            int nbrTotal = nbrTotalHomme + nbrTotalFemme;
+
+            double pourcentHomme = (double) (nbrTotalHomme * 100) / nbrTotal;
+            double pourcentFemme = (double) (nbrTotalHomme * 100) / nbrTotal;
+
+            request.setAttribute("pourcentHomme",pourcentHomme);
+            request.setAttribute("pourcentFemme",pourcentFemme);
+
             request.setAttribute("list_statHomme",statistiqueSexeHomme);
             request.setAttribute("list_statFemme",statistiqueSexeFemme);
 

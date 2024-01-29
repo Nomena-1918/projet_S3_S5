@@ -21,6 +21,16 @@
     List<Activite> activite = Cast.castToList(request.getAttribute("list_activite"), Activite.class);
     List<StatistiqueSexe> statistiqueSexeHomme=Cast.castToList(request.getAttribute("list_statHomme"), StatistiqueSexe.class);
     List<StatistiqueSexe> statistiqueSexeFemme=Cast.castToList(request.getAttribute("list_statFemme"), StatistiqueSexe.class);
+
+    Double pourcentHomme = 0.0;
+    Double pourcentFemme = 0.0;
+
+    // Pourcentages
+    if(request.getAttribute("pourcentHomme") != null && request.getAttribute("pourcentFemme") != null) {
+        pourcentHomme = Double.parseDouble((String)request.getAttribute("pourcentHomme"));
+        pourcentFemme = Double.parseDouble((String)request.getAttribute("pourcentFemme"));
+    }
+
     String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -116,7 +126,7 @@
                     <script>
                         document.addEventListener("DOMContentLoaded", () => {
                             new ApexCharts(document.querySelector("#pieChart"), {
-                                series:[<%=40 %>,<%=60 %>],
+                                series:[<%=pourcentHomme%>,<%=pourcentFemme%>],
                                 chart: {
                                     height: 350,
                                     type: 'pie',
