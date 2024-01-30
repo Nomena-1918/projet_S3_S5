@@ -32,6 +32,10 @@ create table voyage(
 );
 
 
+alter table voyage add constraint
+    unique_bouquet_duree_categ_lieu unique (id_bouquet, id_duree, id_categorie_lieu);
+
+
 CREATE TABLE voyage_activite (
     id serial PRIMARY KEY,
     id_voyage int references voyage(id),
@@ -41,6 +45,8 @@ CREATE TABLE voyage_activite (
     CONSTRAINT bouquet_activite_id_bouquet_fkey FOREIGN KEY (id_voyage) REFERENCES bouquet(id)
 );
 
+alter table voyage_activite add constraint unique_voyage_activite unique (id_voyage, id_activite)
+
 
 CREATE TABLE entree_activite (
     id serial PRIMARY KEY,
@@ -49,6 +55,11 @@ CREATE TABLE entree_activite (
     quantite integer check ( quantite > 0 ) not null,
     date_heure_entree timestamp default now()
 );
+
+alter table entree_activite
+    add constraint unique_entree_activite
+        unique (id_activite, date_heure_entree);
+
 
 
 
@@ -139,12 +150,14 @@ order by id_activite;
 
 
 -- Reste des billets pour chaque activité
-CREATE VIEW vue_reste_activite_voyage as
+CREATE or replace VIEW vue_reste_activite_voyage as
 select
-    vqea.id_activite,
+    vqea.id_activite, --a.nom
     (vqea.quantite_total - coalesce(vqsa.nombre_billet_reserves,0)) as quantite_reste
     from vue_quantite_entree_activite vqea
+             --join activite a on a.id = vqea.id_activite
     left join vue_quantite_sortie_activite vqsa on vqea.id_activite = vqsa.id_activite;
+
 
 
 
@@ -234,6 +247,11 @@ create table prix_vente_activite(
     prix_vente decimal not null check ( prix_vente>0 )
 );
 
+alter table prix_vente_activite
+    add constraint unique_prix_vente_activite
+        unique (id_activite, prix_vente);
+
+
 
 create table voyage_employe(
     id serial primary key,
@@ -241,6 +259,7 @@ create table voyage_employe(
     id_emp int references employe(id),
     heures_travail int not null check ( heures_travail > 0 )
 );
+alter table voyage_employe add constraint unique_voyage_emp unique (id_emp, id_voyage);
 
 -- Vue Prix de vente par activité
 create view vue_prix_vente_activite as

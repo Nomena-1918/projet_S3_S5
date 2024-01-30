@@ -5,6 +5,7 @@ import org.example.demo.models.Bouquet;
 import org.example.demo.models.CategorieLieu;
 import org.example.demo.models.TypeDuree;
 import org.example.demo.models.promotionPoste.Sexe;
+import org.example.demo.models.promotionPoste.SituationProPersonne;
 import veda.godao.DAO;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.ForeignKey;
@@ -127,11 +128,18 @@ public class Employe {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        Employe[] employes=dao.select(connection,Employe.class);
+
+        SituationProPersonne[] employes=dao.select(connection,SituationProPersonne.class);
+
+        List<Employe> emp = new ArrayList<>();
+        for (SituationProPersonne s : employes) {
+            emp.add(s.getEmploye());
+        }
 
         if (new_connex)
             connection.close();
-        return Arrays.asList(employes);
+
+        return emp;
     }
 
     public static Employe findById(Connection connection, Integer idEmploye) throws Exception {

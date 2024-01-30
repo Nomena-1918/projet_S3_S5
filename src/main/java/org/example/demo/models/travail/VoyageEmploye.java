@@ -55,7 +55,7 @@ public class VoyageEmploye {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "INSERT INTO voyage_employe(id_voyage,id_emp,heure_travail) VALUES (?,?,?)";
+        String query = "INSERT INTO voyage_employe(id_voyage,id_emp,heures_travail) VALUES (?,?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setLong(1, voyageEmploye.getVoyage().getId());

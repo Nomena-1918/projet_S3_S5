@@ -46,7 +46,7 @@ public class ResteActivite {
             new_connex = true;
         }
 
-        String query = "SELECT id_activite,quantite_reste FROM vue_reste_activite_voyage ";
+        String query = "SELECT id_activite, quantite_reste FROM vue_reste_activite_voyage ";
         if(idActivite!=null){
             query+=" where id_activite=?";
         }

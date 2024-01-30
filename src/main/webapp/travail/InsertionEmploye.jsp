@@ -65,7 +65,7 @@
               <select class="form-control mr-0 ml-auto" name="idsexe" id="sexe"  required>
                 <% for (Sexe item : sexes) {%>
                 <option
-                        value="<%=item.getId()%>"><%=item.getNom()%>%>
+                        value="<%=item.getId()%>"> <%=item.getNom()%>
                 </option>
                 <% }%>
               </select>

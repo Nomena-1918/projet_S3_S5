@@ -48,7 +48,7 @@
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
                                 <% for (Employe item : employe) {%>
-                                <option value="<%=item.getId()%>"><%=item.getNom()%>
+                                <option value="<%=item.getId()%>"><%=item.getNom()%> <%=item.getPrenom()%>
                                 </option>
                                 <% }%>
                             </select>

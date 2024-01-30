@@ -59,12 +59,12 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label for="idVoyage" class="col-sm-3 col-form-label text-right tm-color-primary">Voyage</label>
+                        <label for="idVoyage" class="col-sm-3 col-form-label text-right tm-color-primary">Client</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idClient" id="idClient" required>
                                 <% for (Client value : client) {%>
                                 <option
-                                        value="<%=value.getId()%>"><%=value.getNom()%> <%=value.getSexe().getNom()%>
+                                        value="<%=value.getId()%>"><%=value.getNom()%>  -  <%=value.getSexe().getNom()%>
                                 </option>
                                 <% }%>
                             </select>

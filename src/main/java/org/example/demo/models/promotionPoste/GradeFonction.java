@@ -49,7 +49,7 @@ public class GradeFonction {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        String query = "insert into grade_fonction(nom, coeff_taux_horaire, plage_anciennete) values (?, ?, int4range(?, ?)),";
+        String query = "insert into grade_fonction(nom, coeff_taux_horaire, plage_anciennete) values (?, ?, int4range(?, ?))";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, gradeFonction.getNom());

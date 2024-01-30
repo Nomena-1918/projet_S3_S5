@@ -34,7 +34,7 @@ public class VoyageActiviteServlet extends HttpServlet {
                     nombre
             );
             VoyageActivite.insertVoyageActivite(connection,voyageActivite);
-
+            connection.commit();
             getInfo(request, response, connection);
         } catch (Exception e) {
             try(Connection connection = ConnexionPool.getConnection()){

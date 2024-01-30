@@ -18,10 +18,19 @@
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
 <%@ page import="org.example.demo.models.travail.Employe" %>
 <%@ page import="org.example.demo.models.travail.Voyage" %>
+<%@ page import="java.util.ArrayList" %>
 
 <%
-    List<Employe> employe = castToList(request.getAttribute("list-employe"), Employe.class);
-    List<Voyage> voyage = castToList(request.getAttribute("list-voyage"), Voyage.class);
+
+  List<Employe> employe = new ArrayList<>();
+  List<Voyage> voyage = new ArrayList<>();
+
+  if (request.getAttribute("list-employe") != null)
+    employe = castToList(request.getAttribute("list-employe"), Employe.class);
+
+  if (request.getAttribute("list-voyage") != null)
+    voyage   = castToList(request.getAttribute("list-voyage"), Voyage.class);
+
   String messageError = castToString(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
@@ -61,7 +70,7 @@
               <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
                 <% for (Employe item : employe) {%>
                 <option
-                        value="<%=item.getId()%>"><%=item.getNom()%>%>
+                        value="<%=item.getId()%>"><%=item.getNom()%> <%=item.getPrenom()%>
                 </option>
                 <% }%>
               </select>

@@ -31,6 +31,7 @@ public class VoyageServlet extends HttpServlet {
             Voyage voyage=new Voyage(new Bouquet(idBouquet),new TypeDuree(idTypeDuree),new CategorieLieu(idCategorieLieu));
 
             Voyage.insertVoyage(connection,voyage);
+            connection.commit();
 
             getInfo(request, response, connection);
         } catch (Exception e) {

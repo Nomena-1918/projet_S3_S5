@@ -46,13 +46,17 @@
                     <i class="far fa-comments"></i>
                     Nombre Activite Voyage
                 </a></li>
+                <li class="tm-nav-item"><a href="entreeactivite-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Achat billet activité
+                </a></li>
                 <li class="tm-nav-item"><a href="activitebouquetprix-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
                     Voyage fourchette de prix
                 </a></li>
-                <li class="tm-nav-item"><a href="entreeactivite-servlet" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="client-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
-                    Achat billet activité
+                    Insertion client
                 </a></li>
                 <li class="tm-nav-item"><a href="reservationResteBilletActivite-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
@@ -71,6 +75,10 @@
                     <i class="fas fa-pen"></i>
                     Insertion fonction employé
                 </a></li>
+                <li class="tm-nav-item"><a href="embauche-servlet" class="tm-nav-link">
+                    <i class="fas fa-pen"></i>
+                    Embauche
+                </a></li>
                 <li class="tm-nav-item"><a href="insertionVoyageEmploye-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
                     Insertion voyage employé
@@ -81,11 +89,7 @@
                 </a></li>
                 <li class="tm-nav-item"><a href="benefice-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
-                    Benefice
-                </a></li>
-                <li class="tm-nav-item"><a href="embauche-servlet" class="tm-nav-link">
-                    <i class="fas fa-pen"></i>
-                    Embauche
+                    Bénéfice voyage
                 </a></li>
                 <li class="tm-nav-item"><a href="insertionGradePoste-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
@@ -93,11 +97,7 @@
                 </a></li>
                 <li class="tm-nav-item"><a href="listePersonnel-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
-                    Liste personnel
-                </a></li>
-                <li class="tm-nav-item"><a href="client-servlet" class="tm-nav-link">
-                    <i class="fas fa-pen"></i>
-                    Insertion client
+                    Liste du personnel
                 </a></li>
                 <li class="tm-nav-item"><a href="stat-genre-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>

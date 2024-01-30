@@ -61,8 +61,8 @@ public class VoyageActivite {
         String query = "INSERT INTO voyage_activite(id_voyage,id_activite,nombre) VALUES (?,?,?)";
 
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, voyageActivite.getActivite().getId());
-            statement.setLong(2, voyageActivite.getVoyage().getId());
+            statement.setLong(1, voyageActivite.getVoyage().getId());
+            statement.setLong(2, voyageActivite.getActivite().getId());
             statement.setLong(3, voyageActivite.getNombre());
 
             System.out.println("\n" + query + "\n");
