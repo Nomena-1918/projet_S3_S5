@@ -39,7 +39,7 @@ public class ResteActivite {
         this.resteBillet = resteBillet;
     }
 
-    public static List<ResteActivite> selectWhere(Connection connection, Long idActivite) throws Exception {
+    public static List<ResteActivite> selectWhere(Connection connection, Integer idActivite) throws Exception {
         boolean new_connex = false;
         if(connection == null) {
             connection = Connexion.getConnexionPostgreSql();
@@ -62,7 +62,7 @@ public class ResteActivite {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"))
+                            new Activite(resultSet.getInt("id_activite"))
                             ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);
@@ -101,7 +101,7 @@ public class ResteActivite {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     resteActivite = new ResteActivite(
-                            new Activite(resultSet.getLong("id_activite"),resultSet.getString("nom_activite"))
+                            new Activite(resultSet.getInt("id_activite"),resultSet.getString("nom_activite"))
                             ,resultSet.getInt("quantite_reste")
                     );
                     listResteActivite.add(resteActivite);

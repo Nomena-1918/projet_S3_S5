@@ -32,7 +32,7 @@ public class StatistiqueGenreServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Long idActivite=Long.parseLong(request.getParameter("idActivite"));
+        Integer idActivite=Integer.parseInt(request.getParameter("idActivite"));
         try(Connection connection = ConnexionPool.getConnection()){
             Activite activite=new Activite(idActivite,"NomTestActivite");
             List<Sexe> sexes = Sexe.readAll(connection);
@@ -41,20 +41,20 @@ public class StatistiqueGenreServlet extends HttpServlet {
             List<StatistiqueSexe> statistiqueSexeFemme=StatistiqueSexe.readAll(connection,sexes.get(1),activite);
 
             // Pourcentage Homme - Femme
-            int nbrTotalHomme = 0;
+            double nbrTotalHomme = 0;
             for (StatistiqueSexe s : statistiqueSexeHomme) {
                 nbrTotalHomme+=s.getNombre();
             }
 
-            int nbrTotalFemme = 0;
+            double nbrTotalFemme = 0;
             for (StatistiqueSexe s : statistiqueSexeFemme) {
                 nbrTotalFemme+=s.getNombre();
             }
 
-            int nbrTotal = nbrTotalHomme + nbrTotalFemme;
+            double nbrTotal = nbrTotalHomme + nbrTotalFemme;
 
-            double pourcentHomme = (double) (nbrTotalHomme * 100) / nbrTotal;
-            double pourcentFemme = (double) (nbrTotalHomme * 100) / nbrTotal;
+            Double pourcentHomme = (nbrTotalHomme * 100.0) / nbrTotal;
+            Double pourcentFemme = (nbrTotalFemme * 100.0) / nbrTotal;
 
             request.setAttribute("pourcentHomme",pourcentHomme);
             request.setAttribute("pourcentFemme",pourcentFemme);

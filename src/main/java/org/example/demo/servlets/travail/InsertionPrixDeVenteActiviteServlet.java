@@ -27,7 +27,7 @@ public class InsertionPrixDeVenteActiviteServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Long idActivite=Long.parseLong(request.getParameter("idActivite"));
+        Integer idActivite=Integer.parseInt(request.getParameter("idActivite"));
         Double prixVente=Double.parseDouble(request.getParameter("prixVente"));
 
         try(Connection connection = ConnexionPool.getConnection()){

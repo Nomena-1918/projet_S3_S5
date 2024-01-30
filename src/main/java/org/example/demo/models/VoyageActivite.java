@@ -99,7 +99,7 @@ public class VoyageActivite {
                 while (resultSet.next()) {
                     voyageActivite = new VoyageActivite();
                     voyageActivite.setId(resultSet.getLong("id"));
-                    voyageActivite.setActivite(new Activite(resultSet.getLong("id_activite"),
+                    voyageActivite.setActivite(new Activite(resultSet.getInt("id_activite"),
                                                             resultSet.getString("nom_activite")));
                     voyageActivite.setVoyage(new Voyage(
                             new Bouquet(resultSet.getLong("id_bouquet"),
@@ -142,7 +142,7 @@ public class VoyageActivite {
                     voyageActivite = new VoyageActivite();
                     voyageActivite.setId(resultSet.getLong("id"));
                     voyageActivite.setActivite(
-                            new Activite(   resultSet.getLong("id_activite"),
+                            new Activite(   resultSet.getInt("id_activite"),
                                             resultSet.getString("nom_activite"))
                     );
                     voyageActivite.setVoyage(new Voyage(
@@ -192,7 +192,7 @@ public class VoyageActivite {
                 while (resultSet.next()) {
                     voyageActivite = new VoyageActivite();
                     voyageActivite.setId(resultSet.getLong("id"));
-                    voyageActivite.setActivite(new Activite( resultSet.getLong("id_activite")));
+                    voyageActivite.setActivite(new Activite( resultSet.getInt("id_activite")));
                     voyageActivite.setVoyage(new Voyage(  resultSet.getLong("id_voyage")));
                     voyageActivite.setNombre(resultSet.getInt("nombre"));
                     listVoyageActivite.add(voyageActivite);

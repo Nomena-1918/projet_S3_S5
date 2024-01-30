@@ -24,7 +24,7 @@ public class VoyageActiviteServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Long idActivite=Long.parseLong(request.getParameter("idActivite"));
+        Integer idActivite=Integer.parseInt(request.getParameter("idActivite"));
         Long idVoyage=Long.parseLong(request.getParameter("idVoyage"));
         int nombre= Integer.parseInt(request.getParameter("nombre"));
         try(Connection connection = ConnexionPool.getConnection()){

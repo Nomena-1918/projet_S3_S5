@@ -34,9 +34,9 @@ public class StatistiqueSexe {
     @Column("id_activite")
     private Activite activite;
     @Column("nombre")
-    int nombre;
+    Integer nombre;
     @Column("prix_total")
-    double prixTotal;
+    Double prixTotal;
 
     public StatistiqueSexe(Sexe sexe, Activite activite, int nombre, double prixTotal) {
         this.sexe = sexe;
@@ -64,23 +64,28 @@ public class StatistiqueSexe {
         this.activite = activite;
     }
 
-    public int getNombre() {
+
+    public Integer getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(Integer nombre) {
         this.nombre = nombre;
     }
 
-    public double getPrixTotal() {
+    public Double getPrixTotal() {
         return prixTotal;
+    }
+
+    public void setPrixTotal(Double prixTotal) {
+        this.prixTotal = prixTotal;
     }
 
     public void setPrixTotal(double prixTotal) {
         this.prixTotal = prixTotal;
     }
 
-    public static List<StatistiqueSexe> readAll(Connection connection,Sexe sexe,Activite activite) throws Exception {
+    public static List<StatistiqueSexe> readAll(Connection connection, Sexe sexe, Activite activite) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();

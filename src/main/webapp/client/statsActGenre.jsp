@@ -26,9 +26,12 @@
     Double pourcentFemme = 0.0;
 
     // Pourcentages
-    if(request.getAttribute("pourcentHomme") != null && request.getAttribute("pourcentFemme") != null) {
-        pourcentHomme = Double.parseDouble((String)request.getAttribute("pourcentHomme"));
-        pourcentFemme = Double.parseDouble((String)request.getAttribute("pourcentFemme"));
+    if(request.getAttribute("pourcentHomme") instanceof Double && request.getAttribute("pourcentFemme") instanceof Double) {
+        pourcentHomme = (Double) request.getAttribute("pourcentHomme");
+        pourcentFemme = (Double) request.getAttribute("pourcentFemme");
+    } else if(request.getAttribute("pourcentHomme") instanceof String && request.getAttribute("pourcentFemme") instanceof String) {
+        pourcentHomme = Double.parseDouble((String) request.getAttribute("pourcentHomme"));
+        pourcentFemme = Double.parseDouble((String) request.getAttribute("pourcentFemme"));
     }
 
     String messageError = castToString(request.getAttribute("messageError"));
