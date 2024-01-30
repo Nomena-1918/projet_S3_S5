@@ -17,10 +17,15 @@
 <%@ page import="org.example.demo.utils.Cast" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="org.example.demo.models.client.StatistiqueSexe" %>
+<%@ page import="java.util.ArrayList" %>
 <%
     List<Activite> activite = Cast.castToList(request.getAttribute("list_activite"), Activite.class);
     List<StatistiqueSexe> statistiqueSexeHomme=Cast.castToList(request.getAttribute("list_statHomme"), StatistiqueSexe.class);
     List<StatistiqueSexe> statistiqueSexeFemme=Cast.castToList(request.getAttribute("list_statFemme"), StatistiqueSexe.class);
+
+    if (statistiqueSexeHomme == null) statistiqueSexeHomme = new ArrayList<>();
+    if (statistiqueSexeFemme == null) statistiqueSexeFemme = new ArrayList<>();
+
 
     Double pourcentHomme = 0.0;
     Double pourcentFemme = 0.0;
@@ -60,7 +65,8 @@
                         <label for="idActivite" class="col-sm-3 col-form-label text-right tm-color-primary">Activité</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idActivite" id="idActivite"  required>
-                                <% for (Activite item : activite) {%>
+                                <% if(activite != null)
+                                    for (Activite item : activite) {%>
                                 <option value="<%=item.getId()%>"><%=item.getNom()%>
                                 </option>
                                 <% }%>
@@ -75,16 +81,17 @@
                 </form>
             </div>
         </div>
-        <%if (statistiqueSexeHomme != null) {%>
         <div class="row tm-row">
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques masculin à l'activité <%=statistiqueSexeFemme.get(0).getActivite().getNom()%></h2>
+                <% if(!statistiqueSexeHomme.isEmpty()) if(statistiqueSexeHomme.get(0).getActivite() != null) {%>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques masculines à l'activité : <%=statistiqueSexeHomme.get(0).getActivite().getNom()%></h2>
+                <% } %>
             </div>
             <div class="col-lg-7 tm-contact-left">
                 <table class="table table-striped tm-table">
                     <tr>
-                        <th>nombre</th>
-                        <th>prix_total</th>
+                        <th>Nombre</th>
+                        <th>Prix total</th>
                     </tr>
                     <%for(StatistiqueSexe item: statistiqueSexeHomme){%>
                     <tr>
@@ -95,18 +102,18 @@
                 </table>
             </div>
         </div>
-        <%}%>
 
-        <%if (statistiqueSexeFemme != null) {%>
         <div class="row tm-row">
             <div class="col-12">
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques féminin à l'activité <%=statistiqueSexeFemme.get(0).getActivite().getNom()%></h2>
+                <% if(!statistiqueSexeFemme.isEmpty()) if(statistiqueSexeFemme.get(0).getActivite() != null) { %>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques féminines à l'activité : <%=statistiqueSexeFemme.get(0).getActivite().getNom()%></h2>
+                <% } %>
             </div>
             <div class="col-lg-7 tm-contact-left">
                 <table class="table table-striped tm-table">
                     <tr>
-                        <th>nombre</th>
-                        <th>prix_total</th>
+                        <th>Nombre</th>
+                        <th>Prix total</th>
                     </tr>
                     <%for(StatistiqueSexe item: statistiqueSexeFemme){%>
                     <tr>
@@ -117,7 +124,6 @@
                 </table>
             </div>
         </div>
-        <%}%>
 
         <div class="row">
             <div class="card col-lg-12 d-flex h-100">
