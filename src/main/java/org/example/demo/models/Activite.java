@@ -14,15 +14,15 @@ import java.util.List;
 public class Activite {
     @PrimaryKey
     @Column("id")
-    private Long id;
+    private Integer id;
     @Column("nom")
     private String nom;
-    public Activite(Long id,String nom){
+    public Activite(Integer id,String nom){
         this.id=id;
         this.nom=nom;
     }
 
-    public Activite(Long id) {
+    public Activite(Integer id) {
         this.id = id;
     }
 
@@ -34,9 +34,9 @@ public class Activite {
 
     }
 
-    public void setId(Long id) {this.id = id;}
+    public void setId(Integer id) {this.id = id;}
     public void setNom(String nom) {this.nom = nom;}
-    public Long getId() {return id;}
+    public Integer getId() {return id;}
     public String getNom() {return nom;}
 
     public static void insertActivite(Connection connection,Activite activite) throws Exception {
@@ -81,7 +81,7 @@ public class Activite {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     activite = new Activite();
-                    activite.setId(resultSet.getLong("id"));
+                    activite.setId(resultSet.getInt("id"));
                     activite.setNom(resultSet.getString("nom"));
                     listActivite.add(activite);
                 }
