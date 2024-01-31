@@ -5,16 +5,22 @@ create table activite(
     id serial primary key,
     nom varchar(100) unique not null
 );
+alter table activite add constraint unique_activite unique (nom);
+
 
 create table bouquet(
     id serial primary key,
     nom varchar(100) unique not null
 );
+alter table bouquet add constraint unique_bouquet unique (nom);
+
 
 CREATE TABLE categorie_lieu (
    id serial PRIMARY KEY,
    nom varchar(100) unique not null
 );
+alter table categorie_lieu add constraint unique_categorie_lieu unique (nom);
+
 
 CREATE TABLE type_duree (
     id serial PRIMARY KEY,
@@ -22,6 +28,7 @@ CREATE TABLE type_duree (
     intervaljour int4range,
     EXCLUDE USING gist (intervaljour WITH &&)
 );
+alter table type_duree add constraint unique_type_duree unique (nom);
 
 
 create table voyage(
@@ -30,8 +37,6 @@ create table voyage(
     id_duree int references type_duree(id),
     id_categorie_lieu int references categorie_lieu(id)
 );
-
-
 alter table voyage add constraint
     unique_bouquet_duree_categ_lieu unique (id_bouquet, id_duree, id_categorie_lieu);
 
@@ -45,7 +50,7 @@ CREATE TABLE voyage_activite (
     CONSTRAINT bouquet_activite_id_bouquet_fkey FOREIGN KEY (id_voyage) REFERENCES bouquet(id)
 );
 
-alter table voyage_activite add constraint unique_voyage_activite unique (id_voyage, id_activite)
+alter table voyage_activite add constraint unique_voyage_activite unique (id_voyage, id_activite);
 
 
 CREATE TABLE entree_activite (
@@ -61,13 +66,11 @@ alter table entree_activite
         unique (id_activite, date_heure_entree);
 
 
-
-
 create table sexe(
     id serial primary key,
     nom varchar(100) not null
 );
-
+ alter table sexe add constraint unique_sexe unique (nom);
 
 
 
@@ -76,6 +79,7 @@ create table client(
    nom varchar(100) not null,
    id_sexe int references sexe(id)
 );
+alter table client add constraint unique_client unique (nom);
 
 
 
@@ -85,6 +89,7 @@ CREATE TABLE reservation_voyage (
     nombre_billet integer NOT NULL CHECK (nombre_billet > 0),
     id_client int not null references client(id)
 );
+alter table reservation_voyage add column date_reservation timestamp default now();
 
 
 -- Toutes les activités d'un bouquet
@@ -237,7 +242,7 @@ create table employe(
     id_sexe int not null references sexe(id),
     dtn date not null check ( dtn < now() )
 );
-
+alter table employe add constraint unique_employe unique (nom, prenom, id_sexe, dtn);
 
 
 
@@ -289,7 +294,7 @@ create table fonction_employe(
     nom varchar(100) not null,
     salaire_horaire decimal not null check ( salaire_horaire>0 )
 );
-
+alter table fonction_employe add constraint unique_fonction_employe unique (nom, salaire_horaire);
 
 
 
@@ -300,6 +305,7 @@ create table grade_fonction(
     plage_anciennete int4range,
     EXCLUDE USING gist (plage_anciennete WITH &&)
 );
+alter table grade_fonction add constraint unique_grade_fonction unique (nom, coeff_taux_horaire, plage_anciennete);
 
 create table embauche_employe(
     id serial primary key,
@@ -307,7 +313,7 @@ create table embauche_employe(
     id_fonction int not null references fonction_employe(id),
     date_embauche date not null check ( date_embauche <= now() )
 );
-
+alter table embauche_employe add constraint unique_embauche_employe unique (id_emp, id_fonction, date_embauche);
 
 
 -- Vue salaire total employé par voyage
