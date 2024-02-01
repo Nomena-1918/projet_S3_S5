@@ -54,6 +54,10 @@
                     <i class="far fa-comments"></i>
                     Voyage fourchette de prix
                 </a></li>
+                <li class="tm-nav-item"><a href="genre-servlet" class="tm-nav-link">
+                    <i class="fas fa-home"></i>
+                    Insertion genre
+                </a></li>
                 <li class="tm-nav-item"><a href="client-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
                     Insertion client

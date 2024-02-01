@@ -38,6 +38,10 @@ public class Sexe {
     public Sexe() {
     }
 
+    public Sexe(String nom) {
+        this.nom = nom;
+    }
+
     public Sexe(Integer id) {
         this.id = id;
     }
