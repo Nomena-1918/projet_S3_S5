@@ -92,35 +92,24 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Prix total</th>
+                        <th>Genre</th>
                     </tr>
                     <%for(StatistiqueSexe item: statistiqueSexeHomme){%>
                     <tr>
                         <td><%=item.getNombre()%></td>
                         <td><%=item.getPrixTotal()%></td>
+                        <td><%=item.getSexe().getNom()%></td>
                     </tr>
                     <%}%>
-                </table>
-            </div>
-        </div>
-
-        <div class="row tm-row">
-            <div class="col-12">
-                <% if(!statistiqueSexeFemme.isEmpty()) if(statistiqueSexeFemme.get(0).getActivite() != null) { %>
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques féminines à l'activité : <%=statistiqueSexeFemme.get(0).getActivite().getNom()%></h2>
-                <% } %>
-            </div>
-            <div class="col-lg-7 tm-contact-left">
-                <table class="table table-striped tm-table">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Prix total</th>
-                    </tr>
+                    <% if(!statistiqueSexeFemme.isEmpty()) {%>
                     <%for(StatistiqueSexe item: statistiqueSexeFemme){%>
                     <tr>
                         <td><%=item.getNombre()%></td>
                         <td><%=item.getPrixTotal()%></td>
+                        <td><%=item.getSexe().getNom()%></td>
                     </tr>
-                    <%}%>
+                    <%}
+                    }%>
                 </table>
             </div>
         </div>
@@ -129,7 +118,6 @@
             <div class="card col-lg-12 d-flex h-100">
                 <div class="card-body">
                     <h5 class="card-title">Statistique par Chart</h5>
-                    <div id="chart"></div>
                     <div id="pieChart"></div>
 
                     <script>

@@ -80,4 +80,5 @@ public class StatistiqueGenreServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("client/statsActGenre.jsp");
         dispatcher.forward(request, response);
     }
+
 }
