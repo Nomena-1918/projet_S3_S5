@@ -29,6 +29,8 @@ CREATE TABLE type_duree (
     EXCLUDE USING gist (intervaljour WITH &&)
 );
 alter table type_duree add constraint unique_type_duree unique (nom);
+alter table type_duree add constraint interval_jour_lower_positif check (lower(intervaljour) > 0);
+alter table type_duree add constraint interval_jour_upper_positif check (upper(intervaljour) > 0);
 
 
 create table voyage(
@@ -49,8 +51,9 @@ CREATE TABLE voyage_activite (
     CONSTRAINT bouquet_activite_id_activite_fkey FOREIGN KEY (id_activite) REFERENCES activite(id),
     CONSTRAINT bouquet_activite_id_bouquet_fkey FOREIGN KEY (id_voyage) REFERENCES bouquet(id)
 );
-
 alter table voyage_activite add constraint unique_voyage_activite unique (id_voyage, id_activite);
+alter table voyage_activite alter column id_voyage set not null;
+alter table voyage_activite alter column id_activite set not null;
 
 
 CREATE TABLE entree_activite (
