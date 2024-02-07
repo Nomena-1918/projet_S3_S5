@@ -14,10 +14,9 @@
 <body>
 <jsp:include page="../inc/header.jsp"/>
 <%@ page import="java.util.List" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.gestion_personnel.Employe" %>
-<%@ page import="org.example.demo.models.composition_voyage.Voyage" %>
+<%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Employe" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.Voyage" %>
 <%@ page import="java.util.ArrayList" %>
 
 <%
@@ -26,12 +25,12 @@
   List<Voyage> voyage = new ArrayList<>();
 
   if (request.getAttribute("list-employe") != null)
-    employe = castToList(request.getAttribute("list-employe"), Employe.class);
+    employe = castToList(request.getAttribute("list-employe"));
 
   if (request.getAttribute("list-voyage") != null)
-    voyage   = castToList(request.getAttribute("list-voyage"), Voyage.class);
+    voyage   = castToList(request.getAttribute("list-voyage"));
 
-  String messageError = castToString(request.getAttribute("messageError"));
+  String messageError = (String) (request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
   <main class="tm-main">

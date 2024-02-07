@@ -14,22 +14,21 @@
 <body>
 <jsp:include page="inc/header.jsp"/>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.models.composition_voyage.Bouquet" %>
-<%@ page import="org.example.demo.models.composition_voyage.CategorieLieu" %>
-<%@ page import="org.example.demo.models.composition_voyage.TypeDuree" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="static org.example.demo.utils.Cast.castToList" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.Bouquet" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.CategorieLieu" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.TypeDuree" %>
+<%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
 
 <%
-  List<Bouquet> bouquet = castToList(request.getAttribute("list-bouquet"), Bouquet.class);
-  List<CategorieLieu> categorieLieu = castToList(request.getAttribute("list-categorieLieu"), CategorieLieu.class);
-  List<TypeDuree> typeDuree = castToList(request.getAttribute("list-typeDuree"), TypeDuree.class);
-  String messageError = castToString(request.getAttribute("messageError"));
+  List<Bouquet> bouquet = castToList(request.getAttribute("list-bouquet"));
+  List<CategorieLieu> categorieLieu = castToList(request.getAttribute("list-categorieLieu"));
+  List<TypeDuree> typeDuree = castToList(request.getAttribute("list-typeDuree"));
+  String messageError = (String) (request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
   <main class="tm-main">
     <div class="row tm-row">
-      <%if (messageError != null) {%>
+      <% if (messageError != null) {%>
       <div class="card col-12">
         <div class="card-body">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">

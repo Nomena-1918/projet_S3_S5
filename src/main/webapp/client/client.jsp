@@ -13,14 +13,14 @@
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
+
 <%@ page import="java.util.List" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.gestion_personnel.Genre" %>
+<%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Genre" %>
 
 <%
-    List<Genre> sexes = castToList(request.getAttribute("list-genre"), Genre.class);
-    String messageError = castToString(request.getAttribute("messageError"));
+    List<Genre> sexes = castToList(request.getAttribute("list-genre"));
+    String messageError = (String) (request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
     <main class="tm-main">

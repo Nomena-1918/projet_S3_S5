@@ -1,17 +1,17 @@
-import org.example.demo.connexion.Connexion;
-import org.example.demo.models.composition_voyage.VoyageActivite;
-import org.example.demo.models.gestion_personnel.*;
-import org.example.demo.models.gestion_reservation.BeneficeVoyage;
-import org.example.demo.models.gestion_reservation.Client;
-import org.example.demo.models.composition_voyage.Activite;
-import org.example.demo.models.composition_voyage.Bouquet;
-import org.example.demo.models.gestion_personnel.Genre;
-import org.example.demo.models.composition_voyage.Voyage;
+import org.voyage.demo.connexion.Connexion;
+import org.voyage.demo.models.composition_voyage.VoyageActivite;
+import org.voyage.demo.models.gestion_personnel.*;
+import org.voyage.demo.models.gestion_reservation.BeneficeVoyage;
+import org.voyage.demo.models.gestion_reservation.Client;
+import org.voyage.demo.models.composition_voyage.Activite;
+import org.voyage.demo.models.composition_voyage.Bouquet;
+import org.voyage.demo.models.composition_voyage.Voyage;
 import org.junit.jupiter.api.Test;
 import veda.godao.DAO;
 import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class ClasseTest {
 
     @Test
     void testClient() throws Exception {
-        Client.insertClient(null, new Client("Clienttest", new Genre(1)));
+        Client.insertClient(null, new Client("Clienttest-"+LocalDateTime.now(), new Genre(1)));
         System.out.println("ok");
     }
 
@@ -73,19 +73,26 @@ public class ClasseTest {
 
     @Test
     void testBenefice() throws Exception {
-        List<BeneficeVoyage> beneficeVoyageList = BeneficeVoyage.readAll(Connexion.getConnexionPostgreSql());
-        System.out.println(beneficeVoyageList);
+        BeneficeVoyage[] beneficeVoyage=dao.select(null, BeneficeVoyage.class);
+        System.out.println(Arrays.toString(beneficeVoyage));
+    }
+
+    @Test
+    void testVoyageSelect() throws Exception {
+        Voyage[] voyage=dao.select(null,Voyage.class);
+        System.out.println(Arrays.toString(voyage));
     }
 
     @Test
     void test() {
         System.out.println("Hello World!");
     }
+
     @Test
     void testInsertActivite() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Activite activite=new Activite();
-            activite.setNom("Voyage a Mananjary");
+            activite.setNom("Voyage a Mananjary - "+LocalDateTime.now());
             Activite.insertActivite(connection,activite);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -96,21 +103,13 @@ public class ClasseTest {
     void testInsertBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Bouquet bouquet=new Bouquet();
-            bouquet.setNom("Bouquet EXTRA");
+            bouquet.setNom("Bouquet EXTRA - "+LocalDateTime.now());
             Bouquet.insertBouquet(connection,bouquet);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Test
-    void testInsertActiviteBouquet() {
-        try(Connection connection = Connexion.getConnexionPostgreSql()) {
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Test
     void testReadAllActivite() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
@@ -120,6 +119,7 @@ public class ClasseTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     void testReadAllBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
@@ -141,7 +141,7 @@ public class ClasseTest {
     }
 
     @Test
-    void getVoyageBetweenPrix() {
+    void getFonctions() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             List<Fonction> listactbouq = Fonction.readAll(connection);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
@@ -149,4 +149,5 @@ public class ClasseTest {
             throw new RuntimeException(e);
         }
     }
+
 }

@@ -13,13 +13,12 @@
   <body>
   <jsp:include page="../inc/header.jsp"/>
   <%@ page import="java.util.List" %>
-  <%@ page import="org.example.demo.utils.Cast" %>
-  <%@ page import="static org.example.demo.utils.Cast.castToString" %>
-  <%@ page import="org.example.demo.models.gestion_personnel.SituationProPersonne" %>
+  <%@ page import="org.voyage.demo.utils.Cast" %>
+  <%@ page import="org.voyage.demo.models.gestion_personnel.SituationProPersonne" %>
 
   <%
-    List<SituationProPersonne> personnel = Cast.castToList(request.getAttribute("liste-personnel"), SituationProPersonne.class);
-    String messageError = castToString(request.getAttribute("messageError"));
+    List<SituationProPersonne> personnel = Cast.castToList(request.getAttribute("liste-personnel"));
+    String messageError = (String) (request.getAttribute("messageError"));
   %>
   <div class="container-fluid">
     <main class="tm-main">

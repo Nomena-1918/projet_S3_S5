@@ -14,15 +14,14 @@
 <body>
 <jsp:include page="../inc/header.jsp"/>
 <%@ page import="java.util.List" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.gestion_personnel.Employe" %>
-<%@ page import="org.example.demo.models.gestion_personnel.Fonction" %>
+<%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Employe" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Fonction" %>
 
 <%
-    List<Employe> employe = castToList(request.getAttribute("list-employe"), Employe.class);
-    List<Fonction> fonctions = castToList(request.getAttribute("list_fonction"), Fonction.class);
-    String messageError = castToString(request.getAttribute("messageError"));
+    List<Employe> employe = castToList(request.getAttribute("list-employe"));
+    List<Fonction> fonctions = castToList(request.getAttribute("list_fonction"));
+    String messageError = (String)(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
     <main class="tm-main">

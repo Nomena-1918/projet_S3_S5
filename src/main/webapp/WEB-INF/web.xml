@@ -11,7 +11,7 @@
 
     <servlet>
         <servlet-name>embaucheServlet</servlet-name>
-        <servlet-class>org.example.demo.servlets.promotionPoste.EmbaucheServlet</servlet-class>
+        <servlet-class>org.voyage.demo.servlets.gestion_personnel.EmbaucheServlet</servlet-class>
         <init-param>
             <param-name>majeur</param-name>
             <param-value>18</param-value>

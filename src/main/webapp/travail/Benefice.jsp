@@ -12,12 +12,11 @@
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
-<%@ page import="org.example.demo.models.composition_voyage.ActiviteBouquetPrix" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.utils.Cast" %>
-<%@ page import="org.example.demo.models.gestion_reservation.Benefice" %>
+<%@ page import="org.voyage.demo.utils.Cast" %>
+<%@ page import="org.voyage.demo.models.gestion_reservation.Benefice" %>
 <%
-    List<Benefice> benefices = Cast.castToList(request.getAttribute("list-benefices"), Benefice.class);
+    List<Benefice> benefices = Cast.castToList(request.getAttribute("list-benefices"));
     String messageError = (String) request.getAttribute("messageError");
 %>
 <div class="container-fluid">

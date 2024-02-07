@@ -12,16 +12,15 @@
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
-<%@ page import="org.example.demo.models.composition_voyage.Activite" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.Activite" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.utils.Cast" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="org.example.demo.models.stats.StatistiqueGenre" %>
+<%@ page import="org.voyage.demo.utils.Cast" %>
+<%@ page import="org.voyage.demo.models.stats.StatistiqueGenre" %>
 <%@ page import="java.util.ArrayList" %>
 <%
-    List<Activite> activite = Cast.castToList(request.getAttribute("list_activite"), Activite.class);
-    List<StatistiqueGenre> statistiqueGenreHomme =Cast.castToList(request.getAttribute("list_statHomme"), StatistiqueGenre.class);
-    List<StatistiqueGenre> statistiqueGenreFemme =Cast.castToList(request.getAttribute("list_statFemme"), StatistiqueGenre.class);
+    List<Activite> activite = Cast.castToList(request.getAttribute("list_activite"));
+    List<StatistiqueGenre> statistiqueGenreHomme =Cast.castToList(request.getAttribute("list_statHomme"));
+    List<StatistiqueGenre> statistiqueGenreFemme =Cast.castToList(request.getAttribute("list_statFemme"));
 
     if (statistiqueGenreHomme == null) statistiqueGenreHomme = new ArrayList<>();
     if (statistiqueGenreFemme == null) statistiqueGenreFemme = new ArrayList<>();
@@ -39,7 +38,7 @@
         pourcentFemme = Double.parseDouble((String) request.getAttribute("pourcentFemme"));
     }
 
-    String messageError = castToString(request.getAttribute("messageError"));
+    String messageError = (String)(request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
     <main class="tm-main">

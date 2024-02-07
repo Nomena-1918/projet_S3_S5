@@ -12,15 +12,14 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<%@ page import="org.example.demo.models.composition_voyage.Activite" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.Activite" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.utils.Cast" %>
-<%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="org.example.demo.models.composition_voyage.ResteActivite" %>
+<%@ page import="org.voyage.demo.utils.Cast" %>
+<%@ page import="org.voyage.demo.models.composition_voyage.ResteActivite" %>
 <%
-    List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"), Activite.class);
-    List<ResteActivite> resteActivites=Cast.castToList(request.getAttribute("list-resteActivite"), ResteActivite.class);
-    String messageError = castToString(request.getAttribute("messageError"));
+    List<Activite> activite = Cast.castToList(request.getAttribute("list-activite"));
+    List<ResteActivite> resteActivites=Cast.castToList(request.getAttribute("list-resteActivite"));
+    String messageError = (String) (request.getAttribute("messageError"));
 %>
 <div class="container-fluid">
     <main class="tm-main">
