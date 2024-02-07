@@ -5,20 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.*;
-import org.example.demo.models.client.StatistiqueSexe;
-import org.example.demo.models.promotionPoste.Embauche;
-import org.example.demo.models.promotionPoste.Sexe;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
-import org.example.demo.models.travail.Voyage;
-import org.example.demo.models.travail.VoyageEmploye;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_personnel.Genre;
+import org.example.demo.models.stats.StatistiqueGenre;
+import org.example.demo.models.composition_voyage.Activite;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet(name = "StatGenre", value = "/stat-genre-servlet")
@@ -35,19 +28,19 @@ public class StatistiqueGenreServlet extends HttpServlet {
         Integer idActivite=Integer.parseInt(request.getParameter("idActivite"));
         try(Connection connection = ConnexionPool.getConnection()){
             Activite activite=new Activite(idActivite,"NomTestActivite");
-            List<Sexe> sexes = Sexe.readAll(connection);
+            List<Genre> sexes = Genre.readAll(connection);
 
-            List<StatistiqueSexe> statistiqueSexeHomme=StatistiqueSexe.readAll(connection,sexes.get(0),activite);
-            List<StatistiqueSexe> statistiqueSexeFemme=StatistiqueSexe.readAll(connection,sexes.get(1),activite);
+            List<StatistiqueGenre> statistiqueSexeHomme= StatistiqueGenre.readAll(connection,sexes.get(0),activite);
+            List<StatistiqueGenre> statistiqueGenreFemme = StatistiqueGenre.readAll(connection,sexes.get(1),activite);
 
             // Pourcentage Homme - Femme
             double nbrTotalHomme = 0;
-            for (StatistiqueSexe s : statistiqueSexeHomme) {
+            for (StatistiqueGenre s : statistiqueSexeHomme) {
                 nbrTotalHomme+=s.getNombre();
             }
 
             double nbrTotalFemme = 0;
-            for (StatistiqueSexe s : statistiqueSexeFemme) {
+            for (StatistiqueGenre s : statistiqueGenreFemme) {
                 nbrTotalFemme+=s.getNombre();
             }
 
@@ -60,7 +53,7 @@ public class StatistiqueGenreServlet extends HttpServlet {
             request.setAttribute("pourcentFemme",pourcentFemme);
 
             request.setAttribute("list_statHomme",statistiqueSexeHomme);
-            request.setAttribute("list_statFemme",statistiqueSexeFemme);
+            request.setAttribute("list_statFemme", statistiqueGenreFemme);
 
             getInfo(request, response, connection);
         } catch (Exception e) {

@@ -1,9 +1,8 @@
-package org.example.demo.models.client;
-import org.example.demo.database.Connexion;
-import org.example.demo.models.promotionPoste.Sexe;
+package org.example.demo.models.gestion_reservation;
+import org.example.demo.connexion.Connexion;
+import org.example.demo.models.gestion_personnel.Genre;
 import veda.godao.DAO;
 import veda.godao.annotations.*;
-import veda.godao.utils.DAOConnexion;
 
 import java.sql.Connection;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class Client {
     private String nom;
     @ForeignKey(recursive=true)
     @Column("id_sexe")
-    private Sexe sexe;
+    private Genre genre;
 
     public Client() {
     }
@@ -38,8 +37,8 @@ public class Client {
         this.id = id;
     }
 
-    public Client(Sexe sexe){
-        this.sexe=sexe;
+    public Client(Genre genre){
+        this.genre = genre;
     }
 
     public static void insertClient(Connection connection, Client client) throws Exception {
@@ -67,9 +66,9 @@ public class Client {
         return Arrays.asList(clients);
     }
 
-    public Client(String nom, Sexe sexe) {
+    public Client(String nom, Genre genre) {
         this.nom = nom;
-        this.sexe = sexe;
+        this.genre = genre;
     }
 
     public Integer getId() {
@@ -88,11 +87,11 @@ public class Client {
         this.nom = nom;
     }
 
-    public Sexe getSexe() {
-        return sexe;
+    public Genre getSexe() {
+        return genre;
     }
 
-    public void setSexe(Sexe sexe) {
-        this.sexe = sexe;
+    public void setSexe(Genre genre) {
+        this.genre = genre;
     }
 }

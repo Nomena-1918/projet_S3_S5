@@ -1,8 +1,6 @@
-package org.example.demo.models.promotionPoste;
+package org.example.demo.models.gestion_personnel;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
+import org.example.demo.connexion.Connexion;
 import veda.godao.DAO;
 import veda.godao.annotations.*;
 

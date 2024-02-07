@@ -12,19 +12,19 @@
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
-<%@ page import="org.example.demo.models.Activite" %>
+<%@ page import="org.example.demo.models.composition_voyage.Activite" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
-<%@ page import="org.example.demo.models.client.StatistiqueSexe" %>
+<%@ page import="org.example.demo.models.stats.StatistiqueGenre" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     List<Activite> activite = Cast.castToList(request.getAttribute("list_activite"), Activite.class);
-    List<StatistiqueSexe> statistiqueSexeHomme=Cast.castToList(request.getAttribute("list_statHomme"), StatistiqueSexe.class);
-    List<StatistiqueSexe> statistiqueSexeFemme=Cast.castToList(request.getAttribute("list_statFemme"), StatistiqueSexe.class);
+    List<StatistiqueGenre> statistiqueGenreHomme =Cast.castToList(request.getAttribute("list_statHomme"), StatistiqueGenre.class);
+    List<StatistiqueGenre> statistiqueGenreFemme =Cast.castToList(request.getAttribute("list_statFemme"), StatistiqueGenre.class);
 
-    if (statistiqueSexeHomme == null) statistiqueSexeHomme = new ArrayList<>();
-    if (statistiqueSexeFemme == null) statistiqueSexeFemme = new ArrayList<>();
+    if (statistiqueGenreHomme == null) statistiqueGenreHomme = new ArrayList<>();
+    if (statistiqueGenreFemme == null) statistiqueGenreFemme = new ArrayList<>();
 
 
     Double pourcentHomme = 0.0;
@@ -83,8 +83,8 @@
         </div>
         <div class="row tm-row">
             <div class="col-12">
-                <% if(!statistiqueSexeHomme.isEmpty()) if(statistiqueSexeHomme.get(0).getActivite() != null) {%>
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques masculines à l'activité : <%=statistiqueSexeHomme.get(0).getActivite().getNom()%></h2>
+                <% if(!statistiqueGenreHomme.isEmpty()) if(statistiqueGenreHomme.get(0).getActivite() != null) {%>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques masculines à l'activité : <%=statistiqueGenreHomme.get(0).getActivite().getNom()%></h2>
                 <% } %>
             </div>
             <div class="col-lg-7 tm-contact-left">
@@ -94,15 +94,15 @@
                         <th>Prix total</th>
                         <th>Genre</th>
                     </tr>
-                    <%for(StatistiqueSexe item: statistiqueSexeHomme){%>
+                    <%for(StatistiqueGenre item: statistiqueGenreHomme){%>
                     <tr>
                         <td><%=item.getNombre()%></td>
                         <td><%=item.getPrixTotal()%></td>
                         <td><%=item.getSexe().getNom()%></td>
                     </tr>
                     <%}%>
-                    <% if(!statistiqueSexeFemme.isEmpty()) {%>
-                    <%for(StatistiqueSexe item: statistiqueSexeFemme){%>
+                    <% if(!statistiqueGenreFemme.isEmpty()) {%>
+                    <%for(StatistiqueGenre item: statistiqueGenreFemme){%>
                     <tr>
                         <td><%=item.getNombre()%></td>
                         <td><%=item.getPrixTotal()%></td>

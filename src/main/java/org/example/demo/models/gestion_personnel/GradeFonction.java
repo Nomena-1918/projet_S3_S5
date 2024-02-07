@@ -1,7 +1,6 @@
-package org.example.demo.models.promotionPoste;
+package org.example.demo.models.gestion_personnel;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.client.Client;
+import org.example.demo.connexion.Connexion;
 import veda.godao.annotations.*;
 
 import java.sql.Connection;
@@ -9,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.example.demo.models.promotionPoste.SituationProPersonne.dao;
+import static org.example.demo.models.gestion_personnel.SituationProPersonne.dao;
 
 @Table("vue_grade_fonction")
 public class GradeFonction {

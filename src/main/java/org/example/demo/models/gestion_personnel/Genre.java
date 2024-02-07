@@ -1,18 +1,17 @@
-package org.example.demo.models.promotionPoste;
+package org.example.demo.models.gestion_personnel;
 
-import org.example.demo.database.Connexion;
+import org.example.demo.connexion.Connexion;
 import veda.godao.DAO;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.PrimaryKey;
 import veda.godao.annotations.Table;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Table("sexe")
-public class Sexe {
+public class Genre {
     private static final DAO dao;
     static {
         dao=new DAO(
@@ -30,19 +29,19 @@ public class Sexe {
     @Column("nom")
     private String nom;
 
-    public Sexe(Integer id, String nom) {
+    public Genre(Integer id, String nom) {
         this.id = id;
         this.nom = nom;
     }
 
-    public Sexe() {
+    public Genre() {
     }
 
-    public Sexe(String nom) {
+    public Genre(String nom) {
         this.nom = nom;
     }
 
-    public Sexe(Integer id) {
+    public Genre(Integer id) {
         this.id = id;
     }
 
@@ -62,26 +61,26 @@ public class Sexe {
         this.nom = nom;
     }
 
-    public static List<Sexe> readAll(Connection connection) throws Exception {
+    public static List<Genre> readAll(Connection connection) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        Sexe[] sexes=dao.select(connection,Sexe.class);
+        Genre[] sexes=dao.select(connection, Genre.class);
 
         if (new_connex)
             connection.close();
         return Arrays.asList(sexes);
     }
 
-    public static void insertSexe(Connection connection, Sexe sexe) throws Exception {
+    public static void insertSexe(Connection connection, Genre genre) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        dao.insertWithoutPrimaryKey(connection, sexe);
+        dao.insertWithoutPrimaryKey(connection, genre);
         if (new_connex) {
             connection.commit();
             connection.close();

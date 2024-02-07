@@ -1,7 +1,6 @@
-package org.example.demo.models;
+package org.example.demo.models.composition_voyage;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.travail.Voyage;
+import org.example.demo.connexion.Connexion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

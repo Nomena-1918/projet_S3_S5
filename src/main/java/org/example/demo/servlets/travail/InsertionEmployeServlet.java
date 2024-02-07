@@ -6,13 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.Activite;
-import org.example.demo.models.EntreeActivite;
-import org.example.demo.models.promotionPoste.Sexe;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
-import org.example.demo.models.travail.Voyage;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_personnel.Genre;
+import org.example.demo.models.gestion_personnel.Employe;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,7 +36,7 @@ public class InsertionEmployeServlet  extends HttpServlet {
         Integer idSexe=Integer.parseInt(request.getParameter("idsexe"));
 
         try(Connection connection = ConnexionPool.getConnection()){
-            Sexe sex=new Sexe(idSexe);
+            Genre sex=new Genre(idSexe);
             Employe employe=new Employe(nom,prenom,dtn,sex);
             Employe.insertEmploye(connection,employe);
             getInfo(request,response,connection);
@@ -55,7 +51,7 @@ public class InsertionEmployeServlet  extends HttpServlet {
     }
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
-        List<Sexe> sexes=Sexe.readAll(connection);
+        List<Genre> sexes= Genre.readAll(connection);
         request.setAttribute("list-sexe", sexes);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");

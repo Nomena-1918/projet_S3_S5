@@ -5,10 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.promotionPoste.Embauche;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_personnel.Embauche;
+import org.example.demo.models.gestion_personnel.Employe;
+import org.example.demo.models.gestion_personnel.Fonction;
 
 import java.io.IOException;
 import java.sql.Connection;

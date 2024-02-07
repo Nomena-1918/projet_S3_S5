@@ -1,9 +1,9 @@
-package org.example.demo.models.client;
+package org.example.demo.models.stats;
 
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.Activite;
-import org.example.demo.models.promotionPoste.Sexe;
+import org.example.demo.connexion.Connexion;
+import org.example.demo.models.composition_voyage.Activite;
+import org.example.demo.models.gestion_personnel.Genre;
 import veda.godao.DAO;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.ForeignKey;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Table("vue_stats_genre")
-public class StatistiqueSexe {
+public class StatistiqueGenre {
     private static final DAO dao;
     static {
         dao=new DAO(
@@ -29,7 +29,7 @@ public class StatistiqueSexe {
 
     @ForeignKey(recursive = true)
     @Column("id_sexe")
-    private Sexe sexe;
+    private Genre genre;
     @ForeignKey(recursive = true)
     @Column("id_activite")
     private Activite activite;
@@ -38,22 +38,22 @@ public class StatistiqueSexe {
     @Column("prix_total")
     Double prixTotal;
 
-    public StatistiqueSexe(Sexe sexe, Activite activite, int nombre, double prixTotal) {
-        this.sexe = sexe;
+    public StatistiqueGenre(Genre genre, Activite activite, int nombre, double prixTotal) {
+        this.genre = genre;
         this.activite = activite;
         this.nombre = nombre;
         this.prixTotal = prixTotal;
     }
 
-    public StatistiqueSexe() {
+    public StatistiqueGenre() {
     }
 
-    public Sexe getSexe() {
-        return sexe;
+    public Genre getSexe() {
+        return genre;
     }
 
-    public void setSexe(Sexe sexe) {
-        this.sexe = sexe;
+    public void setSexe(Genre genre) {
+        this.genre = genre;
     }
 
     public Activite getActivite() {
@@ -85,29 +85,29 @@ public class StatistiqueSexe {
         this.prixTotal = prixTotal;
     }
 
-    public static List<StatistiqueSexe> readAll(Connection connection, Sexe sexe, Activite activite) throws Exception {
+    public static List<StatistiqueGenre> readAll(Connection connection, Genre genre, Activite activite) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
-        StatistiqueSexe[] statistiquesSexe;
+        StatistiqueGenre[] statistiquesSexe;
 
         // Par défaut :
-        if (activite == null && sexe == null)
-            return Arrays.asList(dao.select(connection,StatistiqueSexe.class));
+        if (activite == null && genre == null)
+            return Arrays.asList(dao.select(connection, StatistiqueGenre.class));
 
         // Recherche par activité
         else {
-            StatistiqueSexe where = new StatistiqueSexe();
-            if (sexe != null) {
-                where.setSexe(sexe);
+            StatistiqueGenre where = new StatistiqueGenre();
+            if (genre != null) {
+                where.setSexe(genre);
             }
 
             if (activite != null) {
                 where.setActivite(activite);
             }
-            statistiquesSexe=dao.select(connection,StatistiqueSexe.class,where);
+            statistiquesSexe=dao.select(connection, StatistiqueGenre.class,where);
         }
 
         if (new_connex)

@@ -14,10 +14,10 @@
 <body>
 <jsp:include page="inc/header.jsp"/>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.models.Activite" %>
+<%@ page import="org.example.demo.models.composition_voyage.Activite" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
-<%@ page import="org.example.demo.models.travail.Voyage" %>
+<%@ page import="org.example.demo.models.composition_voyage.Voyage" %>
 
 <%
     List<Activite> activite = castToList(request.getAttribute("list-activite"), Activite.class);

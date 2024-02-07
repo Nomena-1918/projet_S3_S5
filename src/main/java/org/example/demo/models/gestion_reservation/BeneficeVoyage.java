@@ -1,7 +1,7 @@
-package org.example.demo.models.benefice;
+package org.example.demo.models.gestion_reservation;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.travail.Voyage;
+import org.example.demo.connexion.Connexion;
+import org.example.demo.models.composition_voyage.Voyage;
 import veda.godao.DAO;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.ForeignKey;

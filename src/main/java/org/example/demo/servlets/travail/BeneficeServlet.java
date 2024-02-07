@@ -6,10 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.ActiviteBouquetPrix;
-import org.example.demo.models.CategorieLieu;
-import org.example.demo.models.travail.Benefice;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_reservation.Benefice;
 
 import java.io.IOException;
 import java.sql.Connection;

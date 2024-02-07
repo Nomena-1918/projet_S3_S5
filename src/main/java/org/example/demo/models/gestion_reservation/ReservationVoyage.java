@@ -1,8 +1,9 @@
-package org.example.demo.models;
+package org.example.demo.models.gestion_reservation;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.client.Client;
-import org.example.demo.models.travail.Voyage;
+import org.example.demo.connexion.Connexion;
+import org.example.demo.models.composition_voyage.VoyageActivite;
+import org.example.demo.models.composition_voyage.ResteActivite;
+import org.example.demo.models.composition_voyage.Voyage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

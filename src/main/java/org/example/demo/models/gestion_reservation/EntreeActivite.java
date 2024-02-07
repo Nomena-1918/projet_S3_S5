@@ -1,9 +1,8 @@
-package org.example.demo.models;
+package org.example.demo.models.gestion_reservation;
 
-import org.example.demo.database.Connexion;
+import org.example.demo.connexion.Connexion;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

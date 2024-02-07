@@ -15,7 +15,7 @@
   <%@ page import="java.util.List" %>
   <%@ page import="org.example.demo.utils.Cast" %>
   <%@ page import="static org.example.demo.utils.Cast.castToString" %>
-  <%@ page import="org.example.demo.models.promotionPoste.SituationProPersonne" %>
+  <%@ page import="org.example.demo.models.gestion_personnel.SituationProPersonne" %>
 
   <%
     List<SituationProPersonne> personnel = Cast.castToList(request.getAttribute("liste-personnel"), SituationProPersonne.class);

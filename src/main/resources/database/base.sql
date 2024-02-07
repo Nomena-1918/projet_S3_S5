@@ -69,18 +69,18 @@ alter table entree_activite
         unique (id_activite, date_heure_entree);
 
 
-create table sexe(
+create table genre(
     id serial primary key,
     nom varchar(100) not null
 );
- alter table sexe add constraint unique_sexe unique (nom);
+ alter table genre add constraint unique_sexe unique (nom);
 
 
 
 create table client(
    id serial primary key,
    nom varchar(100) not null,
-   id_sexe int references sexe(id)
+   id_sexe int references genre(id)
 );
 alter table client add constraint unique_client unique (nom);
 
@@ -242,7 +242,7 @@ create table employe(
     id serial primary key,
     nom varchar(100) not null,
     prenom varchar(100) not null,
-    id_sexe int not null references sexe(id),
+    id_sexe int not null references genre(id),
     dtn date not null check ( dtn < now() )
 );
 alter table employe add constraint unique_employe unique (nom, prenom, id_sexe, dtn);
@@ -252,13 +252,13 @@ alter table employe add constraint unique_employe unique (nom, prenom, id_sexe, 
 create table prix_vente_activite(
     id serial primary key,
     id_activite int references activite(id),
-    prix_vente decimal not null check ( prix_vente>0 )
+    prix_vente decimal not null check ( prix_vente>0 ),
+    date_heure timestamp default now()
 );
 
 alter table prix_vente_activite
     add constraint unique_prix_vente_activite
-        unique (id_activite, prix_vente);
-
+        unique (id_activite, prix_vente, date_heure);
 
 
 create table voyage_employe(
@@ -270,10 +270,25 @@ create table voyage_employe(
 alter table voyage_employe add constraint unique_voyage_emp unique (id_emp, id_voyage);
 
 -- Vue Prix de vente par activité
-create view vue_prix_vente_activite as
-select pva.id, pva.id_activite, a.nom as nom_activite, prix_vente
-    from prix_vente_activite pva
-join activite a on pva.id_activite = a.id;
+create or replace view vue_prix_vente_activite as
+WITH prix_recents AS (
+    SELECT id_activite, MAX(date_heure) AS date_heure_max
+    FROM prix_vente_activite
+    GROUP BY id_activite
+)
+SELECT
+        pv.id,
+        pv.id_activite,
+        a.nom as nom_activite,
+        pv.prix_vente,
+        pv.date_heure
+FROM prix_vente_activite pv
+         JOIN activite a ON a.id = pv.id_activite
+         JOIN prix_recents pr ON pr.id_activite = pv.id_activite AND pr.date_heure_max = pv.date_heure
+ORDER BY a.nom;
+
+
+
 
 
 -- Vue Bénéfice activite
@@ -398,7 +413,7 @@ select row_number() over () as id,
 join client c on rv.id_client = c.id
 join vue_activite_bouquet_nombre vabn on rv.id_voyage = vabn.id_voyage
 join vue_prix_vente_activite vpva on vpva.id_activite = vabn.id_activite
-join sexe s on c.id_sexe = s.id;
+join genre s on c.id_sexe = s.id;
 
 select * from vue_resume_reservation_client_genre where id_sexe = 1;
 select * from vue_resume_reservation_client_genre where id_sexe = 2;

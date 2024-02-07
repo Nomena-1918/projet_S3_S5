@@ -1,4 +1,4 @@
-package org.example.demo.database;
+package org.example.demo.connexion;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 

@@ -73,7 +73,7 @@ INSERT INTO entree_activite (id_activite,prix_unitaire,quantite) values
 (6,70000,20),
 (7,80000,20);
 
-insert into sexe(nom) values
+insert into genre(nom) values
 ('Masculin'),
 ('Féminin');
 
@@ -119,14 +119,23 @@ insert into grade_fonction(nom, coeff_taux_horaire, plage_anciennete) values
 ('Expert', 3, int4range(5, 80));
 
 -- Données pour la table prix_vente_activite
-INSERT INTO prix_vente_activite (id_activite, prix_vente) VALUES
-(1,200000),
-(2, 60000),
-(3, 80000),
-(4,1000000),
-(5,1200000),
-(6,1400000),
-(7,160000);
+INSERT INTO prix_vente_activite (id_activite, prix_vente, date_heure) VALUES
+(1, 200000, '2024-02-04 14:02:09.791488'),
+(2,  60000, '2024-02-04 14:02:09.791488'),
+(3,  80000, '2024-02-04 14:02:09.791488'),
+(4,1000000, '2024-02-04 14:02:09.791488'),
+(5,1200000, '2024-02-04 14:02:09.791488'),
+(6,1400000, '2024-02-04 14:02:09.791488'),
+(7, 160000, '2024-02-04 14:02:09.791488');
+
+INSERT INTO prix_vente_activite (id_activite, prix_vente, date_heure) VALUES
+(1, 200000, '2024-02-07 14:02:09.791488'),
+(2,  60000, '2024-02-07 14:02:09.791488'),
+(3,  80000, '2024-02-07 14:02:09.791488'),
+(4,1000000, '2024-02-07 14:02:09.791488'),
+(5,1200000, '2024-02-07 14:02:09.791488'),
+(6,1400000, '2024-02-07 14:02:09.791488'),
+(7, 160000, '2024-02-07 14:02:09.791488');
 
 -- Données pour la table voyage_employe
 INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
@@ -141,3 +150,6 @@ INSERT INTO voyage_employe (id_voyage, id_emp, heures_travail) VALUES
 (7, 4, 30);
 
 
+
+----------------
+--SET enable_nestloop=0;SELECT 'postgresql' AS dbms,t.table_catalog,t.table_schema,t.table_name,c.column_name,c.ordinal_position,c.data_type,c.character_maximum_length,n.constraint_type,k2.table_schema,k2.table_name,k2.column_name FROM information_schema.tables t NATURAL LEFT JOIN information_schema.columns c LEFT JOIN(information_schema.key_column_usage k NATURAL JOIN information_schema.table_constraints n NATURAL LEFT JOIN information_schema.referential_constraints r)ON c.table_catalog=k.table_catalog AND c.table_schema=k.table_schema AND c.table_name=k.table_name AND c.column_name=k.column_name LEFT JOIN information_schema.key_column_usage k2 ON k.position_in_unique_constraint=k2.ordinal_position AND r.unique_constraint_catalog=k2.constraint_catalog AND r.unique_constraint_schema=k2.constraint_schema AND r.unique_constraint_name=k2.constraint_name WHERE t.TABLE_TYPE='BASE TABLE' AND t.table_schema NOT IN('information_schema','pg_catalog');

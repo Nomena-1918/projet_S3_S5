@@ -14,9 +14,9 @@
 <body>
 <jsp:include page="inc/header.jsp"/>
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.demo.models.Bouquet" %>
-<%@ page import="org.example.demo.models.CategorieLieu" %>
-<%@ page import="org.example.demo.models.TypeDuree" %>
+<%@ page import="org.example.demo.models.composition_voyage.Bouquet" %>
+<%@ page import="org.example.demo.models.composition_voyage.CategorieLieu" %>
+<%@ page import="org.example.demo.models.composition_voyage.TypeDuree" %>
 <%@ page import="static org.example.demo.utils.Cast.castToString" %>
 <%@ page import="static org.example.demo.utils.Cast.castToList" %>
 

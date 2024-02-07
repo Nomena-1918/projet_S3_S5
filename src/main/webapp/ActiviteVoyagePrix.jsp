@@ -12,7 +12,7 @@
 </head>
 <body>
 <jsp:include page="inc/header.jsp"/>
-<%@ page import="org.example.demo.models.ActiviteBouquetPrix" %>
+<%@ page import="org.example.demo.models.composition_voyage.ActiviteBouquetPrix" %>
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.demo.utils.Cast" %>
 <%

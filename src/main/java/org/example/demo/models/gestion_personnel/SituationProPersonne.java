@@ -1,9 +1,6 @@
-package org.example.demo.models.promotionPoste;
+package org.example.demo.models.gestion_personnel;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.client.Client;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
+import org.example.demo.connexion.Connexion;
 import veda.godao.annotations.*;
 import veda.godao.DAO;
 
@@ -12,7 +9,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 @Table("vue_liste_personnel")
 public class SituationProPersonne {

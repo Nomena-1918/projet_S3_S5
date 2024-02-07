@@ -1,25 +1,15 @@
-package org.example.demo.models.travail;
+package org.example.demo.models.gestion_personnel;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.Bouquet;
-import org.example.demo.models.CategorieLieu;
-import org.example.demo.models.TypeDuree;
-import org.example.demo.models.promotionPoste.Sexe;
-import org.example.demo.models.promotionPoste.SituationProPersonne;
+import org.example.demo.connexion.Connexion;
 import veda.godao.DAO;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.ForeignKey;
 import veda.godao.annotations.PrimaryKey;
 import veda.godao.annotations.Table;
-import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 @Table("employe")
 public class Employe {
@@ -46,25 +36,25 @@ public class Employe {
     private LocalDate dtn;
     @ForeignKey(recursive = true)
     @Column("id_sexe")
-    private Sexe sexe;
+    private Genre genre;
 
     public Employe() {
 
     }
 
-    public Sexe getSexe() {
-        return sexe;
+    public Genre getSexe() {
+        return genre;
     }
 
-    public void setSexe(Sexe sexe) {
-        this.sexe = sexe;
+    public void setSexe(Genre genre) {
+        this.genre = genre;
     }
 
-    public Employe(String nom, String prenom, LocalDate dtn, Sexe sexe) {
+    public Employe(String nom, String prenom, LocalDate dtn, Genre genre) {
         this.nom = nom;
         this.prenom = prenom;
         this.dtn = dtn;
-        this.sexe = sexe;
+        this.genre = genre;
     }
 
     public Employe(Integer id) {
@@ -166,8 +156,8 @@ public class Employe {
                         nom : %s,
                         prenom : %s,
                         dtn : %s,
-                        sexe : %s
+                        genre : %s
                     }
-                """, this.getId(), this.getNom(), this.prenom, this.getDtn(), this.sexe.getNom());
+                """, this.getId(), this.getNom(), this.prenom, this.getDtn(), this.genre.getNom());
     }
 }

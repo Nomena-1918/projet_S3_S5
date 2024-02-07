@@ -1,13 +1,11 @@
-package org.example.demo.models.travail;
+package org.example.demo.models.composition_voyage;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.*;
+import org.example.demo.connexion.Connexion;
 import veda.godao.annotations.Column;
 import veda.godao.annotations.ForeignKey;
 import veda.godao.annotations.PrimaryKey;
 import veda.godao.annotations.Table;
 
-import javax.swing.plaf.BorderUIResource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

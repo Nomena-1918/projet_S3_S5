@@ -1,7 +1,7 @@
-package org.example.demo.models.travail;
+package org.example.demo.models.gestion_reservation;
 
-import org.example.demo.database.Connexion;
-import org.example.demo.models.Activite;
+import org.example.demo.connexion.Connexion;
+import org.example.demo.models.composition_voyage.Activite;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +10,7 @@ public class ActivitePrixVente {
     private Long id;
     private Activite activite;
     private Double prixVente;
+
 
     public Long getId() {
         return id;

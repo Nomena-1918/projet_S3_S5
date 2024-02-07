@@ -6,15 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.Activite;
-import org.example.demo.models.promotionPoste.Sexe;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_personnel.Genre;
 
 import java.io.IOException;
 import java.sql.Connection;
 
 @WebServlet(name = "genreServlet", value = "/genre-servlet")
-public class SexeServlet extends HttpServlet {
+public class GenreServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             RequestDispatcher dispatcher = request.getRequestDispatcher("genre.jsp");
@@ -27,8 +26,8 @@ public class SexeServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String nomActivite=request.getParameter("nom");
         try(Connection connection = ConnexionPool.getConnection()){
-            Sexe activite = new Sexe(nomActivite);
-            Sexe.insertSexe(connection,activite);
+            Genre activite = new Genre(nomActivite);
+            Genre.insertSexe(connection,activite);
             RequestDispatcher dispatcher = request.getRequestDispatcher("genre.jsp");
 
             dispatcher.forward(request, response);

@@ -5,21 +5,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.*;
-import org.example.demo.models.client.Client;
-import org.example.demo.models.client.StatistiqueSexe;
-import org.example.demo.models.promotionPoste.Embauche;
-import org.example.demo.models.promotionPoste.Sexe;
-import org.example.demo.models.travail.Employe;
-import org.example.demo.models.travail.Fonction;
-import org.example.demo.models.travail.Voyage;
-import org.example.demo.models.travail.VoyageEmploye;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.gestion_personnel.Genre;
+import org.example.demo.models.gestion_reservation.Client;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet(name = "clientservlet", value = "/client-servlet")
@@ -36,8 +27,8 @@ public class ClientServlet extends HttpServlet {
         Integer idSexe=Integer.parseInt(request.getParameter("idsexe"));
         String nom = request.getParameter("nom");
         try(Connection connection = ConnexionPool.getConnection()){
-            Sexe sexe=new Sexe(idSexe);
-            Client client=new Client(nom, sexe);
+            Genre genre =new Genre(idSexe);
+            Client client=new Client(nom, genre);
             Client.insertClient(connection,client);
             connection.commit();
             getInfo(request, response, connection);
@@ -52,7 +43,7 @@ public class ClientServlet extends HttpServlet {
     }
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
-        List<Sexe> sexes = Sexe.readAll(connection);
+        List<Genre> sexes = Genre.readAll(connection);
         request.setAttribute("list-sexe",sexes);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("client/client.jsp");

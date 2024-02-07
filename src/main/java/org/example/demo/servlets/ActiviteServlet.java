@@ -6,12 +6,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.demo.database.ConnexionPool;
-import org.example.demo.models.Activite;
+import org.example.demo.connexion.ConnexionPool;
+import org.example.demo.models.composition_voyage.Activite;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 
 @WebServlet(name = "activiteServlet", value = "/activite-servlet")
 public class ActiviteServlet  extends HttpServlet {
