@@ -83,7 +83,7 @@
         <div class="row tm-row">
             <div class="col-12">
                 <% if(!statistiqueGenreHomme.isEmpty()) if(statistiqueGenreHomme.get(0).getActivite() != null) {%>
-                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques masculines à l'activité : <%=statistiqueGenreHomme.get(0).getActivite().getNom()%></h2>
+                <h2 class="tm-color-primary tm-post-title tm-mb-60">Statistiques de l'activité : <%=statistiqueGenreHomme.get(0).getActivite().getNom()%></h2>
                 <% } %>
             </div>
             <div class="col-lg-7 tm-contact-left">

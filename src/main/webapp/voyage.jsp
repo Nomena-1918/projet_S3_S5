@@ -56,7 +56,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="categorieLieu" class="col-sm-3 col-form-label text-right tm-color-primary">Catégorie Lieu</label>
+            <label for="categorieLieu" class="col-sm-3 col-form-label text-right tm-color-primary">Lieu</label>
             <div class="col-sm-9">
               <select class="form-control mr-0 ml-auto" name="idCategorieLieu" id="CategorieLieu" required>
                 <% for (CategorieLieu item : categorieLieu) {%>
@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="typeDuree" class="col-sm-3 col-form-label text-right tm-color-primary">Type Durée</label>
+            <label for="typeDuree" class="col-sm-3 col-form-label text-right tm-color-primary">Durée</label>
             <div class="col-sm-9">
               <select class="form-control mr-0 ml-auto" name="idTypeDuree" id="typeDuree" required>
                 <% for (TypeDuree item : typeDuree) {%>
