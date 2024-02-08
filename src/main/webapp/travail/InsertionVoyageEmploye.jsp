@@ -15,17 +15,18 @@
 <jsp:include page="../inc/header.jsp"/>
 <%@ page import="java.util.List" %>
 <%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
-<%@ page import="org.voyage.demo.models.gestion_personnel.Employe" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Candidat" %>
 <%@ page import="org.voyage.demo.models.composition_voyage.Voyage" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Candidat" %>
 
 <%
 
-  List<Employe> employe = new ArrayList<>();
+  List<Candidat> candidat = new ArrayList<>();
   List<Voyage> voyage = new ArrayList<>();
 
-  if (request.getAttribute("list-employe") != null)
-    employe = castToList(request.getAttribute("list-employe"));
+  if (request.getAttribute("list-candidat") != null)
+    candidat = castToList(request.getAttribute("list-candidat"));
 
   if (request.getAttribute("list-voyage") != null)
     voyage   = castToList(request.getAttribute("list-voyage"));
@@ -67,7 +68,7 @@
             <label for="idEmploye" class="col-sm-3 col-form-label text-right tm-color-primary">Employé</label>
             <div class="col-sm-9">
               <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
-                <% for (Employe item : employe) {%>
+                <% for (Candidat item : candidat) {%>
                 <option
                         value="<%=item.getId()%>"><%=item.getNom()%> <%=item.getPrenom()%>
                 </option>

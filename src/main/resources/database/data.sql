@@ -98,8 +98,8 @@ INSERT INTO fonction_employe (nom, salaire_horaire) VALUES
 ('Chauffeur', 4000.00);
 
 
--- Données pour la table employe
-INSERT INTO employe (id_sexe, nom, prenom, dtn) VALUES
+-- Données pour la table candidat
+INSERT INTO candidat (id_sexe, nom, prenom, dtn) VALUES
 (1, 'Jean', 'Dupont', '2004-01-23'),
 (2, 'Marie', 'Martin', '2004-01-23'),
 (1, 'Pierre','Dubois', '2004-01-23'),

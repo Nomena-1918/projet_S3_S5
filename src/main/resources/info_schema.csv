@@ -22,25 +22,25 @@ postgresql,voyage_db,public,client,id_sexe,3,integer,,FOREIGN KEY,public,genre,i
 postgresql,voyage_db,public,reservation_voyage,id,1,integer,,PRIMARY KEY,,,
 postgresql,voyage_db,public,reservation_voyage,id_voyage,2,integer,,FOREIGN KEY,public,voyage,id
 postgresql,voyage_db,public,reservation_voyage,id_client,4,integer,,FOREIGN KEY,public,client,id
-postgresql,voyage_db,public,employe,id,1,integer,,PRIMARY KEY,,,
-postgresql,voyage_db,public,employe,id_sexe,4,integer,,FOREIGN KEY,public,genre,id
+postgresql,voyage_db,public,candidat,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,candidat,id_sexe,4,integer,,FOREIGN KEY,public,genre,id
 postgresql,voyage_db,public,prix_vente_activite,id,1,integer,,PRIMARY KEY,,,
 postgresql,voyage_db,public,prix_vente_activite,id_activite,2,integer,,FOREIGN KEY,public,activite,id
 postgresql,voyage_db,public,voyage_employe,id,1,integer,,PRIMARY KEY,,,
 postgresql,voyage_db,public,voyage_employe,id_voyage,2,integer,,FOREIGN KEY,public,voyage,id
-postgresql,voyage_db,public,voyage_employe,id_emp,3,integer,,FOREIGN KEY,public,employe,id
+postgresql,voyage_db,public,voyage_employe,id_emp,3,integer,,FOREIGN KEY,public,candidat,id
 postgresql,voyage_db,public,fonction_employe,id,1,integer,,PRIMARY KEY,,,
 postgresql,voyage_db,public,genre,nom,2,character varying,100,UNIQUE,,,
 postgresql,voyage_db,public,client,nom,2,character varying,100,UNIQUE,,,
 postgresql,voyage_db,public,grade_fonction,id,1,integer,,PRIMARY KEY,,,
 postgresql,voyage_db,public,grade_fonction,nom,2,character varying,100,UNIQUE,,,
 postgresql,voyage_db,public,embauche_employe,id,1,integer,,PRIMARY KEY,,,
-postgresql,voyage_db,public,embauche_employe,id_emp,2,integer,,FOREIGN KEY,public,employe,id
+postgresql,voyage_db,public,embauche_employe,id_emp,2,integer,,FOREIGN KEY,public,candidat,id
 postgresql,voyage_db,public,embauche_employe,id_fonction,3,integer,,FOREIGN KEY,public,fonction_employe,id
-postgresql,voyage_db,public,employe,nom,2,character varying,100,UNIQUE,,,
-postgresql,voyage_db,public,employe,prenom,3,character varying,100,UNIQUE,,,
-postgresql,voyage_db,public,employe,id_sexe,4,integer,,UNIQUE,,,
-postgresql,voyage_db,public,employe,dtn,5,date,,UNIQUE,,,
+postgresql,voyage_db,public,candidat,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,candidat,prenom,3,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,candidat,id_sexe,4,integer,,UNIQUE,,,
+postgresql,voyage_db,public,candidat,dtn,5,date,,UNIQUE,,,
 postgresql,voyage_db,public,fonction_employe,nom,2,character varying,100,UNIQUE,,,
 postgresql,voyage_db,public,fonction_employe,salaire_horaire,3,numeric,,UNIQUE,,,
 postgresql,voyage_db,public,grade_fonction,nom,2,character varying,100,UNIQUE,,,

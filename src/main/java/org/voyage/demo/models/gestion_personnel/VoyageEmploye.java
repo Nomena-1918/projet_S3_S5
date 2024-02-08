@@ -9,12 +9,12 @@ import java.sql.PreparedStatement;
 public class VoyageEmploye {
     private Long id;
     private Voyage voyage;
-    private Employe employe;
+    private Candidat candidat;
     private int heureTravail;
 
-    public VoyageEmploye(Voyage voyage, Employe employe, int heureTravail) {
+    public VoyageEmploye(Voyage voyage, Candidat candidat, int heureTravail) {
         this.voyage = voyage;
-        this.employe = employe;
+        this.candidat = candidat;
         this.heureTravail = heureTravail;
     }
 
@@ -34,12 +34,12 @@ public class VoyageEmploye {
         this.voyage = voyage;
     }
 
-    public Employe getEmploye() {
-        return employe;
+    public Candidat getEmploye() {
+        return candidat;
     }
 
-    public void setEmploye(Employe employe) {
-        this.employe = employe;
+    public void setEmploye(Candidat candidat) {
+        this.candidat = candidat;
     }
 
     public int getHeureTravail() {

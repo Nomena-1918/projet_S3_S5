@@ -15,11 +15,11 @@
 <jsp:include page="../inc/header.jsp"/>
 <%@ page import="java.util.List" %>
 <%@ page import="static org.voyage.demo.utils.Cast.castToList" %>
-<%@ page import="org.voyage.demo.models.gestion_personnel.Employe" %>
+<%@ page import="org.voyage.demo.models.gestion_personnel.Candidat" %>
 <%@ page import="org.voyage.demo.models.gestion_personnel.Fonction" %>
 
 <%
-    List<Employe> employe = castToList(request.getAttribute("list-employe"));
+    List<Candidat> candidat = castToList(request.getAttribute("list-candidat"));
     List<Fonction> fonctions = castToList(request.getAttribute("list_fonction"));
     String messageError = (String)(request.getAttribute("messageError"));
 %>
@@ -46,7 +46,7 @@
                         <label for="idEmploye" class="col-sm-3 col-form-label text-right tm-color-primary">Employé</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
-                                <% for (Employe item : employe) {%>
+                                <% for (Candidat item : candidat) {%>
                                 <option value="<%=item.getId()%>"><%=item.getNom()%> <%=item.getPrenom()%>
                                 </option>
                                 <% }%>

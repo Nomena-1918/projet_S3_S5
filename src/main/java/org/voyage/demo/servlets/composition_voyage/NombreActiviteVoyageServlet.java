@@ -17,7 +17,7 @@ import java.util.List;
 public class NombreActiviteVoyageServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try(Connection connection = ConnexionPool.getConnection()) {
-            getInfo(request, response, connection);
+            getInfo(request, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("NombreActiviteVoyage.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class NombreActiviteVoyageServlet  extends HttpServlet {
         try(Connection connection = ConnexionPool.getConnection()){
             List<VoyageActivite> listActiviteBouquet=VoyageActivite.getByActivite(connection,idActivite);
             request.setAttribute("list-voyageActivite",listActiviteBouquet);
-            getInfo(request, response, connection);
+            getInfo(request, connection);
             RequestDispatcher dispatcher = request.getRequestDispatcher("NombreActiviteVoyage.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class NombreActiviteVoyageServlet  extends HttpServlet {
         }
     }
 
-    private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
+    private void getInfo(HttpServletRequest request, Connection connection) throws Exception {
         List<Activite> listActivite = Activite.readAll(connection);
         request.setAttribute("list-activite", listActivite);
     }

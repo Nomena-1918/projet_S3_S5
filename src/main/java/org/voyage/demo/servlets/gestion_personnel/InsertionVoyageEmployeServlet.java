@@ -6,13 +6,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.voyage.demo.connexion.ConnexionPool;
-import org.voyage.demo.models.gestion_personnel.Employe;
+import org.voyage.demo.models.gestion_personnel.Candidat;
 import org.voyage.demo.models.composition_voyage.Voyage;
+import org.voyage.demo.models.gestion_personnel.SituationProPersonne;
 import org.voyage.demo.models.gestion_personnel.VoyageEmploye;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "insertionVoyageEmployeServlet", value = "/insertionVoyageEmploye-servlet")
 public class InsertionVoyageEmployeServlet extends HttpServlet {
@@ -30,9 +32,9 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
         int heureTravail=Integer.parseInt(request.getParameter("heure"));
         try(Connection connection = ConnexionPool.getConnection()){
             Voyage voyage=new Voyage(idVoyage);
-            Employe employe=new Employe(idEmploye);
+            Candidat candidat =new Candidat(idEmploye);
 
-            VoyageEmploye voyageEmploye=new VoyageEmploye(voyage,employe,heureTravail);
+            VoyageEmploye voyageEmploye=new VoyageEmploye(voyage, candidat,heureTravail);
             VoyageEmploye.insertVoyageEmploye(connection,voyageEmploye);
             getInfo(request, response, connection);
         } catch (Exception e) {
@@ -46,8 +48,14 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
     }
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
-        List<Employe> listEmploye = Employe.readAll(connection);
-        request.setAttribute("list-employe", listEmploye);
+        List<SituationProPersonne> situationProPersonnes = SituationProPersonne.readAll(connection);
+
+        // Prendre les candidats de situation pro personne list
+        List<Candidat> listCandidat = situationProPersonnes.stream()
+                .map(SituationProPersonne::getCandidat)
+                .collect(Collectors.toList());
+
+        request.setAttribute("list-employe", listCandidat);
 
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);

@@ -238,15 +238,14 @@ order by id_voyage;
 Select * from vue_activite_bouquet_nombre_prix where prix_total between 80000 and 500000;
 
 
-create table employe(
+create table candidat(
     id serial primary key,
     nom varchar(100) not null,
     prenom varchar(100) not null,
     id_sexe int not null references genre(id),
     dtn date not null check ( dtn < now() )
 );
-alter table employe add constraint unique_employe unique (nom, prenom, id_sexe, dtn);
-
+alter table candidat add constraint unique_employe unique (nom, prenom, id_sexe, dtn);
 
 
 create table prix_vente_activite(
@@ -264,7 +263,7 @@ alter table prix_vente_activite
 create table voyage_employe(
     id serial primary key,
     id_voyage int references voyage(id),
-    id_emp int references employe(id),
+    id_emp int references candidat(id),
     heures_travail int not null check ( heures_travail > 0 )
 );
 alter table voyage_employe add constraint unique_voyage_emp unique (id_emp, id_voyage);
@@ -327,7 +326,7 @@ alter table grade_fonction add constraint unique_grade_fonction unique (nom, coe
 
 create table embauche_employe(
     id serial primary key,
-    id_emp int not null references employe(id),
+    id_emp int not null references candidat(id),
     id_fonction int not null references fonction_employe(id),
     date_embauche date not null check ( date_embauche <= now() )
 );
@@ -338,7 +337,7 @@ alter table embauche_employe add constraint unique_embauche_employe unique (id_e
 create view vue_salaire_employe_voyage as
 select ve.id_voyage,  sum(fe.salaire_horaire*heures_travail) as salaire_total
 from voyage_employe ve
-join employe e on ve.id_emp = e.id
+join candidat e on ve.id_emp = e.id
 join embauche_employe ee on e.id = ee.id_emp and ee.date_embauche = (select max(date_embauche) from embauche_employe where embauche_employe.id_emp = e.id)
 join fonction_employe fe on ee.id_fonction = fe.id
 group by ve.id_voyage
@@ -376,7 +375,7 @@ WITH derniere_date AS (
     GROUP BY id_emp
 )
 SELECT e.id, e.nom, ee.id_fonction, fe.nom as nom_fonction, fe.salaire_horaire, dd.derniere_date_embauche
-FROM employe e
+FROM candidat e
          JOIN embauche_employe ee ON e.id = ee.id_emp
          JOIN fonction_employe fe ON ee.id_fonction = fe.id
          JOIN derniere_date dd ON e.id = dd.id_emp AND ee.date_embauche = dd.derniere_date_embauche

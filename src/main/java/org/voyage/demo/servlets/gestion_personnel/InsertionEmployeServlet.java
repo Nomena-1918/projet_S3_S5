@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.voyage.demo.connexion.ConnexionPool;
 import org.voyage.demo.models.gestion_personnel.Genre;
-import org.voyage.demo.models.gestion_personnel.Employe;
+import org.voyage.demo.models.gestion_personnel.Candidat;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -37,8 +37,8 @@ public class InsertionEmployeServlet  extends HttpServlet {
 
         try(Connection connection = ConnexionPool.getConnection()){
             Genre sex=new Genre(idSexe);
-            Employe employe=new Employe(nom,prenom,dtn,sex);
-            Employe.insertEmploye(connection,employe);
+            Candidat candidat =new Candidat(nom,prenom,dtn,sex);
+            Candidat.insertEmploye(connection, candidat);
             getInfo(request,response,connection);
         } catch (Exception e) {
             try(Connection connection = ConnexionPool.getConnection()){

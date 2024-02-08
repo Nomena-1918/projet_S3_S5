@@ -30,7 +30,7 @@ public class SituationProPersonne {
 
     @ForeignKey(recursive=true)
     @Column("id")
-    private Employe employe;
+    private Candidat candidat;
 
     @ForeignKey(recursive=true)
     @Column("id_fonction")
@@ -48,8 +48,8 @@ public class SituationProPersonne {
 
 
 
-    public SituationProPersonne(Employe employe, Fonction fonction, GradeFonction gradeFonction) {
-        this.employe = employe;
+    public SituationProPersonne(Candidat candidat, Fonction fonction, GradeFonction gradeFonction) {
+        this.candidat = candidat;
         this.fonction = fonction;
         this.gradeFonction = gradeFonction;
     }
@@ -75,12 +75,12 @@ public class SituationProPersonne {
         this.id_row = id_row;
     }
 
-    public Employe getEmploye() {
-        return employe;
+    public Candidat getEmploye() {
+        return candidat;
     }
 
-    public void setEmploye(Employe employe) {
-        this.employe = employe;
+    public void setEmploye(Candidat candidat) {
+        this.candidat = candidat;
     }
 
     public Fonction getFonction() {
@@ -115,4 +115,12 @@ public class SituationProPersonne {
         return this.gradeFonction.getTauxHoraireCoeff() * this.fonction.getSalaireHoraire();
     }
 
+    public Candidat getCandidat() {
+        return candidat;
+    }
+
+    public SituationProPersonne setCandidat(Candidat candidat) {
+        this.candidat = candidat;
+        return this;
+    }
 }

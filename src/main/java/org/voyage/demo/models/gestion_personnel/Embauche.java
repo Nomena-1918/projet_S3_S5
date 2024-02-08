@@ -25,15 +25,15 @@ public class Embauche {
     private Integer id;
     @ForeignKey(recursive = true)
     @Column("id_emp")
-    private Employe employe;
+    private Candidat candidat;
     @ForeignKey(recursive = true)
     @Column("id_fonction")
     private Fonction fonction;
     @Column("date_embauche")
     private LocalDate date;
 
-    public Embauche(Employe employe, Fonction fonction, LocalDate date) {
-        this.employe = employe;
+    public Embauche(Candidat candidat, Fonction fonction, LocalDate date) {
+        this.candidat = candidat;
         this.fonction = fonction;
         this.date = date;
     }
@@ -46,12 +46,12 @@ public class Embauche {
         this.id = id;
     }
 
-    public Employe getEmploye() {
-        return employe;
+    public Candidat getEmploye() {
+        return candidat;
     }
 
-    public void setEmploye(Employe employe) {
-        this.employe = employe;
+    public void setEmploye(Candidat candidat) {
+        this.candidat = candidat;
     }
 
     public Fonction getFonction() {

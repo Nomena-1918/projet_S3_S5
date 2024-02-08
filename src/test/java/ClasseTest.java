@@ -60,7 +60,7 @@ public class ClasseTest {
 
     @Test
     void testSelectEmp() throws Exception {
-        var list = Employe.readAll(Connexion.getConnexionPostgreSql());
+        var list = Candidat.readAll(Connexion.getConnexionPostgreSql());
         System.out.println(list);
     }
 

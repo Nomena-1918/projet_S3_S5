@@ -10,14 +10,11 @@ public class ConnexionPool {
 
     static {
         ds.setUrl(Connexion.getUrl());
-        ds.setUsername(Connexion.getUsername());
-        ds.setPassword(Connexion.getPassword());
         // Min connexions fermées
-        ds.setMinIdle(5);
-
+        ds.setMinIdle(2);
         // Max connexions fermées
-        ds.setMaxIdle(10);
-        ds.setMaxOpenPreparedStatements(5);
+        ds.setMaxIdle(5);
+        ds.setMaxOpenPreparedStatements(3);
     }
 
     public static Connection getConnection() throws SQLException {

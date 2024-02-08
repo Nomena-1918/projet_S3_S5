@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet(name = "activitebouquetprixServlet", value = "/activitebouquetprix-servlet")
 public class ActiviteBouquetPrixServlet  extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try(Connection connection = ConnexionPool.getConnection()) {
+        try {
             RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
@@ -29,7 +29,6 @@ public class ActiviteBouquetPrixServlet  extends HttpServlet {
         Double prixMax=Double.parseDouble(request.getParameter("prixMax"));
         try(Connection connection = ConnexionPool.getConnection()){
             List<ActiviteBouquetPrix> listActiviteBouquet=ActiviteBouquetPrix.getVoyageBetweenPrix(connection,prixMin,prixMax);
-
             request.setAttribute("list-activitebouquetprix",listActiviteBouquet);
             RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
             dispatcher.forward(request, response);

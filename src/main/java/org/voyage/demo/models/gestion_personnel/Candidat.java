@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Table("employe")
-public class Employe {
+public class Candidat {
     private static final DAO dao;
     static {
         dao=new DAO(
@@ -38,7 +38,7 @@ public class Employe {
     @Column("id_sexe")
     private Genre genre;
 
-    public Employe() {
+    public Candidat() {
 
     }
 
@@ -50,14 +50,14 @@ public class Employe {
         this.genre = genre;
     }
 
-    public Employe(String nom, String prenom, LocalDate dtn, Genre genre) {
+    public Candidat(String nom, String prenom, LocalDate dtn, Genre genre) {
         this.nom = nom;
         this.prenom = prenom;
         this.dtn = dtn;
         this.genre = genre;
     }
 
-    public Employe(Integer id) {
+    public Candidat(Integer id) {
         this.id = id;
     }
 
@@ -94,14 +94,14 @@ public class Employe {
         this.id = id;
     }
 
-    public static void insertEmploye(Connection connection, Employe employe) throws Exception {
+    public static void insertEmploye(Connection connection, Candidat candidat) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
         try{
-            dao.insertWithoutPrimaryKey(connection,employe);
+            dao.insertWithoutPrimaryKey(connection, candidat);
             connection.commit();
         }
         catch (Exception e) {
@@ -112,7 +112,7 @@ public class Employe {
         if (new_connex)
             connection.close();
     }
-    public static List<Employe> readAll(Connection connection) throws Exception {
+    public static List<Candidat> readAll(Connection connection) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
@@ -121,7 +121,7 @@ public class Employe {
 
         SituationProPersonne[] employes=dao.select(connection,SituationProPersonne.class);
 
-        List<Employe> emp = new ArrayList<>();
+        List<Candidat> emp = new ArrayList<>();
         for (SituationProPersonne s : employes) {
             emp.add(s.getEmploye());
         }
@@ -132,14 +132,14 @@ public class Employe {
         return emp;
     }
 
-    public static Employe findById(Connection connection, Integer idEmploye) throws Exception {
+    public static Candidat findById(Connection connection, Integer idEmploye) throws Exception {
         boolean new_connex = false;
         if (connection == null) {
             connection = Connexion.getConnexionPostgreSql();
             new_connex = true;
         }
 
-        Employe emp = dao.select(connection, Employe.class, new Employe(idEmploye))[0];
+        Candidat emp = dao.select(connection, Candidat.class, new Candidat(idEmploye))[0];
 
         if (new_connex)
             connection.close();

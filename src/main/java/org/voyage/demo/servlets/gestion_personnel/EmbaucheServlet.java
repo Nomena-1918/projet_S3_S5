@@ -6,8 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.voyage.demo.connexion.ConnexionPool;
+import org.voyage.demo.models.gestion_personnel.Candidat;
 import org.voyage.demo.models.gestion_personnel.Embauche;
-import org.voyage.demo.models.gestion_personnel.Employe;
 import org.voyage.demo.models.gestion_personnel.Fonction;
 
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class EmbaucheServlet extends HttpServlet {
         LocalDate date = LocalDate.parse(request.getParameter("date"), formatter);
 
         try(Connection connection = ConnexionPool.getConnection()) {
-            Employe emp=Employe.findById(connection, idEmploye);
+            Candidat emp= Candidat.findById(connection, idEmploye);
             long ageEmp = ChronoUnit.YEARS.between(emp.getDtn(), LocalDate.now());
 
             if (ageEmp < AGE_MAJEUR)
@@ -64,8 +64,8 @@ public class EmbaucheServlet extends HttpServlet {
         List<Fonction> fonctions = Fonction.readAll(connection);
         request.setAttribute("list_fonction",fonctions);
 
-        List<Employe> employes = Employe.readAll(connection);
-        request.setAttribute("list-employe",employes);
+        List<Candidat> candidats = Candidat.readAll(connection);
+        request.setAttribute("list-employe", candidats);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("promotionPoste/Embauche.jsp");
         dispatcher.forward(request, response);
