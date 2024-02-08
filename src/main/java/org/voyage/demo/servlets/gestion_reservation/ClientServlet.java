@@ -44,7 +44,7 @@ public class ClientServlet extends HttpServlet {
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
         List<Genre> sexes = Genre.readAll(connection);
-        request.setAttribute("list-sexe",sexes);
+        request.setAttribute("list-genre",sexes);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("client/client.jsp");
         dispatcher.forward(request, response);

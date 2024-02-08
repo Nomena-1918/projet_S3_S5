@@ -48,7 +48,7 @@
       </div>
       <%}%>
       <div class="col-12">
-        <h2 class="tm-color-primary tm-post-title tm-mb-60">Insertion Voyage employé</h2>
+        <h2 class="tm-color-primary tm-post-title tm-mb-60">Affectation voyage à employé</h2>
       </div>
       <div class="col-lg-7 tm-contact-left">
         <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
@@ -77,7 +77,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="heure" class="col-sm-3 col-form-label text-right tm-color-primary">Heure de travail</label>
+            <label for="heure" class="col-sm-3 col-form-label text-right tm-color-primary">Heures</label>
             <diV class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="heure" id="heure" type="number" required>
             </diV>

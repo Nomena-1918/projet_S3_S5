@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label for="nombre" class="col-sm-3 col-form-label text-right tm-color-primary">Nombre de personne</label>
+                        <label for="nombre" class="col-sm-3 col-form-label text-right tm-color-primary">Nombre</label>
                         <diV class="col-sm-9">
                             <input class="form-control mr-0 ml-auto" name="nombrePersonne" id="nombre" type="number" required>
                         </diV>

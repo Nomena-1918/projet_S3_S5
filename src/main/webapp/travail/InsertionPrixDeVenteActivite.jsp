@@ -51,7 +51,7 @@
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="prix" class="col-sm-3 col-form-label text-right tm-color-primary">Prix de vente activité</label>
+            <label for="prix" class="col-sm-3 col-form-label text-right tm-color-primary">Prix</label>
             <div class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="prixVente" id="prix" type="number" required>
             </div>

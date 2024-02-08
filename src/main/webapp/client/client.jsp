@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label for="genre" class="col-sm-3 col-form-label text-right tm-color-primary">Sexe</label>
+                        <label for="genre" class="col-sm-3 col-form-label text-right tm-color-primary">Genre</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idsexe" id="genre" required>
                                 <% for (Genre item : sexes) {%>

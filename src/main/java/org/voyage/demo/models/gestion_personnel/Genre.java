@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.util.Arrays;
 import java.util.List;
 
-@Table("sexe")
+@Table("genre")
 public class Genre {
     private static final DAO dao;
     static {

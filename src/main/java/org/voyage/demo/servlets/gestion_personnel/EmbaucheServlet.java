@@ -65,7 +65,7 @@ public class EmbaucheServlet extends HttpServlet {
         request.setAttribute("list_fonction",fonctions);
 
         List<Candidat> candidats = Candidat.readAll(connection);
-        request.setAttribute("list-employe", candidats);
+        request.setAttribute("list-candidat", candidats);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("promotionPoste/Embauche.jsp");
         dispatcher.forward(request, response);

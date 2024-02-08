@@ -14,10 +14,10 @@ import java.sql.Connection;
 import java.util.List;
 
 @WebServlet(name = "activitebouquetprixServlet", value = "/activitebouquetprix-servlet")
-public class ActiviteBouquetPrixServlet  extends HttpServlet {
+public class ActiviteBouquetCoutServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyageCout.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -30,11 +30,11 @@ public class ActiviteBouquetPrixServlet  extends HttpServlet {
         try(Connection connection = ConnexionPool.getConnection()){
             List<ActiviteBouquetPrix> listActiviteBouquet=ActiviteBouquetPrix.getVoyageBetweenPrix(connection,prixMin,prixMax);
             request.setAttribute("list-activitebouquetprix",listActiviteBouquet);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyageCout.jsp");
             dispatcher.forward(request, response);
         }  catch (Exception e) {
             request.setAttribute("messageError",e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyagePrix.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("ActiviteVoyageCout.jsp");
             dispatcher.forward(request, response);
         }
     }

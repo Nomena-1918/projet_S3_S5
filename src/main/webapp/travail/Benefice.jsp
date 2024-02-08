@@ -39,13 +39,13 @@
             <div class="col-lg-7 tm-contact-left">
                 <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
                     <div class="form-group row mb-4">
-                        <label for="min" class="col-sm-3 col-form-label text-right tm-color-primary">Prix Min</label>
+                        <label for="min" class="col-sm-3 col-form-label text-right tm-color-primary">Min</label>
                         <div class="col-sm-9">
                             <input class="form-control mr-0 ml-auto" name="prixMin" id="min" type="number" required>
                         </div>
                     </div>
                     <div class="form-group row mb-4">
-                        <label for="max" class="col-sm-3 col-form-label text-right tm-color-primary">Prix Max</label>
+                        <label for="max" class="col-sm-3 col-form-label text-right tm-color-primary">Max</label>
                         <div class="col-sm-9">
                             <input class="form-control mr-0 ml-auto" name="prixMax" id="max" type="number" required>
                         </div>

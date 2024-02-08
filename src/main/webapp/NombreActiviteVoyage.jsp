@@ -57,7 +57,7 @@
                     <table class="table table-striped tm-table">
                         <tr>
                             <th>Bouquet</th>
-                            <th>Catégorie lieu</th>
+                            <th>Lieu</th>
                             <th>Durée</th>
                             <th>Nombre</th>
                         </tr>

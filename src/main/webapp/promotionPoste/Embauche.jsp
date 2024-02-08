@@ -43,7 +43,7 @@
             <div class="col-lg-7 tm-contact-left">
                 <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
                     <div class="form-group row mb-4">
-                        <label for="idEmploye" class="col-sm-3 col-form-label text-right tm-color-primary">Employé</label>
+                        <label for="idEmploye" class="col-sm-3 col-form-label text-right tm-color-primary">Candidat</label>
                         <div class="col-sm-9">
                             <select class="form-control mr-0 ml-auto" name="idEmploye" id="idEmploye" required>
                                 <% for (Candidat item : candidat) {%>

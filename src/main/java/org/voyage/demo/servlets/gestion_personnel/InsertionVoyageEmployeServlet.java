@@ -55,7 +55,7 @@ public class InsertionVoyageEmployeServlet extends HttpServlet {
                 .map(SituationProPersonne::getCandidat)
                 .collect(Collectors.toList());
 
-        request.setAttribute("list-employe", listCandidat);
+        request.setAttribute("list-candidat", listCandidat);
 
         List<Voyage> listVoyage = Voyage.readAll(connection);
         request.setAttribute("list-voyage", listVoyage);

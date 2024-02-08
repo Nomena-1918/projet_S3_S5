@@ -11,7 +11,7 @@ import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-@Table("employe")
+@Table("candidat")
 public class Candidat {
     private static final DAO dao;
     static {
@@ -151,7 +151,7 @@ public class Candidat {
     public String toString() {
         return String.format("""
                 
-                    Emp : {
+                    Candidat : {
                         id : %s,
                         nom : %s,
                         prenom : %s,

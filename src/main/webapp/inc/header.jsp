@@ -5,8 +5,7 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="tm-site-header">
-            <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-times fa-2x"></i></div>
-            <h1 class="text-center">Holiday activity</h1>
+            <h1 class="text-center">Voyage organisé</h1>
         </div>
         <nav class="tm-nav" id="tm-nav">
             <ul>
@@ -52,7 +51,7 @@
                 </a></li>
                 <li class="tm-nav-item"><a href="activitebouquetprix-servlet" class="tm-nav-link">
                     <i class="far fa-comments"></i>
-                    Voyage fourchette de prix
+                    Voyage fourchette de coûts
                 </a></li>
                 <li class="tm-nav-item"><a href="genre-servlet" class="tm-nav-link">
                     <i class="fas fa-home"></i>
@@ -71,9 +70,9 @@
                     Liste reste billet activité
                 </a></li>
                 <%-- Travail --%>
-                <li class="tm-nav-item"><a href="insertionEmploye-servlet" class="tm-nav-link">
+                <li class="tm-nav-item"><a href="insertionCandidat-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>
-                    Insertion employé
+                    Insertion candidat
                 </a></li>
                 <li class="tm-nav-item"><a href="insertionFonction-servlet" class="tm-nav-link">
                     <i class="fas fa-pen"></i>

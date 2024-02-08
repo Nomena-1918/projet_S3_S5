@@ -37,35 +37,34 @@
       </div>
       <%}%>
       <div class="col-12">
-        <h2 class="tm-color-primary tm-post-title tm-mb-60">Insertion Employé</h2>
+        <h2 class="tm-color-primary tm-post-title tm-mb-60">Insertion candidat</h2>
       </div>
       <div class="col-lg-7 tm-contact-left">
         <form method="POST" action="" class="mb-5 ml-auto mr-0 tm-contact-form">
           <div class="form-group row mb-4">
-            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom </label>
+            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Nom</label>
             <div class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="nom" id="name" type="text" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="prenom" class="col-sm-3 col-form-label text-right tm-color-primary">Prénom </label>
+            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Prénom</label>
             <div class="col-sm-9">
-              <input class="form-control mr-0 ml-auto" name="prenom" id="prenom" type="text" required>
+              <input class="form-control mr-0 ml-auto" name="prenom" id="lastname" type="text" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="date" class="col-sm-3 col-form-label text-right tm-color-primary">Date de naissance </label>
+            <label for="name" class="col-sm-3 col-form-label text-right tm-color-primary">Date naissance</label>
             <div class="col-sm-9">
               <input class="form-control mr-0 ml-auto" name="date" id="date" type="date" required>
             </div>
           </div>
           <div class="form-group row mb-4">
-            <label for="genre" class="col-sm-3 col-form-label text-right tm-color-primary">Sexe</label>
+            <label for="genre" class="col-sm-3 col-form-label text-right tm-color-primary">Genre</label>
             <div class="col-sm-9">
-              <select class="form-control mr-0 ml-auto" name="idsexe" id="genre"  required>
+              <select class="form-control mr-0 ml-auto" name="idsexe" id="genre" required>
                 <% for (Genre item : sexes) {%>
-                <option
-                        value="<%=item.getId()%>"> <%=item.getNom()%>
+                <option value="<%=item.getId()%>"><%=item.getNom()%>
                 </option>
                 <% }%>
               </select>

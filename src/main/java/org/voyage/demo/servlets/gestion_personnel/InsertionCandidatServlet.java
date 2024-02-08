@@ -16,8 +16,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@WebServlet(name = "insertionEmployeServlet", value = "/insertionEmploye-servlet")
-public class InsertionEmployeServlet  extends HttpServlet {
+@WebServlet(name = "insertionCandidatServlet", value = "/insertionCandidat-servlet")
+public class InsertionCandidatServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try(Connection connection = ConnexionPool.getConnection()) {
             getInfo(request,response,connection);
@@ -52,7 +52,7 @@ public class InsertionEmployeServlet  extends HttpServlet {
 
     private void getInfo(HttpServletRequest request, HttpServletResponse response, Connection connection) throws Exception {
         List<Genre> sexes= Genre.readAll(connection);
-        request.setAttribute("list-sexe", sexes);
+        request.setAttribute("list-genre", sexes);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("travail/InsertionEmploye.jsp");
         dispatcher.forward(request, response);
