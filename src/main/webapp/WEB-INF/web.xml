@@ -9,4 +9,13 @@
         <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
     </resource-env-ref>
 
+    <servlet>
+        <servlet-name>embaucheServlet</servlet-name>
+        <servlet-class>org.voyage.demo.servlets.gestion_personnel.EmbaucheServlet</servlet-class>
+        <init-param>
+            <param-name>majeur</param-name>
+            <param-value>18</param-value>
+        </init-param>
+    </servlet>
+
 </web-app>

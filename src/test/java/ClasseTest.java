@@ -1,40 +1,98 @@
-import org.example.demo.database.Connexion;
-import org.example.demo.models.Activite;
-import org.example.demo.models.ActiviteBouquet;
-import org.example.demo.models.Bouquet;
-import org.example.demo.models.Emp;
+import org.voyage.demo.connexion.Connexion;
+import org.voyage.demo.models.composition_voyage.VoyageActivite;
+import org.voyage.demo.models.gestion_personnel.*;
+import org.voyage.demo.models.gestion_reservation.BeneficeVoyage;
+import org.voyage.demo.models.gestion_reservation.Client;
+import org.voyage.demo.models.composition_voyage.Activite;
+import org.voyage.demo.models.composition_voyage.Bouquet;
+import org.voyage.demo.models.composition_voyage.Voyage;
 import org.junit.jupiter.api.Test;
+import veda.godao.DAO;
+import veda.godao.utils.Constantes;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClasseTest {
+    private static final DAO dao;
+    static {
+        dao=new DAO(
+                "voyage_db",
+                "localhost",
+                "5432",
+                "nomena",
+                "root",
+                false,
+                Constantes.PSQL_ID);
+    }
+
+    @Test
+    void testVoyage() throws Exception {
+        Voyage[] voyageList = dao.select(null, Voyage.class);
+        System.out.println(Arrays.toString(voyageList));
+    }
+
+    @Test
+    void testClient() throws Exception {
+        Client.insertClient(null, new Client("Clienttest-"+LocalDateTime.now(), new Genre(1)));
+        System.out.println("ok");
+    }
+
+    @Test
+    void testSelectClient() throws Exception {
+        var list = Client.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
+    void testSelectGrade() throws Exception {
+        var list = GradeFonction.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
+    void testSelectFonction() throws Exception {
+        var list = dao.select(Connexion.getConnexionPostgreSql(), Fonction.class);
+        System.out.println(Arrays.toString(list));
+    }
+
+    @Test
+    void testSelectEmp() throws Exception {
+        var list = Candidat.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+
+    @Test
+    void testSelectSituationPro() throws Exception {
+        var list = SituationProPersonne.readAll(Connexion.getConnexionPostgreSql());
+        System.out.println(list);
+    }
+
+    @Test
+    void testBenefice() throws Exception {
+        BeneficeVoyage[] beneficeVoyage=dao.select(null, BeneficeVoyage.class);
+        System.out.println(Arrays.toString(beneficeVoyage));
+    }
+
+    @Test
+    void testVoyageSelect() throws Exception {
+        Voyage[] voyage=dao.select(null,Voyage.class);
+        System.out.println(Arrays.toString(voyage));
+    }
+
     @Test
     void test() {
         System.out.println("Hello World!");
     }
 
     @Test
-    void testReadAllEmp() {
-        // Tous les emp avec pagination
-        int nb_lignes = 4;
-        int pagination_debut = 1;
-
-        try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<Emp> listEmp = Emp.readAllEmp(connection, nb_lignes, pagination_debut);
-            System.out.println("\n====================\n"+listEmp+"\n====================\n");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @Test
     void testInsertActivite() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Activite activite=new Activite();
-            activite.setNom("Voyage a Mananjary");
+            activite.setNom("Voyage a Mananjary - "+LocalDateTime.now());
             Activite.insertActivite(connection,activite);
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -45,22 +103,13 @@ public class ClasseTest {
     void testInsertBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
             Bouquet bouquet=new Bouquet();
-            bouquet.setNom("Bouquet EXTRA");
+            bouquet.setNom("Bouquet EXTRA - "+LocalDateTime.now());
             Bouquet.insertBouquet(connection,bouquet);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    @Test
-    void testInsertActiviteBouquet() {
-        try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            ActiviteBouquet actbouq=new ActiviteBouquet(8L, 1L,"Excursion en montagne", 8L,"Bouquet EXTRA");
-            actbouq.insertActiviteBouquet(connection,actbouq);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
     @Test
     void testReadAllActivite() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
@@ -70,6 +119,7 @@ public class ClasseTest {
             throw new RuntimeException(e);
         }
     }
+
     @Test
     void testReadAllBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
@@ -83,10 +133,21 @@ public class ClasseTest {
     @Test
     void testfindActiviteBouquet() {
         try(Connection connection = Connexion.getConnexionPostgreSql()) {
-            List<ActiviteBouquet> listactbouq = ActiviteBouquet.findActiviteBouquet(connection,2L);
+            List<VoyageActivite> listactbouq = VoyageActivite.findActiviteBouquet(connection,2L);
             System.out.println("\n====================\n"+listactbouq+"\n====================\n");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
+
+    @Test
+    void getFonctions() {
+        try(Connection connection = Connexion.getConnexionPostgreSql()) {
+            List<Fonction> listactbouq = Fonction.readAll(connection);
+            System.out.println("\n====================\n"+listactbouq+"\n====================\n");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

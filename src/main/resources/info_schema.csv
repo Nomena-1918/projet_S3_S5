@@ -1,0 +1,73 @@
+postgresql,voyage_db,public,activite,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,activite,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,bouquet,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,bouquet,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,categorie_lieu,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,categorie_lieu,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,type_duree,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,type_duree,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,voyage,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,voyage,id_bouquet,2,integer,,FOREIGN KEY,public,bouquet,id
+postgresql,voyage_db,public,voyage,id_duree,3,integer,,FOREIGN KEY,public,type_duree,id
+postgresql,voyage_db,public,voyage,id_categorie_lieu,4,integer,,FOREIGN KEY,public,categorie_lieu,id
+postgresql,voyage_db,public,voyage_activite,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,voyage_activite,id_voyage,2,integer,,FOREIGN KEY,public,voyage,id
+postgresql,voyage_db,public,voyage_activite,id_activite,3,integer,,FOREIGN KEY,public,activite,id
+postgresql,voyage_db,public,voyage_activite,id_voyage,2,integer,,FOREIGN KEY,public,bouquet,id
+postgresql,voyage_db,public,entree_activite,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,entree_activite,id_activite,2,integer,,FOREIGN KEY,public,activite,id
+postgresql,voyage_db,public,genre,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,client,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,client,id_sexe,3,integer,,FOREIGN KEY,public,genre,id
+postgresql,voyage_db,public,reservation_voyage,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,reservation_voyage,id_voyage,2,integer,,FOREIGN KEY,public,voyage,id
+postgresql,voyage_db,public,reservation_voyage,id_client,4,integer,,FOREIGN KEY,public,client,id
+postgresql,voyage_db,public,candidat,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,candidat,id_sexe,4,integer,,FOREIGN KEY,public,genre,id
+postgresql,voyage_db,public,prix_vente_activite,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,prix_vente_activite,id_activite,2,integer,,FOREIGN KEY,public,activite,id
+postgresql,voyage_db,public,voyage_employe,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,voyage_employe,id_voyage,2,integer,,FOREIGN KEY,public,voyage,id
+postgresql,voyage_db,public,voyage_employe,id_emp,3,integer,,FOREIGN KEY,public,candidat,id
+postgresql,voyage_db,public,fonction_employe,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,genre,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,client,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,grade_fonction,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,grade_fonction,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,embauche_employe,id,1,integer,,PRIMARY KEY,,,
+postgresql,voyage_db,public,embauche_employe,id_emp,2,integer,,FOREIGN KEY,public,candidat,id
+postgresql,voyage_db,public,embauche_employe,id_fonction,3,integer,,FOREIGN KEY,public,fonction_employe,id
+postgresql,voyage_db,public,candidat,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,candidat,prenom,3,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,candidat,id_sexe,4,integer,,UNIQUE,,,
+postgresql,voyage_db,public,candidat,dtn,5,date,,UNIQUE,,,
+postgresql,voyage_db,public,fonction_employe,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,fonction_employe,salaire_horaire,3,numeric,,UNIQUE,,,
+postgresql,voyage_db,public,grade_fonction,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,grade_fonction,coeff_taux_horaire,3,numeric,,UNIQUE,,,
+postgresql,voyage_db,public,grade_fonction,plage_anciennete,4,int4range,,UNIQUE,,,
+postgresql,voyage_db,public,embauche_employe,id_emp,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,embauche_employe,id_fonction,3,integer,,UNIQUE,,,
+postgresql,voyage_db,public,embauche_employe,date_embauche,4,date,,UNIQUE,,,
+postgresql,voyage_db,public,type_duree,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,categorie_lieu,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,bouquet,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,activite,nom,2,character varying,100,UNIQUE,,,
+postgresql,voyage_db,public,voyage,id_bouquet,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage,id_duree,3,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage,id_categorie_lieu,4,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage_activite,id_voyage,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage_activite,id_activite,3,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage_employe,id_emp,3,integer,,UNIQUE,,,
+postgresql,voyage_db,public,voyage_employe,id_voyage,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,entree_activite,id_activite,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,entree_activite,date_heure_entree,5,timestamp without time zone,,UNIQUE,,,
+postgresql,voyage_db,public,prix_vente_activite,id_activite,2,integer,,UNIQUE,,,
+postgresql,voyage_db,public,prix_vente_activite,prix_vente,3,numeric,,UNIQUE,,,
+postgresql,voyage_db,public,voyage_activite,nombre,4,integer,,,,,
+postgresql,voyage_db,public,reservation_voyage,nombre_billet,3,integer,,,,,
+postgresql,voyage_db,public,reservation_voyage,date_reservation,5,timestamp without time zone,,,,,
+postgresql,voyage_db,public,voyage_employe,heures_travail,4,integer,,,,,
+postgresql,voyage_db,public,entree_activite,quantite,4,integer,,,,,
+postgresql,voyage_db,public,entree_activite,prix_unitaire,3,numeric,,,,,
+postgresql,voyage_db,public,type_duree,intervaljour,3,int4range,,,,,
